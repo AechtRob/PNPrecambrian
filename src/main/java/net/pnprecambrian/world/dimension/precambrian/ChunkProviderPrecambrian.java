@@ -4,7 +4,9 @@ import net.lepidodendron.block.BlockBacterialLayer;
 import net.lepidodendron.block.BlockLavaRock;
 import net.lepidodendron.block.BlockMeteorite;
 import net.lepidodendron.block.BlockToxicMud;
+import net.lepidodendron.util.EnumBiomeTypePrecambrian;
 import net.lepidodendron.world.biome.ChunkGenSpawner;
+import net.lepidodendron.world.biome.permian.BiomePrecambrian;
 import net.lepidodendron.world.gen.WorldGenPrecambrianLakes;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.BlockSand;
@@ -20,7 +22,12 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.*;
-import net.pnprecambrian.world.biome.precambrian.BiomePrecambrianBiome;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.pnprecambrian.world.biome.precambrian.BiomeHadeanLava;
+import net.pnprecambrian.world.biome.precambrian.BiomeHadeanSmelts;
+import net.pnprecambrian.world.biome.precambrian.BiomeHadeanSmeltsHelper;
+import net.pnprecambrian.world.biome.precambrian.BiomePaleoproterozoicRegolith;
 
 import java.util.List;
 import java.util.Random;
@@ -31,10 +38,11 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
     //public static final IBlockState FLUID = Blocks.FLOWING_WATER.getDefaultState();
 
     public static final IBlockState FLUID = Blocks.WATER.getDefaultState();
+    public static final IBlockState LAVA = Blocks.LAVA.getDefaultState();
 
     public static final IBlockState AIR = Blocks.AIR.getDefaultState();
     public static final IBlockState BEDROCK = Blocks.BEDROCK.getDefaultState();
-    public static final int SEALEVEL = 50;
+    public static final int SEALEVEL = 110;
     public final Random random;
     private NoiseGeneratorOctaves perlin1;
     private NoiseGeneratorOctaves perlin2;
@@ -126,22 +134,39 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
         long l = this.random.nextLong() / 2 * 2 + 1;
         this.random.setSeed((long) x * k + (long) z * l ^ this.world.getSeed());
         net.minecraftforge.event.ForgeEventFactory.onChunkPopulate(true, this, this.world, this.random, x, z, false);
-        if (this.random.nextInt(4) == 0)
-            if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.random, x, z, false,
-                    net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAKE)) {
-                int i1 = this.random.nextInt(16) + 8;
-                int j1 = this.random.nextInt(256);
-                int k1 = this.random.nextInt(16) + 8;
-                (new WorldGenPrecambrianLakes(Blocks.WATER)).generate(this.world, this.random, blockpos.add(i1, j1, k1));
+        if (biome instanceof BiomePrecambrian) {
+            if (((BiomePrecambrian) biome).getBiomeType() == EnumBiomeTypePrecambrian.Hadean) {
+                if (this.random.nextInt(8) == 0) {
+                    if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.random, x, z, false,
+                            net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAKE)) {
+                        int i1 = this.random.nextInt(16) + 8;
+                        int j1 = this.random.nextInt(256);
+                        int k1 = this.random.nextInt(16) + 8;
+                        (new WorldGenPrecambrianLakes((new FluidStack(FluidRegistry.getFluid("sulfuric_acid"), 1000)).getFluid().getBlock())).generate(this.world, this.random, blockpos.add(i1, j1, k1));
+                    }
+                }
+                if (this.random.nextInt(6) == 0) {
+                    if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.random, x, z, false,
+                            net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAKE)) {
+                        int i1 = this.random.nextInt(16) + 8;
+                        int j1 = this.random.nextInt(256);
+                        int k1 = this.random.nextInt(16) + 8;
+                        (new WorldGenPrecambrianLakes(Blocks.LAVA)).generate(this.world, this.random, blockpos.add(i1, j1, k1));
+                    }
+                }
             }
-        if (this.random.nextInt(4) == 0)
-            if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.random, x, z, false,
-                    net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAKE)) {
-                int i1 = this.random.nextInt(16) + 8;
-                int j1 = this.random.nextInt(256);
-                int k1 = this.random.nextInt(16) + 8;
-                (new WorldGenPrecambrianLakes(Blocks.LAVA)).generate(this.world, this.random, blockpos.add(i1, j1, k1));
+            else {
+                if (this.random.nextInt(4) == 0) {
+                    if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.random, x, z, false,
+                            net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAKE)) {
+                        int i1 = this.random.nextInt(16) + 8;
+                        int j1 = this.random.nextInt(256);
+                        int k1 = this.random.nextInt(16) + 8;
+                        (new WorldGenPrecambrianLakes(Blocks.WATER)).generate(this.world, this.random, blockpos.add(i1, j1, k1));
+                    }
+                }
             }
+        }
 
         net.minecraftforge.common.MinecraftForge.EVENT_BUS
                 .post(new net.minecraftforge.event.terraingen.DecorateBiomeEvent.Pre(this.world, this.random, blockpos));
@@ -217,7 +242,21 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                                 if ((lvt_45_1_ += d16) > 0.0D) {
                                     primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, STONE);
                                 } else if (i2 * 8 + j2 < SEALEVEL) {
-                                    primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, FLUID);
+                                    Biome biome = world.getBiome(new BlockPos(x * 16, 0, z * 16));
+                                    Biome biome1 = world.getBiome(new BlockPos((x * 16) + 16, 0, z * 16));
+                                    Biome biome2 = world.getBiome(new BlockPos((x * 16) - 16, 0, z * 16));
+                                    Biome biome3 = world.getBiome(new BlockPos(x * 16, 0, (z * 16) + 16));
+                                    Biome biome4 = world.getBiome(new BlockPos(x * 16, 0, (z * 16) - 16));
+                                    if (biome == BiomeHadeanSmelts.biome || biome == BiomeHadeanSmeltsHelper.biome || biome == BiomeHadeanLava.biome
+                                            || biome1 == BiomeHadeanSmelts.biome || biome1 == BiomeHadeanSmeltsHelper.biome || biome1 == BiomeHadeanLava.biome
+                                            || biome2 == BiomeHadeanSmelts.biome || biome2 == BiomeHadeanSmeltsHelper.biome || biome2 == BiomeHadeanLava.biome
+                                            || biome3 == BiomeHadeanSmelts.biome || biome3 == BiomeHadeanSmeltsHelper.biome || biome3 == BiomeHadeanLava.biome
+                                            || biome4 == BiomeHadeanSmelts.biome || biome4 == BiomeHadeanSmeltsHelper.biome || biome4 == BiomeHadeanLava.biome) {
+                                        primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, LAVA);
+                                    }
+                                    else {
+                                        primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, FLUID);
+                                    }
                                     //primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, Blocks.ICE.getDefaultState());
                                 }
                             }
@@ -307,6 +346,14 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                     double d2 = this.limitRegMin[i] / (double) 512;
                     double d3 = this.limitRegMax[i] / (double) 512;
                     double d4 = (this.noiseRegMain[i] / 10.0D + 1.0D) / 2.0D;
+
+                    if (biome == BiomeHadeanLava.biome) {
+                        //Flatten these out somewhat:
+                        d4 = 1.0F;
+                        d2 = d4;
+                        d3 = d4;
+                    }
+
                     double d5 = MathHelper.clampedLerp(d2, d3, d4) - d1;
                     if (l1 > 29) {
                         double d6 = (double) ((float) (l1 - 29) / 3.0F);
@@ -363,15 +410,58 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                         }
                         if (j1 < i && (iblockstate == null || iblockstate.getMaterial() == Material.AIR)) {
                             if (biome.getTemperature(blockpos$mutableblockpos.setPos(x, j1, z)) < 0.15F) {
-                                iblockstate = FLUID;
+                                if (biome == BiomeHadeanSmelts.biome || biome == BiomeHadeanSmeltsHelper.biome
+                                    || biome == BiomeHadeanLava.biome) {
+                                    iblockstate = LAVA;
+                                }
+                                else {
+                                    iblockstate = FLUID;
+                                }
                             } else {
-                                iblockstate = FLUID;
+                                if (biome == BiomeHadeanSmelts.biome || biome == BiomeHadeanSmeltsHelper.biome
+                                        || biome == BiomeHadeanLava.biome) {
+                                    iblockstate = LAVA;
+                                }
+                                else {
+                                    iblockstate = FLUID;
+                                }
                             }
                         }
 
+
+
+                        //For the Regolith biomes, make mountains craggy:
+                        if (biome == BiomePaleoproterozoicRegolith.biome
+                        ) {
+                            //If it's over 90 blocks then start to fill in more as stone
+                            //up to 120 where it almost fully stone - sometimes cobble
+                            int minHeight = 125;
+                            if (j1 >= minHeight) {
+                                int j2 = Math.max(0, 135 - j1);
+                                double stoneFactor = (double) j2 / (135D - (double) minHeight);
+                                if (Math.random() >= stoneFactor) {
+                                    iblockstate = Blocks.STONE.getStateFromMeta(1);
+                                    if (rand.nextInt(8) == 0) {
+                                        iblockstate = Blocks.COBBLESTONE.getDefaultState();
+                                    }
+                                }
+                                if (Math.random() >= stoneFactor) {
+                                    iblockstate1 = Blocks.STONE.getStateFromMeta(0);
+                                    if (rand.nextInt(8) == 0) {
+                                        iblockstate1 = Blocks.COBBLESTONE.getDefaultState();
+                                    }
+                                }
+                            }
+                        }
+
+
+
+
+
+
                         j = k;
                         if (j1 >= i - 1) {
-                            if (biome == BiomePrecambrianBiome.biome && rand.nextInt(600) == 0) {
+                            if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Hadean && rand.nextInt(600) == 0) {
                                 chunkPrimerIn.setBlockState(i1, j1, l, BlockMeteorite.block.getDefaultState());
                             }
                             else {

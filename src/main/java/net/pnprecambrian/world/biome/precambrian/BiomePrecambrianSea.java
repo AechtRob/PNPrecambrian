@@ -3,6 +3,8 @@ package net.pnprecambrian.world.biome.precambrian;
 
 import net.lepidodendron.LepidodendronConfig;
 import net.lepidodendron.block.BlockLavaRock;
+import net.lepidodendron.util.EnumBiomeTypePrecambrian;
+import net.lepidodendron.world.biome.permian.BiomePrecambrian;
 import net.lepidodendron.world.gen.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -37,7 +39,7 @@ public class BiomePrecambrianSea extends ElementsPNPrecambrianMod.ModElement {
 		BiomeDictionary.addTypes(biome, BiomeDictionary.Type.COLD);
 	}
 
-	static class BiomeGenCustom extends Biome {
+	static class BiomeGenCustom extends BiomePrecambrian {
 		public BiomeGenCustom() {
 			super(new BiomeProperties("Precambrian Ediacaran Ocean").setRainfall(0.95F).setBaseHeight(-1.5F).setHeightVariation(0.07F).setTemperature(0.1F).setWaterColor(11556675));
 			setRegistryName("lepidodendron:precambrian_sea");
@@ -153,5 +155,11 @@ public class BiomePrecambrianSea extends ElementsPNPrecambrianMod.ModElement {
 
 			super.decorate(worldIn, rand, pos);
 		}
+
+		@Override
+		public EnumBiomeTypePrecambrian getBiomeType() {
+			return EnumBiomeTypePrecambrian.Ediacaran;
+		}
+
 	}
 }

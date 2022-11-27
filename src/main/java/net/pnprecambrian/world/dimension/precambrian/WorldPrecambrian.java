@@ -90,6 +90,13 @@ public class WorldPrecambrian extends ElementsPNPrecambrianMod.ModElement {
 			return super.getSkyRenderer();
 		}
 
+		@SideOnly(Side.CLIENT)
+		@Override
+		public float getCloudHeight()
+		{
+			return 185;//Change to desired cloud Y level.
+		}
+
 		@Override
 		public DimensionType getDimensionType() {
 			return dtype;
