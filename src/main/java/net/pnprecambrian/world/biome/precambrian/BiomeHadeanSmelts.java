@@ -80,7 +80,6 @@ public class BiomeHadeanSmelts extends ElementsPNPrecambrianMod.ModElement {
 			return super.getSkyColorByTemp(par1);
 		}
 
-
 		@Override
 	    public void decorate(World worldIn, Random rand, BlockPos pos)
 	    {

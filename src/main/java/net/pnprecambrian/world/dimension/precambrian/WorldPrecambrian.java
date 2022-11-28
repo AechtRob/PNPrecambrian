@@ -7,6 +7,7 @@ import net.lepidodendron.block.BlockStromatolite;
 import net.lepidodendron.block.BlockStromatoliteSticky;
 import net.lepidodendron.util.ModTriggers;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.BlockPortal;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockWorldState;
@@ -26,8 +27,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.*;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.IChunkGenerator;
-import net.minecraft.world.gen.layer.GenLayer;
-import net.minecraft.world.gen.layer.IntCache;
+import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -36,6 +36,7 @@ import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.pnprecambrian.ElementsPNPrecambrianMod;
+import net.pnprecambrian.world.biome.precambrian.BiomePaleoproterozoicRegolith;
 
 import java.util.Random;
 
@@ -144,6 +145,111 @@ public class WorldPrecambrian extends ElementsPNPrecambrianMod.ModElement {
 			if (scaler < 0.01) {scaler = 0.01;}
 			if (scaler > 100) {scaler = 100;}
 			return (double)1/scaler;
+		}
+
+		public float getTemperatureAdjusted(BlockPos pos) {
+			//Hacking the temperature with altitude thing to account for the raised sea level:
+
+			Biome biome = world.getBiome(pos);
+			float ff = biome.getDefaultTemperature();
+
+			if (biome == BiomePaleoproterozoicRegolith.biome) {
+				//only cold at night:
+				if (world.isDaytime()) {
+					ff = ff + 2F;
+				}
+			}
+
+			NoiseGeneratorPerlin TEMPERATURE_NOISE = new NoiseGeneratorPerlin(new Random(1234L), 1);
+			if (pos.getY() > world.getSeaLevel())
+			{
+				float f = (float)(TEMPERATURE_NOISE.getValue((double)((float)pos.getX() / 8.0F), (double)((float)pos.getZ() / 8.0F)) * 4.0D);
+				return ff - (f + (float)pos.getY() - (float)world.getSeaLevel()) * 0.05F / 30.0F;
+			}
+			else
+			{
+				return ff;
+			}
+		}
+
+		@Override
+		public boolean canBlockFreeze(BlockPos pos, boolean noWaterAdj)
+		{
+			Biome biome = world.getBiome(pos);
+
+			//float f = biome.getTemperature(pos);
+			float f = getTemperatureAdjusted(pos);
+
+			if (f >= 0.15F)
+			{
+				return false;
+			}
+			else
+			{
+				if (pos.getY() >= 0 && pos.getY() < 256 && world.getLightFor(EnumSkyBlock.BLOCK, pos) < 10)
+				{
+					IBlockState iblockstate1 = world.getBlockState(pos);
+					Block block = iblockstate1.getBlock();
+
+					if ((block == Blocks.WATER || block == Blocks.FLOWING_WATER) && ((Integer)iblockstate1.getValue(BlockLiquid.LEVEL)).intValue() == 0)
+					{
+						if (!noWaterAdj)
+						{
+							return true;
+						}
+
+						boolean flag = this.isWater(pos.west()) && this.isWater(pos.east()) && this.isWater(pos.north()) && this.isWater(pos.south());
+
+						if (!flag)
+						{
+							return true;
+						}
+					}
+				}
+
+				return false;
+			}
+		}
+
+		private boolean isWater(BlockPos pos)
+		{
+			return world.getBlockState(pos).getMaterial() == Material.WATER;
+		}
+
+		@Override
+		public boolean canSnowAt(BlockPos pos, boolean checkLight) {
+			Biome biome = world.getBiome(pos);
+
+			if (biome == BiomePaleoproterozoicRegolith.biome) {
+				//This is DRY but cold
+				return false;
+			}
+
+			//float f = biome.getTemperature(pos);
+			float f = getTemperatureAdjusted(pos);
+
+			if (f >= 0.15F)
+			{
+				return false;
+			}
+			else if (!checkLight)
+			{
+				return true;
+			}
+			else
+			{
+				if (pos.getY() >= 0 && pos.getY() < 256 && world.getLightFor(EnumSkyBlock.BLOCK, pos) < 10)
+				{
+					IBlockState iblockstate1 = world.getBlockState(pos);
+
+					if (iblockstate1.getBlock().isAir(iblockstate1, world, pos) && Blocks.SNOW_LAYER.canPlaceBlockAt(world, pos))
+					{
+						return true;
+					}
+				}
+
+				return false;
+			}
 		}
 
 		@Override
