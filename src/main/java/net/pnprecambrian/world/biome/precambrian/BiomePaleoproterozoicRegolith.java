@@ -3,15 +3,15 @@ package net.pnprecambrian.world.biome.precambrian;
 
 import net.lepidodendron.ElementsLepidodendronMod;
 import net.lepidodendron.LepidodendronConfig;
-import net.lepidodendron.block.*;
+import net.lepidodendron.block.BlockSandPaleoproterozoic;
 import net.lepidodendron.util.EnumBiomeTypePrecambrian;
-import net.lepidodendron.world.biome.permian.BiomePrecambrian;
-import net.lepidodendron.world.gen.*;
-import net.minecraft.init.Blocks;
+import net.lepidodendron.world.biome.precambrian.BiomePrecambrian;
+import net.lepidodendron.world.gen.WorldGenCobble;
+import net.lepidodendron.world.gen.WorldGenGranite;
+import net.lepidodendron.world.gen.WorldGenWalchiaTree;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
-import net.minecraft.world.gen.feature.WorldGenDeadBush;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -101,6 +101,8 @@ public class BiomePaleoproterozoicRegolith extends ElementsLepidodendronMod.ModE
 					COBBLE_GENERATOR.generate(worldIn, rand, pos.add(j, l, k));
 				}
 			}
+
+			super.decorate(worldIn, rand, pos);
 		}
 
 		@Override
