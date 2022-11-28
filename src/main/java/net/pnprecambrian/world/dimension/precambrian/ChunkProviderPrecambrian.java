@@ -7,7 +7,7 @@ import net.lepidodendron.block.BlockToxicMud;
 import net.lepidodendron.util.EnumBiomeTypePrecambrian;
 import net.lepidodendron.world.biome.ChunkGenSpawner;
 import net.lepidodendron.world.biome.permian.BiomePrecambrian;
-import net.lepidodendron.world.gen.WorldGenPrecambrianLakes;
+import net.lepidodendron.world.gen.*;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;
@@ -142,7 +142,7 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                         int i1 = this.random.nextInt(16) + 8;
                         int j1 = this.random.nextInt(256);
                         int k1 = this.random.nextInt(16) + 8;
-                        (new WorldGenPrecambrianLakes((new FluidStack(FluidRegistry.getFluid("sulfuric_acid"), 1000)).getFluid().getBlock())).generate(this.world, this.random, blockpos.add(i1, j1, k1));
+                        (new WorldGenHadeanLakes((new FluidStack(FluidRegistry.getFluid("sulfuric_acid"), 1000)).getFluid().getBlock())).generate(this.world, this.random, blockpos.add(i1, j1, k1));
                     }
                 }
                 if (this.random.nextInt(6) == 0) {
@@ -151,7 +151,29 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                         int i1 = this.random.nextInt(16) + 8;
                         int j1 = this.random.nextInt(256);
                         int k1 = this.random.nextInt(16) + 8;
-                        (new WorldGenPrecambrianLakes(Blocks.LAVA)).generate(this.world, this.random, blockpos.add(i1, j1, k1));
+                        (new WorldGenHadeanLakes(Blocks.LAVA)).generate(this.world, this.random, blockpos.add(i1, j1, k1));
+                    }
+                }
+            }
+            else if (((BiomePrecambrian) biome).getBiomeType() == EnumBiomeTypePrecambrian.Archean) {
+                if (this.random.nextInt(4) == 0) {
+                    if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.random, x, z, false,
+                            net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAKE)) {
+                        int i1 = this.random.nextInt(16) + 8;
+                        int j1 = this.random.nextInt(256);
+                        int k1 = this.random.nextInt(16) + 8;
+                        (new WorldGenArcheanProterozoicLakes(Blocks.WATER)).generate(this.world, this.random, blockpos.add(i1, j1, k1));
+                    }
+                }
+            }
+            else if (((BiomePrecambrian) biome).getBiomeType() == EnumBiomeTypePrecambrian.Paleoproterozoic) {
+                if (this.random.nextInt(4) == 0) {
+                    if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.random, x, z, false,
+                            net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAKE)) {
+                        int i1 = this.random.nextInt(16) + 8;
+                        int j1 = this.random.nextInt(256);
+                        int k1 = this.random.nextInt(16) + 8;
+                        (new WorldGenPaleoproterozoicLakes(Blocks.WATER)).generate(this.world, this.random, blockpos.add(i1, j1, k1));
                     }
                 }
             }
