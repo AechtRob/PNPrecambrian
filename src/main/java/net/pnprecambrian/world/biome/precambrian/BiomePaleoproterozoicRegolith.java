@@ -6,7 +6,7 @@ import net.lepidodendron.LepidodendronConfig;
 import net.lepidodendron.block.*;
 import net.lepidodendron.util.EnumBiomeTypePrecambrian;
 import net.lepidodendron.util.EnumBiomeTypeTriassic;
-import net.lepidodendron.world.biome.permian.BiomePrecambrian;
+import net.lepidodendron.world.biome.precambrian.BiomePrecambrian;
 import net.lepidodendron.world.biome.triassic.BiomeTriassic;
 import net.lepidodendron.world.gen.*;
 import net.minecraft.init.Blocks;
@@ -45,7 +45,7 @@ public class BiomePaleoproterozoicRegolith extends ElementsLepidodendronMod.ModE
 	static class BiomeGenCustom extends BiomePrecambrian {
 		public BiomeGenCustom() {
 			//super(new BiomeProperties("Permian Desert").setRainfall(0.0F).setBaseHeight(0.18F).setHeightVariation(0.17F).setTemperature(2.2F).setRainDisabled().setWaterColor(10990706));
-			super(new BiomeProperties("Paleoproterozoic Regolith").setRainfall(0.0F).setBaseHeight(3.137F).setHeightVariation(0.062F).setTemperature(0.1F).setRainDisabled());
+			super(new BiomeProperties("Paleoproterozoic Regolith").setRainfall(0.0F).setBaseHeight(3.137F).setHeightVariation(0.062F).setTemperature(0.1F).setRainDisabled().setWaterColor(0xB00000));
 			setRegistryName("lepidodendron:paleoproterozoic_regolith");
 			topBlock = BlockSandPaleoproterozoic.block.getDefaultState();
 			fillerBlock = BlockSandPaleoproterozoic.block.getDefaultState();
