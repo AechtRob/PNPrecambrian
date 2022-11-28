@@ -6,7 +6,7 @@ import net.lepidodendron.block.BlockMeteorite;
 import net.lepidodendron.block.BlockToxicMud;
 import net.lepidodendron.util.EnumBiomeTypePrecambrian;
 import net.lepidodendron.world.biome.ChunkGenSpawner;
-import net.lepidodendron.world.biome.permian.BiomePrecambrian;
+import net.lepidodendron.world.biome.precambrian.BiomePrecambrian;
 import net.lepidodendron.world.gen.WorldGenPrecambrianLakes;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.BlockSand;

@@ -4,7 +4,7 @@ package net.pnprecambrian.world.biome.precambrian;
 import net.lepidodendron.LepidodendronConfig;
 import net.lepidodendron.block.BlockLavaRock;
 import net.lepidodendron.util.EnumBiomeTypePrecambrian;
-import net.lepidodendron.world.biome.permian.BiomePrecambrian;
+import net.lepidodendron.world.biome.precambrian.BiomePrecambrian;
 import net.lepidodendron.world.gen.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -72,14 +72,14 @@ public class BiomePrecambrianSea extends ElementsPNPrecambrianMod.ModElement {
 	        return null;
 	    }
 
-		@Override
+		/*@Override
 		public int getSkyColorByTemp(float par1)
 		{
 			if (LepidodendronConfig.renderFog) {
 				return 0xC81400;
 			}
 			return super.getSkyColorByTemp(par1);
-		}
+		}*/
 
 		@Override
 	    public void decorate(World worldIn, Random rand, BlockPos pos)

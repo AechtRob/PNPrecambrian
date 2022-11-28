@@ -6,7 +6,7 @@ import net.lepidodendron.block.BlockLavaCobble;
 import net.lepidodendron.block.BlockLavaCobbleMolten;
 import net.lepidodendron.block.BlockLavaRock;
 import net.lepidodendron.util.EnumBiomeTypePrecambrian;
-import net.lepidodendron.world.biome.permian.BiomePrecambrian;
+import net.lepidodendron.world.biome.precambrian.BiomePrecambrian;
 import net.lepidodendron.world.gen.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
