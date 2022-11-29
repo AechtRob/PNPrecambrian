@@ -97,7 +97,7 @@ public class BiomeArcheanShallowSea extends ElementsLepidodendronMod.ModElement 
 
 		@Override
 		public EnumBiomeTypePrecambrian getBiomeType() {
-			return EnumBiomeTypePrecambrian.Mesoproterozoic;
+			return EnumBiomeTypePrecambrian.Archean;
 		}
 
 	}

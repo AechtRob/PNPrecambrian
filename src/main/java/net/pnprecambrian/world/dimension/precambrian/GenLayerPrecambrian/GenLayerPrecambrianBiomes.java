@@ -18,13 +18,16 @@ public class GenLayerPrecambrianBiomes extends GenLayer {
     public  int MESOPROTEROZOIC_SEA_ID =  Biome.getIdForBiome(MESOPROTEROZOIC_SEA);
     public  Biome PROTEROZOIC_LAND = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:proterozoic_hills"));
     public  int PROTEROZOIC_LAND_ID =  Biome.getIdForBiome(PROTEROZOIC_LAND);
+    public  Biome ARCHEAN_SEA = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:archean_shallow_sea"));
+    public  int ARCHEAN_SEA_ID =  Biome.getIdForBiome(ARCHEAN_SEA);
 
     private final int PrecambrianBiomes[] = new int[] {
             PRECAMBRIAN_OCEAN_ID, //default Ediacaran
             HADEAN_LAND_ID, //default Hadean
             PALEOPROTEROZOIC_LAND_ID, //default Paleoproterozoic
             MESOPROTEROZOIC_SEA_ID, //default Mesoproterozoic
-            PROTEROZOIC_LAND_ID //general Proterozoic
+            PROTEROZOIC_LAND_ID, //general Proterozoic
+            ARCHEAN_SEA_ID //general Proterozoic
     };
 
     public GenLayerPrecambrianBiomes(long seed) {

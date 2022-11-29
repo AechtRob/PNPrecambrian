@@ -34,6 +34,7 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
     public static final IBlockState STONE_BACTERIAL_LAYER = BlockBacterialLayer.block.getDefaultState();
     public static final IBlockState STONE_MOLTEN_COBBLE = BlockLavaCobbleMolten.block.getDefaultState();
     public static final IBlockState STONE_PALEOPROTEROZOIC = BlockSandPaleoproterozoicWavy.block.getDefaultState();
+    public static final IBlockState STONE_ARCHEAN = BlockSandBlackWavy.block.getDefaultState();
 
     //public static final IBlockState FLUID = Blocks.FLOWING_WATER.getDefaultState();
 
@@ -500,6 +501,17 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                                             chunkPrimerIn.setBlockState(i1, j1, l, STONE_BACTERIAL_LAYER);
                                         }
                                     }
+                                    else if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Archean) {
+                                        if (Math.random() >= 0.95) {
+                                            chunkPrimerIn.setBlockState(i1, j1, l, BlockBacterialLayerArchean.block.getDefaultState());
+                                        }
+                                        else if (Math.random() >= 0.97) {
+                                            chunkPrimerIn.setBlockState(i1, j1, l, BlockToxicMud.block.getDefaultState());
+                                        }
+                                        else {
+                                            chunkPrimerIn.setBlockState(i1, j1, l, STONE_ARCHEAN);
+                                        }
+                                    }
                                     else {
                                         chunkPrimerIn.setBlockState(i1, j1, l, STONE_BACTERIAL_LAYER);
                                     }
@@ -508,6 +520,10 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                                     if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Mesoproterozoic
                                         && Math.random() > 0.33) {
                                         chunkPrimerIn.setBlockState(i1, j1, l, BlockToxicMud.block.getDefaultState());
+                                    }
+                                    else if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Archean
+                                            && Math.random() > 0.33) {
+                                        chunkPrimerIn.setBlockState(i1, j1, l, BlockLavaRock.block.getDefaultState());
                                     }
                                     else {
                                         chunkPrimerIn.setBlockState(i1, j1, l, Blocks.STONE.getStateFromMeta(0));
@@ -519,6 +535,9 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                                 if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Mesoproterozoic) {
                                     t = 0.1D;
                                 }
+                                if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Archean) {
+                                    t = 0.175D;
+                                }
                                 if (Math.random() > t) {
                                     if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Hadean) {
                                         chunkPrimerIn.setBlockState(i1, j1, l, STONE_MOLTEN_COBBLE);
@@ -527,6 +546,17 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                                         chunkPrimerIn.setBlockState(i1, j1, l, STONE_PALEOPROTEROZOIC);
                                         if (biome == BiomePaleoproterozoicShallows.biome && Math.random() > 0.95) {
                                             chunkPrimerIn.setBlockState(i1, j1, l, STONE_BACTERIAL_LAYER);
+                                        }
+                                    }
+                                    else if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Archean) {
+                                        if (Math.random() >= 0.95) {
+                                            chunkPrimerIn.setBlockState(i1, j1, l, BlockBacterialLayerArchean.block.getDefaultState());
+                                        }
+                                        else if (Math.random() >= 0.97) {
+                                            chunkPrimerIn.setBlockState(i1, j1, l, BlockToxicMud.block.getDefaultState());
+                                        }
+                                        else {
+                                            chunkPrimerIn.setBlockState(i1, j1, l, STONE_ARCHEAN);
                                         }
                                     }
                                     else {
@@ -566,6 +596,9 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                             }
                             else if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Paleoproterozoic) {
                                 iblockstate1 = iblockstate1.getValue(BlockSand.VARIANT) == BlockSand.EnumType.RED_SAND ? STONE_PALEOPROTEROZOIC : STONE_PALEOPROTEROZOIC;
+                            }
+                            else if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Archean) {
+                                iblockstate1 = iblockstate1.getValue(BlockSand.VARIANT) == BlockSand.EnumType.RED_SAND ? STONE_ARCHEAN : STONE_ARCHEAN;
                             }
                             else {
                                 iblockstate1 = iblockstate1.getValue(BlockSand.VARIANT) == BlockSand.EnumType.RED_SAND ? STONE_BACTERIAL_LAYER : STONE_BACTERIAL_LAYER;
