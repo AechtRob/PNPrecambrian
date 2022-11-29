@@ -74,7 +74,7 @@ public class BiomeArcheanShallowSea extends ElementsLepidodendronMod.ModElement 
 		public int getSkyColorByTemp(float par1)
 		{
 			if (LepidodendronConfig.renderFog) {
-				return 0x9CE4B8;
+				return 0xD7450A;
 			}
 			return super.getSkyColorByTemp(par1);
 		}

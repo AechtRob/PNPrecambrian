@@ -41,7 +41,7 @@ public class BiomeMesoproterozoicCarpet extends ElementsLepidodendronMod.ModElem
 	static class BiomeGenCustom extends BiomePrecambrian {
 		public BiomeGenCustom() {
 			//super(new BiomeProperties("Permian Desert").setRainfall(0.0F).setBaseHeight(0.18F).setHeightVariation(0.17F).setTemperature(2.2F).setRainDisabled().setWaterColor(10990706));
-			super(new BiomeProperties("Mesoproterozoic Carpet").setBaseHeight(2.0F).setHeightVariation(0.002F).setTemperature(0.6F));
+			super(new BiomeProperties("Mesoproterozoic Carpet").setBaseHeight(2.0F).setHeightVariation(0.002F).setTemperature(0.6F).setWaterColor(0x985ec7));
 			setRegistryName("lepidodendron:mesoproterozoic_carpet");
 			topBlock = Blocks.GRAVEL.getDefaultState();
 			fillerBlock = Blocks.STONE.getDefaultState();
@@ -70,14 +70,14 @@ public class BiomeMesoproterozoicCarpet extends ElementsLepidodendronMod.ModElem
 			return WALCHIA_TREE;
 		}
 
-		@Override
+		/*@Override
 		public int getSkyColorByTemp(float par1)
 		{
 			if (LepidodendronConfig.renderFog) {
 				return 0x9CE4B8;
 			}
 			return super.getSkyColorByTemp(par1);
-		}
+		}*/
 
 		@Override
 		public void decorate(World worldIn, Random rand, BlockPos pos) {
