@@ -41,7 +41,7 @@ public class BiomeArcheanShallowSea extends ElementsLepidodendronMod.ModElement 
 	static class BiomeGenCustom extends BiomePrecambrian {
 		public BiomeGenCustom() {
 			//super(new BiomeProperties("Permian Desert").setRainfall(0.0F).setBaseHeight(0.18F).setHeightVariation(0.17F).setTemperature(2.2F).setRainDisabled().setWaterColor(10990706));
-			super(new BiomeProperties("Archean Shallow Sea").setBaseHeight(1.2F).setHeightVariation(0.015F).setTemperature(0.6F));
+			super(new BiomeProperties("Archean Shallow Sea").setBaseHeight(1.2F).setHeightVariation(0.015F).setTemperature(0.6F).setWaterColor(0x539E6B));
 			setRegistryName("lepidodendron:archean_shallow_sea");
 			topBlock = Blocks.STONE.getDefaultState();
 			fillerBlock = BlockLavaRock.block.getDefaultState();
