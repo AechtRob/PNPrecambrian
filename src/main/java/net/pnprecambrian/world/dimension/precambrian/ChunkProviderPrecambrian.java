@@ -202,6 +202,26 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
             ChunkGenSpawner.executeProcedure(true, this.world, new BlockPos(i, 0, j), this.random, null, true);
         }
 
+        for (int k2 = 0; k2 < 16; ++k2)//This produces a uniform snow or ice cover in cold biomes.
+        {
+            for (int j3 = 0; j3 < 16; ++j3)
+            {
+                BlockPos blockpos1 = this.world.getPrecipitationHeight(blockpos.add(k2, 0, j3));
+                BlockPos blockpos2 = blockpos1.down();
+
+                if (this.world.canBlockFreezeWater(blockpos2))
+                {
+                    this.world.setBlockState(blockpos2, Blocks.ICE.getDefaultState(), 2);//Can be changed to packed ice to be consistent with the sea ice generator.
+                }
+
+                if (this.world.canSnowAt(blockpos1, true))
+                {
+                    this.world.setBlockState(blockpos1, Blocks.SNOW_LAYER.getDefaultState(), 2);
+                }
+            }
+        }
+
+
         net.minecraftforge.event.ForgeEventFactory.onChunkPopulate(false, this, this.world, this.random, x, z, false);
         BlockFalling.fallInstantly = false;
     }
