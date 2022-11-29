@@ -39,7 +39,7 @@ public class BiomeProterozoicHills extends ElementsPNPrecambrianMod.ModElement {
 
 	static class BiomeGenCustom extends BiomePrecambrian {
 		public BiomeGenCustom() {
-			super(new BiomeProperties("Proterozoic Hills").setRainfall(0.9F).setBaseHeight(4.4F).setHeightVariation(0.312F).setTemperature(0.1F));
+			super(new BiomeProperties("Proterozoic Barren Hills").setRainfall(0.9F).setBaseHeight(4.4F).setHeightVariation(0.312F).setTemperature(0.8F));
 			setRegistryName("lepidodendron:proterozoic_hills");
 			topBlock = Blocks.STONE.getStateFromMeta(0);
 			fillerBlock = BlockLavaRock.block.getDefaultState();

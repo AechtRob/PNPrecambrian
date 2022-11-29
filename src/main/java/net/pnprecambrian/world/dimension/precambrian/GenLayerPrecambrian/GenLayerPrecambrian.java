@@ -42,11 +42,15 @@ public class GenLayerPrecambrian {
         biomes = new GenLayerFuzzyZoom(1001L, biomes);
         //Add beaches and rivers between biomes etc:
         //N/A
+        biomes = new GenLayerPrecambrianBeach(321L, biomes);
+
         biomes = new GenLayerPrecambrianHadeanLavaEdge(1056L, biomes);
         biomes = new GenLayerSmooth(706L, biomes);
         biomes = new GenLayerFuzzyZoom(1002L, biomes);
         //Add extra rivers between biomes:
         //N/A
+        biomes = new GenLayerPrecambrianBeach(322L, biomes);
+
         biomes = new GenLayerZoom(1006L, biomes);
         biomes = new GenLayerPrecambrianHadeanLavaEdge(1057L, biomes);
         GenLayer genlayervoronoizoom = new GenLayerVoronoiZoom(10L, biomes);
