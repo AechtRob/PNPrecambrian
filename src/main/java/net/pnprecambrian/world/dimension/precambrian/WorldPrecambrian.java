@@ -37,6 +37,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.pnprecambrian.ElementsPNPrecambrianMod;
 import net.pnprecambrian.world.biome.precambrian.BiomePaleoproterozoicRegolith;
+import net.pnprecambrian.world.biome.precambrian.BiomePaleoproterozoicShallows;
 
 import java.util.Random;
 
@@ -153,7 +154,8 @@ public class WorldPrecambrian extends ElementsPNPrecambrianMod.ModElement {
 			Biome biome = world.getBiome(pos);
 			float ff = biome.getDefaultTemperature();
 
-			if (biome == BiomePaleoproterozoicRegolith.biome) {
+			if (biome == BiomePaleoproterozoicRegolith.biome
+				|| biome == BiomePaleoproterozoicShallows.biome) {
 				//only cold at night:
 				if (world.isDaytime()) {
 					ff = ff + 2F;

@@ -455,9 +455,9 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                         //For the Regolith biomes, make mountains craggy:
                         if (biome == BiomePaleoproterozoicRegolith.biome
                         ) {
-                            //If it's over 125 blocks then start to fill in more as stone
+                            //If it's over 122 blocks then start to fill in more as stone
                             //up to 135 where it almost fully stone - sometimes cobble
-                            int minHeight = 125;
+                            int minHeight = 122;
                             if (j1 >= minHeight) {
                                 int j2 = Math.max(0, 135 - j1);
                                 double stoneFactor = (double) j2 / (135D - (double) minHeight);
@@ -475,56 +475,6 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                                 }
                             }
                         }
-                        if (biome == BiomePaleoproterozoicFrigidWastes.biome
-                                || biome == BiomePaleoproterozoicFrigidPeaks.biome
-                        ) {
-                            //If it's over 140 blocks then start to fill in more as stone
-                            //up to 185 where it almost fully stone - sometimes cobble
-                            int minHeight = 140;
-                            if (j1 >= minHeight) {
-                                int j2 = Math.max(0, 185 - j1);
-                                double stoneFactor = (double) j2 / (185D - (double) minHeight);
-                                if (Math.random() >= stoneFactor) {
-                                    iblockstate = Blocks.STONE.getStateFromMeta(1);
-                                    if (rand.nextInt(8) == 0) {
-                                        iblockstate = Blocks.COBBLESTONE.getDefaultState();
-                                    }
-                                }
-                                if (Math.random() >= stoneFactor) {
-                                    iblockstate1 = BlockLavaRock.block.getDefaultState();
-                                    if (rand.nextInt(8) == 0) {
-                                        iblockstate1 = Blocks.COBBLESTONE.getDefaultState();
-                                    }
-                                }
-                                if (Math.random() >= stoneFactor) {
-                                    iblockstate1 = Blocks.STONE.getStateFromMeta(3);
-                                    if (rand.nextInt(6) == 0) {
-                                        iblockstate1 = BlockLavaCobble.block.getDefaultState();
-                                    }
-                                }
-                            }
-                            //If it's over 160 blocks then start to fill in more as snw
-                            //up to 210 where it's fully snow
-                            minHeight = 160;
-                            if (j1 >= minHeight) {
-                                int j2 = Math.max(0, 210 - j1);
-                                double stoneFactor = (double) j2 / (210D - (double) minHeight);
-                                if (Math.random() >= stoneFactor) {
-                                    iblockstate = Blocks.SNOW.getStateFromMeta(0);
-                                }
-                            }
-                            //If it's over 180 blocks then start to fill in more as snow
-                            //up to 165 where it's fully snow
-                            int minHeightS = 180;
-                            if (j1 >= minHeightS) {
-                                int j2 = Math.max(0, 230 - j1);
-                                double stoneFactor = (double) j2 / (230D - (double) minHeightS);
-                                if (Math.random() >= stoneFactor) {
-                                    iblockstate1 = Blocks.SNOW.getStateFromMeta(0);
-                                }
-                            }
-                        }
-
 
 
                         j = k;
@@ -546,6 +496,9 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                                     }
                                     else if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Paleoproterozoic) {
                                         chunkPrimerIn.setBlockState(i1, j1, l, STONE_PALEOPROTEROZOIC);
+                                        if (biome == BiomePaleoproterozoicShallows.biome && Math.random() > 0.95) {
+                                            chunkPrimerIn.setBlockState(i1, j1, l, STONE_BACTERIAL_LAYER);
+                                        }
                                     }
                                     else {
                                         chunkPrimerIn.setBlockState(i1, j1, l, STONE_BACTERIAL_LAYER);
@@ -572,6 +525,9 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                                     }
                                     else if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Paleoproterozoic) {
                                         chunkPrimerIn.setBlockState(i1, j1, l, STONE_PALEOPROTEROZOIC);
+                                        if (biome == BiomePaleoproterozoicShallows.biome && Math.random() > 0.95) {
+                                            chunkPrimerIn.setBlockState(i1, j1, l, STONE_BACTERIAL_LAYER);
+                                        }
                                     }
                                     else {
                                         chunkPrimerIn.setBlockState(i1, j1, l, STONE_BACTERIAL_LAYER);

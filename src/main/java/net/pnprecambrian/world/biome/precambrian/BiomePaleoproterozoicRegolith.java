@@ -43,7 +43,7 @@ public class BiomePaleoproterozoicRegolith extends ElementsLepidodendronMod.ModE
 	static class BiomeGenCustom extends BiomePrecambrian {
 		public BiomeGenCustom() {
 			//super(new BiomeProperties("Permian Desert").setRainfall(0.0F).setBaseHeight(0.18F).setHeightVariation(0.17F).setTemperature(2.2F).setRainDisabled().setWaterColor(10990706));
-			super(new BiomeProperties("Paleoproterozoic Regolith").setRainfall(0.0F).setBaseHeight(3.137F).setHeightVariation(0.062F).setTemperature(0.1F).setRainDisabled().setWaterColor(0xB00000));
+			super(new BiomeProperties("Paleoproterozoic Regolith").setRainfall(0.0F).setBaseHeight(3.037F).setHeightVariation(0.062F).setTemperature(0.1F).setRainDisabled().setWaterColor(0xB00000));
 			setRegistryName("lepidodendron:paleoproterozoic_regolith");
 			topBlock = BlockSandPaleoproterozoic.block.getDefaultState();
 			fillerBlock = BlockSandPaleoproterozoic.block.getDefaultState();

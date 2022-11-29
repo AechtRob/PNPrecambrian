@@ -35,6 +35,7 @@ public class BiomeMesoproterozoicCarpet extends ElementsLepidodendronMod.ModElem
 	@Override
 	public void init(FMLInitializationEvent event) {
 		BiomeDictionary.addTypes(biome, BiomeDictionary.Type.OCEAN);
+		BiomeDictionary.addTypes(biome, BiomeDictionary.Type.WATER);
 	}
 
 	static class BiomeGenCustom extends BiomePrecambrian {
@@ -91,15 +92,49 @@ public class BiomeMesoproterozoicCarpet extends ElementsLepidodendronMod.ModElem
 				}
 
 			if (net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, rand, new net.minecraft.util.math.ChunkPos(pos), DecorateBiomeEvent.Decorate.EventType.CLAY)) {
-				for (int i = 0; i < 2; ++i) {
-					int j = rand.nextInt(16) + 8;
-					int k = rand.nextInt(16) + 8;
+				for (int i = 0; i < 16; ++i) {
+					int radius = 4;
+					int j;
+					int k;
+					if (radius < 14) {
+						j = 16 + rand.nextInt(16 - radius - 2) - rand.nextInt(16 - radius - 2);
+						k = 16 + rand.nextInt(16 - radius - 2) - rand.nextInt(16 - radius - 2);
+					}
+					else {
+						radius = 14;
+						j = 16;
+						k = 16;
+					}
 					int l = rand.nextInt(worldIn.getHeight(pos.add(j, 0, k)).getY() + 32);
 					BlockPos pos1 = pos.add(j, l, k);
 					if (
 							(pos1.getY() < worldIn.getSeaLevel())
 					) {
-						REEF_GENERATOR.generate(worldIn, rand, pos1, 16, false, false);
+						REEF_GENERATOR.generate(worldIn, rand, pos1, radius, false, false);
+					}
+				}
+			}
+
+			if (net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, rand, new net.minecraft.util.math.ChunkPos(pos), DecorateBiomeEvent.Decorate.EventType.CLAY)) {
+				for (int i = 0; i < 3; ++i) {
+					int radius = 16;
+					int j;
+					int k;
+					if (radius < 13) {
+						j = 16 + rand.nextInt(16 - radius - 2) - rand.nextInt(16 - radius - 2);
+						k = 16 + rand.nextInt(16 - radius - 2) - rand.nextInt(16 - radius - 2);
+					}
+					else {
+						radius = 13;
+						j = 16;
+						k = 16;
+					}
+					int l = rand.nextInt(worldIn.getHeight(pos.add(j, 0, k)).getY() + 32);
+					BlockPos pos1 = pos.add(j, l, k);
+					if (
+							(pos1.getY() < worldIn.getSeaLevel())
+					) {
+						REEF_GENERATOR.generate(worldIn, rand, pos1, radius, false, false);
 					}
 				}
 			}
