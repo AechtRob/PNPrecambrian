@@ -36,6 +36,7 @@ import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.pnprecambrian.ElementsPNPrecambrianMod;
+import net.pnprecambrian.world.biome.precambrian.BiomePaleoproterozoicBeach;
 import net.pnprecambrian.world.biome.precambrian.BiomePaleoproterozoicRegolith;
 import net.pnprecambrian.world.biome.precambrian.BiomePaleoproterozoicShallows;
 
@@ -155,7 +156,8 @@ public class WorldPrecambrian extends ElementsPNPrecambrianMod.ModElement {
 			float ff = biome.getDefaultTemperature();
 
 			if (biome == BiomePaleoproterozoicRegolith.biome
-				|| biome == BiomePaleoproterozoicShallows.biome) {
+				|| biome == BiomePaleoproterozoicShallows.biome
+					|| biome == BiomePaleoproterozoicBeach.biome) {
 				//only cold at night:
 				if (world.isDaytime()) {
 					ff = ff + 2F;
@@ -222,7 +224,9 @@ public class WorldPrecambrian extends ElementsPNPrecambrianMod.ModElement {
 		public boolean canSnowAt(BlockPos pos, boolean checkLight) {
 			Biome biome = world.getBiome(pos);
 
-			if (biome == BiomePaleoproterozoicRegolith.biome) {
+			if (biome == BiomePaleoproterozoicRegolith.biome
+					|| biome == BiomePaleoproterozoicShallows.biome
+					|| biome == BiomePaleoproterozoicBeach.biome) {
 				//This is DRY but cold
 				return false;
 			}
