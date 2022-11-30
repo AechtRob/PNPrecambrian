@@ -202,6 +202,8 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
             ChunkGenSpawner.executeProcedure(true, this.world, new BlockPos(i, 0, j), this.random, null, true);
         }
 
+        /*
+        //Disabled: causes infinite lag to world gen
         for (int k2 = 0; k2 < 16; ++k2)//This produces a uniform snow or ice cover in cold biomes.
         {
             for (int j3 = 0; j3 < 16; ++j3)
@@ -220,6 +222,8 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                 }
             }
         }
+
+         */
 
 
         net.minecraftforge.event.ForgeEventFactory.onChunkPopulate(false, this, this.world, this.random, x, z, false);
@@ -471,7 +475,25 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                             }
                         }
 
-
+                        //Break up our Hadean Lava rock a bit:
+                        if (biome == BiomeHadeanVolcanic.biome) {
+                            if (rand.nextInt(16) == 0) {
+                                iblockstate = BlockLavaCobble.block.getDefaultState();
+                            }
+                            //If it's over 122 blocks then start to fill in more as cobble
+                            //up to 200 where it almost fully cobble - which should be higher than our gen here
+                            int minHeight = 122;
+                            if (j1 >= minHeight) {
+                                int j2 = Math.max(0, 200 - j1);
+                                double stoneFactor = (double) j2 / (200D - (double) minHeight);
+                                if (Math.random() >= stoneFactor) {
+                                    iblockstate = BlockLavaCobble.block.getStateFromMeta(1);
+                                }
+                                if (Math.random() >= stoneFactor) {
+                                    iblockstate1 = BlockLavaCobble.block.getDefaultState();
+                                }
+                            }
+                        }
 
                         //For the Regolith biomes, make mountains craggy:
                         if (biome == BiomePaleoproterozoicRegolith.biome

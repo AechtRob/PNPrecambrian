@@ -60,7 +60,7 @@ public class BiomePaleoproterozoicBeach extends ElementsLepidodendronMod.ModElem
 			this.spawnableCaveCreatureList.clear();
 		}
 
-		protected static final WorldGenWalchiaTree WALCHIA_TREE = new WorldGenWalchiaTree(false);
+		protected static final WorldGenNullTree NULL_TREE = new WorldGenNullTree(false);
 
 		protected static final WorldGenGranite GRANITE_GENERATOR = new WorldGenGranite();
 		protected static final WorldGenCobble COBBLE_GENERATOR = new WorldGenCobble();
@@ -69,7 +69,7 @@ public class BiomePaleoproterozoicBeach extends ElementsLepidodendronMod.ModElem
 
 		public WorldGenAbstractTree getRandomTreeFeature(Random rand)
 		{
-			return WALCHIA_TREE;
+			return NULL_TREE;
 		}
 
 		/*@Override

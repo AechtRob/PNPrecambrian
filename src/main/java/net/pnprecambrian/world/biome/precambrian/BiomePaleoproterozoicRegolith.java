@@ -2,13 +2,12 @@
 package net.pnprecambrian.world.biome.precambrian;
 
 import net.lepidodendron.ElementsLepidodendronMod;
-import net.lepidodendron.LepidodendronConfig;
 import net.lepidodendron.block.BlockSandPaleoproterozoic;
 import net.lepidodendron.util.EnumBiomeTypePrecambrian;
 import net.lepidodendron.world.biome.precambrian.BiomePrecambrian;
 import net.lepidodendron.world.gen.WorldGenCobble;
 import net.lepidodendron.world.gen.WorldGenGranite;
-import net.lepidodendron.world.gen.WorldGenWalchiaTree;
+import net.lepidodendron.world.gen.WorldGenNullTree;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
@@ -62,14 +61,14 @@ public class BiomePaleoproterozoicRegolith extends ElementsLepidodendronMod.ModE
 			this.spawnableCaveCreatureList.clear();
 		}
 
-		protected static final WorldGenWalchiaTree WALCHIA_TREE = new WorldGenWalchiaTree(false);
+		protected static final WorldGenNullTree NULL_TREE = new WorldGenNullTree(false);
 
 		protected static final WorldGenGranite GRANITE_GENERATOR = new WorldGenGranite();
 		protected static final WorldGenCobble COBBLE_GENERATOR = new WorldGenCobble();
 
 		public WorldGenAbstractTree getRandomTreeFeature(Random rand)
 		{
-			return WALCHIA_TREE;
+			return NULL_TREE;
 		}
 
 		/*@Override

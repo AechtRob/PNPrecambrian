@@ -20,6 +20,8 @@ public class GenLayerPrecambrianBiomes extends GenLayer {
     public  int PROTEROZOIC_LAND_ID =  Biome.getIdForBiome(PROTEROZOIC_LAND);
     public  Biome ARCHEAN_SEA = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:archean_shallow_sea"));
     public  int ARCHEAN_SEA_ID =  Biome.getIdForBiome(ARCHEAN_SEA);
+    public  Biome CRYOGENIAN_DESERT = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:cryogenian_desert"));
+    public  int CRYOGENIAN_DESERT_ID =  Biome.getIdForBiome(CRYOGENIAN_DESERT);
 
     private final int PrecambrianBiomes[] = new int[] {
             PRECAMBRIAN_OCEAN_ID, //default Ediacaran
@@ -27,7 +29,8 @@ public class GenLayerPrecambrianBiomes extends GenLayer {
             PALEOPROTEROZOIC_LAND_ID, //default Paleoproterozoic
             MESOPROTEROZOIC_SEA_ID, //default Mesoproterozoic
             PROTEROZOIC_LAND_ID, //general Proterozoic
-            ARCHEAN_SEA_ID //general Proterozoic
+            ARCHEAN_SEA_ID, //general Archean
+            CRYOGENIAN_DESERT_ID //general Neoproterozoic (excluding Ediacaran)
     };
 
     public GenLayerPrecambrianBiomes(long seed) {

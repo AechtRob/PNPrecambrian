@@ -14,7 +14,7 @@ public class GenLayerDiversifyPrecambrian extends GenLayer {
     public  Biome PALEOPROTEROZOIC_SHALLOWS = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:paleoproterozoic_shallows"));
     public  int PALEOPROTEROZOIC_SHALLOWS_ID =  Biome.getIdForBiome(PALEOPROTEROZOIC_SHALLOWS);
 
-     private final int PaleoproterozoicBiomes[] = new int[] {
+    private final int PaleoproterozoicBiomes[] = new int[] {
              PALEOPROTEROZOIC_REGOLITH_ID,
              PALEOPROTEROZOIC_REGOLITH_ID,
              PALEOPROTEROZOIC_SHALLOWS_ID

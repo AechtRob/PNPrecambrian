@@ -2,12 +2,11 @@
 package net.pnprecambrian.world.biome.precambrian;
 
 import net.lepidodendron.ElementsLepidodendronMod;
-import net.lepidodendron.LepidodendronConfig;
 import net.lepidodendron.util.EnumBiomeTypePrecambrian;
 import net.lepidodendron.world.biome.precambrian.BiomePrecambrian;
-import net.lepidodendron.world.gen.WorldGenCobble;
-import net.lepidodendron.world.gen.WorldGenGranite;
-import net.lepidodendron.world.gen.WorldGenWalchiaTree;
+import net.lepidodendron.world.gen.WorldGenSnow;
+import net.lepidodendron.world.gen.WorldGenNullTree;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
@@ -60,13 +59,13 @@ public class BiomeCryogenianDesert extends ElementsLepidodendronMod.ModElement {
 			this.spawnableCaveCreatureList.clear();
 		}
 
-		protected static final WorldGenWalchiaTree WALCHIA_TREE = new WorldGenWalchiaTree(false);
+		protected static final WorldGenNullTree NULL_TREE = new WorldGenNullTree(false);
 
 		protected static final WorldGenSnow SNOW_GENERATOR = new WorldGenSnow();
 
 		public WorldGenAbstractTree getRandomTreeFeature(Random rand)
 		{
-			return WALCHIA_TREE;
+			return NULL_TREE;
 		}
 
 		/*@Override

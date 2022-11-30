@@ -7,7 +7,7 @@ import net.lepidodendron.util.EnumBiomeTypePrecambrian;
 import net.lepidodendron.world.biome.precambrian.BiomePrecambrian;
 import net.lepidodendron.world.gen.WorldGenStromatoliteReefPrecambrian;
 import net.lepidodendron.world.gen.WorldGenToxicMud;
-import net.lepidodendron.world.gen.WorldGenWalchiaTree;
+import net.lepidodendron.world.gen.WorldGenNullTree;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -60,14 +60,14 @@ public class BiomeMesoproterozoicCarpet extends ElementsLepidodendronMod.ModElem
 			this.spawnableCaveCreatureList.clear();
 		}
 
-		protected static final WorldGenWalchiaTree WALCHIA_TREE = new WorldGenWalchiaTree(false);
+		protected static final WorldGenNullTree NULL_TREE = new WorldGenNullTree(false);
 
 		protected static final WorldGenToxicMud MUD_GENERATOR = new WorldGenToxicMud();
 		protected static final WorldGenStromatoliteReefPrecambrian REEF_GENERATOR = new WorldGenStromatoliteReefPrecambrian();
 
 		public WorldGenAbstractTree getRandomTreeFeature(Random rand)
 		{
-			return WALCHIA_TREE;
+			return NULL_TREE;
 		}
 
 		/*@Override
