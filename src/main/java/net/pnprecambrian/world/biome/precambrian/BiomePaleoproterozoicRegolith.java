@@ -72,14 +72,14 @@ public class BiomePaleoproterozoicRegolith extends ElementsLepidodendronMod.ModE
 			return WALCHIA_TREE;
 		}
 
-		@Override
+		/*@Override
 		public int getSkyColorByTemp(float par1)
 		{
 			if (LepidodendronConfig.renderFog) {
 				return 0xE2C1FD;
 			}
 			return super.getSkyColorByTemp(par1);
-		}
+		}*/
 
 		@Override
 		public void decorate(World worldIn, Random rand, BlockPos pos) {

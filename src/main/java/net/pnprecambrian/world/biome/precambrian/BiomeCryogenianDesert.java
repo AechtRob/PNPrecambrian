@@ -3,27 +3,25 @@ package net.pnprecambrian.world.biome.precambrian;
 
 import net.lepidodendron.ElementsLepidodendronMod;
 import net.lepidodendron.LepidodendronConfig;
-import net.lepidodendron.block.BlockLavaRock;
 import net.lepidodendron.util.EnumBiomeTypePrecambrian;
 import net.lepidodendron.world.biome.precambrian.BiomePrecambrian;
-import net.lepidodendron.world.gen.WorldGenToxicMud;
+import net.lepidodendron.world.gen.WorldGenCobble;
+import net.lepidodendron.world.gen.WorldGenGranite;
 import net.lepidodendron.world.gen.WorldGenWalchiaTree;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.Random;
 
 @ElementsLepidodendronMod.ModElement.Tag
-public class BiomeArcheanShallowSea extends ElementsLepidodendronMod.ModElement {
-	@GameRegistry.ObjectHolder("lepidodendron:archean_shallow_sea")
+public class BiomeCryogenianDesert extends ElementsLepidodendronMod.ModElement {
+	@GameRegistry.ObjectHolder("lepidodendron:cryogenian_desert")
 	public static final BiomeGenCustom biome = null;
-	public BiomeArcheanShallowSea(ElementsLepidodendronMod instance) {
+	public BiomeCryogenianDesert(ElementsLepidodendronMod instance) {
 		super(instance, 1589);
 	}
 
@@ -34,17 +32,19 @@ public class BiomeArcheanShallowSea extends ElementsLepidodendronMod.ModElement 
 
 	@Override
 	public void init(FMLInitializationEvent event) {
-		BiomeDictionary.addTypes(biome, BiomeDictionary.Type.OCEAN);
-		BiomeDictionary.addTypes(biome, BiomeDictionary.Type.WATER);
+		BiomeDictionary.addTypes(biome, BiomeDictionary.Type.WASTELAND);
+		BiomeDictionary.addTypes(biome, BiomeDictionary.Type.DEAD);
+		BiomeDictionary.addTypes(biome, BiomeDictionary.Type.SNOWY);
+		BiomeDictionary.addTypes(biome, BiomeDictionary.Type.COLD);
 	}
 
 	static class BiomeGenCustom extends BiomePrecambrian {
 		public BiomeGenCustom() {
 			//super(new BiomeProperties("Permian Desert").setRainfall(0.0F).setBaseHeight(0.18F).setHeightVariation(0.17F).setTemperature(2.2F).setRainDisabled().setWaterColor(10990706));
-			super(new BiomeProperties("Archean Shallow Sea").setBaseHeight(1.2F).setHeightVariation(0.015F).setTemperature(0.6F).setWaterColor(0x539E6B));
-			setRegistryName("lepidodendron:archean_shallow_sea");
-			topBlock = Blocks.STONE.getDefaultState();
-			fillerBlock = BlockLavaRock.block.getDefaultState();
+			super(new BiomeProperties("Cryogenian Ice Desert").setRainfall(0.0F).setBaseHeight(3.037F).setHeightVariation(0.062F).setTemperature(0.1F).setSnowEnabled().setWaterColor(11556675));
+			setRegistryName("lepidodendron:cryogenian_desert");
+			this.topBlock = Blocks.SNOW.getDefaultState();
+			this.fillerBlock = Blocks.GRAVEL.getDefaultState();
 			decorator.treesPerChunk = -999;
 			decorator.flowersPerChunk = 0;
 			decorator.grassPerChunk = 0;
@@ -62,42 +62,41 @@ public class BiomeArcheanShallowSea extends ElementsLepidodendronMod.ModElement 
 
 		protected static final WorldGenWalchiaTree WALCHIA_TREE = new WorldGenWalchiaTree(false);
 
-		protected static final WorldGenToxicMud MUD_GENERATOR = new WorldGenToxicMud();
-		//protected static final WorldGenStromatoliteReefPrecambrian REEF_GENERATOR = new WorldGenStromatoliteReefPrecambrian();
+		protected static final WorldGenSnow SNOW_GENERATOR = new WorldGenSnow();
 
 		public WorldGenAbstractTree getRandomTreeFeature(Random rand)
 		{
 			return WALCHIA_TREE;
 		}
 
-		@Override
+		/*@Override
 		public int getSkyColorByTemp(float par1)
 		{
 			if (LepidodendronConfig.renderFog) {
-				return 0xD7450A;
+				return 0xE2C1FD;
 			}
 			return super.getSkyColorByTemp(par1);
-		}
+		}*/
 
 		@Override
 		public void decorate(World worldIn, Random rand, BlockPos pos) {
 
-			if (net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, rand, new net.minecraft.util.math.ChunkPos(pos), DecorateBiomeEvent.Decorate.EventType.GRASS))
-				for (int i = 0; i < 128; ++i)
-				{
-					int j = rand.nextInt(16) + 8;
+			if (net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, rand, new net.minecraft.util.math.ChunkPos(pos), net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.ICE)) {				
+				int i = rand.nextInt(32);
+
+				for (int j = 0; j < i; ++j) {
 					int k = rand.nextInt(16) + 8;
-					int l = rand.nextInt(worldIn.getHeight(pos.add(j, 0, k)).getY() + 32);
-					MUD_GENERATOR.generate(worldIn, rand, pos.add(j, l, k));
+					int l = rand.nextInt(16) + 8;
+					BlockPos blockpos = worldIn.getHeight(pos.add(k, 0, l));
+					SNOW_GENERATOR.generate(worldIn, rand, blockpos, 0);
 				}
-
+			}
 			super.decorate(worldIn, rand, pos);
-
 		}
 
 		@Override
 		public EnumBiomeTypePrecambrian getBiomeType() {
-			return EnumBiomeTypePrecambrian.Archean;
+			return EnumBiomeTypePrecambrian.Neoproterozoic;
 		}
 
 	}
