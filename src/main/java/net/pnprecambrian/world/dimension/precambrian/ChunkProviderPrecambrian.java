@@ -559,9 +559,13 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                                     }
                                 }
                                 else {
-                                    if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Mesoproterozoic
+                                    if ((((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Mesoproterozoic)
                                         && Math.random() > 0.33) {
                                         chunkPrimerIn.setBlockState(i1, j1, l, BlockToxicMud.block.getDefaultState());
+                                    }
+                                    else if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Neoproterozoic
+                                            && Math.random() > 0.33) {
+                                        chunkPrimerIn.setBlockState(i1, j1, l, Blocks.GRAVEL.getDefaultState());
                                     }
                                     else if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Archean
                                             && Math.random() > 0.33) {
@@ -577,7 +581,10 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                                 if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Mesoproterozoic) {
                                     t = 0.1D;
                                 }
-                                if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Archean) {
+                                else if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Neoproterozoic) {
+                                    t = 0.145D;
+                                }
+                                else if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Archean) {
                                     t = 0.175D;
                                 }
                                 if (Math.random() > t) {
@@ -615,7 +622,8 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                                         }
                                     }
                                     else {
-                                        if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Mesoproterozoic) {
+                                        if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Mesoproterozoic
+                                            || ((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Neoproterozoic) {
                                             chunkPrimerIn.setBlockState(i1, j1, l, Blocks.GRAVEL.getDefaultState());
                                         }
                                         else {

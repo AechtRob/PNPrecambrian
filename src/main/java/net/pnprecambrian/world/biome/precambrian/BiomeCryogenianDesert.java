@@ -4,12 +4,15 @@ package net.pnprecambrian.world.biome.precambrian;
 import net.lepidodendron.ElementsLepidodendronMod;
 import net.lepidodendron.util.EnumBiomeTypePrecambrian;
 import net.lepidodendron.world.biome.precambrian.BiomePrecambrian;
-import net.lepidodendron.world.gen.WorldGenSnow;
+import net.lepidodendron.world.gen.WorldGenIceOnSea;
+import net.lepidodendron.world.gen.WorldGenIcebergs;
 import net.lepidodendron.world.gen.WorldGenNullTree;
+import net.lepidodendron.world.gen.WorldGenSnow;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
+import net.minecraft.world.gen.feature.WorldGenIcePath;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -61,7 +64,10 @@ public class BiomeCryogenianDesert extends ElementsLepidodendronMod.ModElement {
 
 		protected static final WorldGenNullTree NULL_TREE = new WorldGenNullTree(false);
 
+		private final WorldGenIcePath icePatch = new WorldGenIcePath(3);
 		protected static final WorldGenSnow SNOW_GENERATOR = new WorldGenSnow();
+		protected static final WorldGenIceOnSea ICE_GENERATOR = new WorldGenIceOnSea();
+		protected static final WorldGenIcebergs ICEBERG_GENERATOR = new WorldGenIcebergs();
 
 		public WorldGenAbstractTree getRandomTreeFeature(Random rand)
 		{
@@ -80,8 +86,35 @@ public class BiomeCryogenianDesert extends ElementsLepidodendronMod.ModElement {
 		@Override
 		public void decorate(World worldIn, Random rand, BlockPos pos) {
 
-			if (net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, rand, new net.minecraft.util.math.ChunkPos(pos), net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.ICE)) {				
-				int i = rand.nextInt(32);
+			if (rand.nextInt(8) == 0)
+			{
+				int i1 = rand.nextInt(16) + 8;
+				int j1 = rand.nextInt(16) + 8;
+				this.icePatch.generate(worldIn, rand, worldIn.getHeight(pos.add(i1, 0, j1)));
+			}
+
+			if (net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, rand, new net.minecraft.util.math.ChunkPos(pos), net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.ICE)) {
+				int i = rand.nextInt(48);
+
+				for (int j = 0; j < i; ++j) {
+					int k = rand.nextInt(16) + 8;
+					int l = rand.nextInt(16) + 8;
+					BlockPos blockpos = worldIn.getHeight(pos.add(k, 0, l));
+					//if (worldIn.getBlockState(blockpos.down()).getMaterial() != Material.WATER) {
+						ICE_GENERATOR.generate(worldIn, rand, blockpos,0);
+					//}
+				}
+
+				i = rand.nextInt(3);
+
+				for (int j = 0; j < i; ++j) {
+					int k = rand.nextInt(16) + 8;
+					int l = rand.nextInt(16) + 8;
+					BlockPos blockpos = worldIn.getHeight(pos.add(k, 0, l));
+					ICEBERG_GENERATOR.generate(worldIn, rand, blockpos, true);
+				}
+
+				i = rand.nextInt(32);
 
 				for (int j = 0; j < i; ++j) {
 					int k = rand.nextInt(16) + 8;
@@ -89,6 +122,8 @@ public class BiomeCryogenianDesert extends ElementsLepidodendronMod.ModElement {
 					BlockPos blockpos = worldIn.getHeight(pos.add(k, 0, l));
 					SNOW_GENERATOR.generate(worldIn, rand, blockpos, 0);
 				}
+
+
 			}
 			super.decorate(worldIn, rand, pos);
 		}
