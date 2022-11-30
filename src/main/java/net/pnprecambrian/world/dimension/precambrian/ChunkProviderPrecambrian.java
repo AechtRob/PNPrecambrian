@@ -4,10 +4,7 @@ import net.lepidodendron.block.*;
 import net.lepidodendron.util.EnumBiomeTypePrecambrian;
 import net.lepidodendron.world.biome.ChunkGenSpawner;
 import net.lepidodendron.world.biome.precambrian.BiomePrecambrian;
-import net.lepidodendron.world.gen.WorldGenArcheanProterozoicLakes;
-import net.lepidodendron.world.gen.WorldGenHadeanLakes;
-import net.lepidodendron.world.gen.WorldGenPaleoproterozoicLakes;
-import net.lepidodendron.world.gen.WorldGenPrecambrianLakes;
+import net.lepidodendron.world.gen.*;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.material.Material;
@@ -156,14 +153,25 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                     }
                 }
             }
-            else if (((BiomePrecambrian) biome).getBiomeType() == EnumBiomeTypePrecambrian.Archean) {
-                if (this.random.nextInt(4) == 0) {
+            else if (biome == BiomeArcheanBeach.biome || biome == BiomeArcheanTidePools.biome) {
+                for (int lake = 0; lake < 24; ++lake) {
                     if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.random, x, z, false,
                             net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAKE)) {
                         int i1 = this.random.nextInt(16) + 8;
                         int j1 = this.random.nextInt(256);
                         int k1 = this.random.nextInt(16) + 8;
                         (new WorldGenArcheanProterozoicLakes(Blocks.WATER)).generate(this.world, this.random, blockpos.add(i1, j1, k1));
+                    }
+                }
+            }
+            else if (biome == BiomeArcheanCausticQuagmire.biome) {
+                for (int lake = 0; lake < 64; ++lake) {
+                    if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.random, x, z, false,
+                            net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.ANIMALS)) {
+                        int i1 = this.random.nextInt(16) + 8;
+                        int j1 = this.random.nextInt(256);
+                        int k1 = this.random.nextInt(16) + 8;
+                        (new WorldGenToxicMudProterozoicLakes(Blocks.WATER)).generate(this.world, this.random, blockpos.add(i1, j1, k1));
                     }
                 }
             }
@@ -175,6 +183,17 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                         int j1 = this.random.nextInt(256);
                         int k1 = this.random.nextInt(16) + 8;
                         (new WorldGenPaleoproterozoicLakes(Blocks.WATER)).generate(this.world, this.random, blockpos.add(i1, j1, k1));
+                    }
+                }
+            }
+            else if (((BiomePrecambrian) biome).getBiomeType() == EnumBiomeTypePrecambrian.Neoproterozoic) {
+                if (this.random.nextInt(4) == 0) {
+                    if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.random, x, z, false,
+                            net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAKE)) {
+                        int i1 = this.random.nextInt(16) + 8;
+                        int j1 = this.random.nextInt(256);
+                        int k1 = this.random.nextInt(16) + 8;
+                        (new WorldGenNeoproterozoicLakes(Blocks.WATER)).generate(this.world, this.random, blockpos.add(i1, j1, k1));
                     }
                 }
             }
@@ -394,8 +413,11 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                     double d3 = this.limitRegMax[i] / (double) 512;
                     double d4 = (this.noiseRegMain[i] / 10.0D + 1.0D) / 2.0D;
 
-                    if (biome == BiomeHadeanLava.biome) {
-                        //Flatten these out somewhat:
+                    if (biome == BiomeHadeanLava.biome
+                        || biome == BiomeNeoproterozoicMicrobialPlains.biome
+                        || biome == BiomeArcheanTidePools.biome
+                        || biome == BiomeArcheanCausticQuagmire.biome) {
+                        //Flatten these out:
                         d4 = 1.0F;
                         d2 = d4;
                         d3 = d4;
@@ -451,6 +473,9 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                         if (k <= 0) {
                             iblockstate = AIR;
                             iblockstate1 = STONE;
+                            if (biome == BiomeNeoproterozoicMicrobialPlains.biome) {
+                                iblockstate1 = STONE_BACTERIAL_LAYER;
+                            }
                         } else if (j1 >= i - 4 && j1 <= i + 1) {
                             iblockstate = biome.topBlock;
                             iblockstate1 = biome.fillerBlock;
@@ -472,6 +497,25 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                                 else {
                                     iblockstate = FLUID;
                                 }
+                            }
+                        }
+
+                        if (biome == BiomeNeoproterozoicMicrobialPlains.biome) {
+                            if (rand.nextInt(3) == 0) {
+                                iblockstate = Blocks.GRAVEL.getDefaultState();
+                            }
+                            if (rand.nextInt(6) == 0) {
+                                iblockstate = Blocks.STONE.getDefaultState();
+                            }
+                        }
+
+                        if (biome == BiomeArcheanTidePools.biome
+                            || biome == BiomeArcheanShallowSea.biome) {
+                            if (rand.nextInt(6) == 0) {
+                                iblockstate = Blocks.GRAVEL.getDefaultState();
+                            }
+                            if (rand.nextInt(6) == 0) {
+                                iblockstate = BlockLavaCobble.block.getDefaultState();
                             }
                         }
 
@@ -551,7 +595,12 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                                             chunkPrimerIn.setBlockState(i1, j1, l, BlockToxicMud.block.getDefaultState());
                                         }
                                         else {
-                                            chunkPrimerIn.setBlockState(i1, j1, l, STONE_ARCHEAN);
+                                            if (biome == BiomeArcheanTidePools.biome && rand.nextInt(6) == 0) {
+                                                chunkPrimerIn.setBlockState(i1, j1, l, BlockBacterialLayerArchean.block.getDefaultState());
+                                            }
+                                            else {
+                                                chunkPrimerIn.setBlockState(i1, j1, l, STONE_ARCHEAN);
+                                            }
                                         }
                                     }
                                     else {
@@ -605,7 +654,12 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                                             chunkPrimerIn.setBlockState(i1, j1, l, BlockToxicMud.block.getDefaultState());
                                         }
                                         else {
-                                            chunkPrimerIn.setBlockState(i1, j1, l, STONE_ARCHEAN);
+                                            if (biome == BiomeArcheanTidePools.biome && rand.nextInt(6) == 0) {
+                                                chunkPrimerIn.setBlockState(i1, j1, l, BlockBacterialLayerArchean.block.getDefaultState());
+                                            }
+                                            else {
+                                                chunkPrimerIn.setBlockState(i1, j1, l, STONE_ARCHEAN);
+                                            }
                                         }
                                     }
                                     else {

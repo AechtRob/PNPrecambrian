@@ -14,6 +14,8 @@ public class GenLayerPrecambrianBeach extends GenLayer
     public int MESOPROTEROZOIC_BEACH_ID =  Biome.getIdForBiome(MESOPROTEROZOIC_BEACH);
     public Biome CRYOGENIAN_BEACH = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:cryogenian_beach"));
     public int CRYOGENIAN_BEACH_ID =  Biome.getIdForBiome(CRYOGENIAN_BEACH);
+    public Biome ARCHEAN_BEACH = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:archean_beach"));
+    public int ARCHEAN_BEACH_ID =  Biome.getIdForBiome(ARCHEAN_BEACH);
 
     public Biome PALEOPROTEROZOIC_OCEAN = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:paleoproterozoic_shallows"));
     public int PALEOPROTEROZOIC_OCEAN_ID =  Biome.getIdForBiome(PALEOPROTEROZOIC_OCEAN);
@@ -21,6 +23,10 @@ public class GenLayerPrecambrianBeach extends GenLayer
     public int MESOPROTEROZOIC_OCEAN_ID =  Biome.getIdForBiome(MESOPROTEROZOIC_OCEAN);
     public Biome CRYOGENIAN_OCEAN = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:cryogenian_ocean"));
     public int CRYOGENIAN_OCEAN_ID =  Biome.getIdForBiome(CRYOGENIAN_OCEAN);
+    public Biome ARCHEAN_OCEAN = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:archean_shallow_sea"));
+    public int ARCHEAN_OCEAN_ID =  Biome.getIdForBiome(ARCHEAN_OCEAN);
+    public Biome ARCHEAN_POOLS = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:archean_tide_pools"));
+    public int ARCHEAN_POOLS_ID =  Biome.getIdForBiome(ARCHEAN_POOLS);
 
     public GenLayerPrecambrianBeach(long seed, GenLayer genLayer)
     {
@@ -59,6 +65,9 @@ public class GenLayerPrecambrianBeach extends GenLayer
                         else if (k == CRYOGENIAN_OCEAN_ID) {
                             aint1[j + i * areaWidth] = CRYOGENIAN_BEACH_ID;
                         }
+                        else if (k == ARCHEAN_OCEAN_ID || k == ARCHEAN_POOLS_ID) {
+                            aint1[j + i * areaWidth] = ARCHEAN_BEACH_ID;
+                        }
                         else {
                             aint1[j + i * areaWidth] = k;
                         }
@@ -78,8 +87,10 @@ public class GenLayerPrecambrianBeach extends GenLayer
     }
 
     private boolean isOcean(int biomeID) {
-        if (biomeID == PALEOPROTEROZOIC_OCEAN_ID || biomeID == MESOPROTEROZOIC_OCEAN_ID
-                || biomeID == CRYOGENIAN_OCEAN_ID) {
+        if (biomeID == PALEOPROTEROZOIC_OCEAN_ID
+                || biomeID == MESOPROTEROZOIC_OCEAN_ID
+                || biomeID == CRYOGENIAN_OCEAN_ID
+                || biomeID == ARCHEAN_OCEAN_ID || biomeID == ARCHEAN_POOLS_ID) {
             return true;
         }
         return false;
@@ -90,8 +101,10 @@ public class GenLayerPrecambrianBeach extends GenLayer
     }
 
     private boolean isBeach(int biomeID) {
-        if (biomeID == PALEOPROTEROZOIC_BEACH_ID || biomeID == MESOPROTEROZOIC_BEACH_ID
-                || biomeID == CRYOGENIAN_BEACH_ID) {
+        if (biomeID == PALEOPROTEROZOIC_BEACH_ID
+                || biomeID == MESOPROTEROZOIC_BEACH_ID
+                || biomeID == CRYOGENIAN_BEACH_ID
+                || biomeID == ARCHEAN_BEACH_ID) {
             return true;
         }
         return false;

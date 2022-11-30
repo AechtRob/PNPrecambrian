@@ -28,16 +28,22 @@ public class GenLayerPrecambrian {
         //biomes = new GenLayerPermianShallowOcean(1300L, biomes);
         //biomes = new GenLayerPermianTreefernCopse(209L, biomes);
         //biomes = new GenLayerPermianSpongeReef(1975L, biomes);
+        biomes = new GenLayerPrecambrianArcheanCaustic(740L, biomes);
+        biomes = new GenLayerNeoproterozoicPlains(1918L, biomes);
         biomes = new GenLayerZoom(1003L, biomes);
         //biomes = new GenLayerPermianMountainEdge(2L, biomes);
         biomes = new GenLayerSmooth(700L, biomes);
         biomes = new GenLayerSmooth(701L, biomes);
+
+        biomes = new GenLayerArcheanTidePools(1002L, biomes);
+
         biomes = new GenLayerZoom(1004L, biomes);
         biomes = new GenLayerSmooth(703L, biomes);
         biomes = new GenLayerFuzzyZoom(1000L, biomes);
         //biomes = new GenLayerPermianBeach(1050L, biomes);
         //biomes = new GenLayerPermianFloodBasaltEdge(3L, biomes);
         //biomes = new GenLayerPermianCliff(1080L, biomes);
+
         biomes = new GenLayerSmooth(705L, biomes);
         biomes = new GenLayerFuzzyZoom(1001L, biomes);
         //Add beaches and rivers between biomes etc:
