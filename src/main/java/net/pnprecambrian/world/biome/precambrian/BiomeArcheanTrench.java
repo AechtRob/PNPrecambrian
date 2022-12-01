@@ -38,7 +38,7 @@ public class BiomeArcheanTrench extends ElementsPNPrecambrianMod.ModElement {
 
 	static class BiomeGenCustom extends BiomePrecambrian {
 		public BiomeGenCustom() {
-			super(new BiomeProperties("Archean Abyssal Chasm").setRainfall(0.95F).setBaseHeight(-1.999F).setHeightVariation(0.001F).setTemperature(1.1F).setWaterColor(11556675));
+			super(new BiomeProperties("Archean Abyssal Chasm").setRainfall(0.95F).setBaseHeight(-1.999F).setHeightVariation(0.001F).setTemperature(1.1F).setWaterColor(0x539E32));
 			setRegistryName("lepidodendron:archean_trench");
 			topBlock =  BlockSandBlack.block.getDefaultState();
 			fillerBlock = BlockLavaRock.block.getDefaultState();

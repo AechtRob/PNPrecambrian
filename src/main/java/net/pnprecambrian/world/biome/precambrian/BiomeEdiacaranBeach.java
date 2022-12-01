@@ -39,7 +39,7 @@ public class BiomeEdiacaranBeach extends ElementsPNPrecambrianMod.ModElement {
 
 	static class BiomeGenCustom extends BiomePrecambrian {
 		public BiomeGenCustom() {
-			super(new BiomeProperties("Ediacaran Shallow Sea").setRainfall(0.95F).setBaseHeight(2.75F).setHeightVariation(0.001F).setTemperature(1.1F).setWaterColor(11556675));
+			super(new BiomeProperties("Ediacaran Shallow Sea").setRainfall(0.95F).setBaseHeight(2.75F).setHeightVariation(0.001F).setTemperature(1.1F));
 			setRegistryName("lepidodendron:ediacaran_beach");
 			topBlock = Blocks.STONE.getDefaultState();
 			fillerBlock = Blocks.STONE.getDefaultState();

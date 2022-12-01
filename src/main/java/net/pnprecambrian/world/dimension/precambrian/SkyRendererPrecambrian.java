@@ -1,5 +1,8 @@
 package net.pnprecambrian.world.dimension.precambrian;
 
+import net.lepidodendron.LepidodendronConfig;
+import net.lepidodendron.util.EnumBiomeTypePrecambrian;
+import net.lepidodendron.world.biome.precambrian.BiomePrecambrian;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.*;
@@ -7,16 +10,20 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.renderer.vertex.VertexBuffer;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.renderer.vertex.VertexFormatElement;
+import net.minecraft.client.settings.GameSettings;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.IRenderHandler;
+import net.minecraftforge.common.ForgeModContainer;
 
 import java.util.Random;
 
 public class SkyRendererPrecambrian extends IRenderHandler {
 
-    public static final ResourceLocation MOON_PHASES_TEXTURES = new ResourceLocation("textures/environment/moon_phases.png");
+    public static final ResourceLocation MOON_PHASES_TEXTURES = new ResourceLocation("lepidodendron:textures/environment/hadean_moon_phases.png");
     public static final ResourceLocation SUN_TEXTURES = new ResourceLocation("textures/environment/sun.png");
     public boolean vboEnabled;
     public final VertexFormat vertexBufferFormat;
@@ -314,7 +321,38 @@ public class SkyRendererPrecambrian extends IRenderHandler {
         GlStateManager.enableTexture2D();
         GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
         GlStateManager.pushMatrix();
-        float f16 = 1.0F - theWorld.getRainStrength(partialTicks);
+        //float f16 = 1.0F - theWorld.getRainStrength(partialTicks);
+        float f16;
+        int[] ranges = ForgeModContainer.blendRanges;
+        GameSettings settings = Minecraft.getMinecraft().gameSettings;
+        int distance = 0;
+        if (ranges.length > 0) {
+            distance = ranges[MathHelper.clamp(settings.renderDistanceChunks, 0, ranges.length - 1)];
+        }
+
+        int divider = 0;
+        float haze = 0;
+        float haze2 = 0;
+        for (int x = -distance; x <= distance; ++x) {
+            for (int z = -distance; z <= distance; ++z) {
+                BlockPos pos = mc.player.getPosition().add(x, 0, z);
+                Biome biome = mc.player.world.getBiome(pos);
+                float ashClouds = getBiomeFactor(biome);
+                //float foggy = biomeFog + (density * 5000F);
+                haze += ashClouds;
+                divider++;
+            }
+        }
+
+        haze = (haze / divider);
+        
+        if (LepidodendronConfig.renderFog) {
+            f16 = (1.0F - theWorld.getRainStrength(partialTicks))*(1-haze);
+        }
+        else {
+            f16 = 1.0F - theWorld.getRainStrength(partialTicks);
+        }
+        
         GlStateManager.color(1.0F, 1.0F, 1.0F, f16);
         GlStateManager.rotate(-90.0F, 0.0F, 1.0F, 0.0F);
         GlStateManager.rotate(theWorld.getCelestialAngle(partialTicks) * 360.0F, 1.0F, 0.0F, 0.0F);
@@ -435,5 +473,17 @@ public class SkyRendererPrecambrian extends IRenderHandler {
         GlStateManager.enableTexture2D();
         GlStateManager.depthMask(true);
     }
-
+    private float getBiomeFactor(Biome biome) {
+    	if (biome instanceof BiomePrecambrian) {
+			if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Hadean) {
+				return 0.8F;
+			}
+        }
+    	if (biome instanceof BiomePrecambrian) {
+			if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Archean) {
+				return 0.5F;
+			}
+    	}
+        return 0;
+    }
 }
