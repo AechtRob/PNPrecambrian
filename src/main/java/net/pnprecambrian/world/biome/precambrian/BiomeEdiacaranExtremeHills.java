@@ -38,7 +38,7 @@ public class BiomeEdiacaranExtremeHills extends ElementsPNPrecambrianMod.ModElem
 
 	static class BiomeGenCustom extends BiomePrecambrian {
 		public BiomeGenCustom() {
-			super(new BiomeProperties("Ediacaran Extreme Sea Hills").setRainfall(0.95F).setBaseHeight(0F).setHeightVariation(0.50F).setTemperature(1.1F).setWaterColor(11556675));
+			super(new BiomeProperties("Ediacaran Extreme Sea Hills").setRainfall(0.95F).setBaseHeight(0F).setHeightVariation(0.50F).setTemperature(1.1F));
 			setRegistryName("lepidodendron:ediacaran_extreme_hills");
 			topBlock = Blocks.STONE.getDefaultState();
 			fillerBlock = Blocks.STONE.getDefaultState();

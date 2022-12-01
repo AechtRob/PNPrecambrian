@@ -38,7 +38,7 @@ public class BiomeEdiacaranFrondoseForest extends ElementsPNPrecambrianMod.ModEl
 
 	static class BiomeGenCustom extends BiomePrecambrian {
 		public BiomeGenCustom() {
-			super(new BiomeProperties("Ediacaran Frondose Forest").setRainfall(0.95F).setBaseHeight(0.25F).setHeightVariation(0.00F).setTemperature(1.1F).setWaterColor(11556675));
+			super(new BiomeProperties("Ediacaran Frondose Forest").setRainfall(0.95F).setBaseHeight(0.25F).setHeightVariation(0.00F).setTemperature(1.1F));
 			setRegistryName("lepidodendron:ediacaran_frondose_forest");
 			topBlock = Blocks.STONE.getDefaultState();
 			fillerBlock = Blocks.STONE.getDefaultState();

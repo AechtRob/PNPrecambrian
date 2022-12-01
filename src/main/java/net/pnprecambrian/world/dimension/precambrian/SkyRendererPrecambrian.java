@@ -1,5 +1,8 @@
 package net.pnprecambrian.world.dimension.precambrian;
 
+import net.lepidodendron.LepidodendronConfig;
+import net.lepidodendron.util.EnumBiomeTypePrecambrian;
+import net.lepidodendron.world.biome.precambrian.BiomePrecambrian;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.*;
@@ -7,15 +10,22 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.renderer.vertex.VertexBuffer;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.renderer.vertex.VertexFormatElement;
+import net.minecraft.client.settings.GameSettings;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.IRenderHandler;
+import net.minecraftforge.common.ForgeModContainer;
 
 import java.util.Random;
 
+import org.lwjgl.opengl.GL11;
+
 public class SkyRendererPrecambrian extends IRenderHandler {
 
+	public static final ResourceLocation MOON_PHASES_HADEAN = new ResourceLocation("lepidodendron:textures/environment/hadean_moon_phases.png");
     public static final ResourceLocation MOON_PHASES_TEXTURES = new ResourceLocation("textures/environment/moon_phases.png");
     public static final ResourceLocation SUN_TEXTURES = new ResourceLocation("textures/environment/sun.png");
     public boolean vboEnabled;
@@ -314,7 +324,40 @@ public class SkyRendererPrecambrian extends IRenderHandler {
         GlStateManager.enableTexture2D();
         GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
         GlStateManager.pushMatrix();
-        float f16 = 1.0F - theWorld.getRainStrength(partialTicks);
+        //float f16 = 1.0F - theWorld.getRainStrength(partialTicks);
+        float f16;
+        int[] ranges = ForgeModContainer.blendRanges;
+        GameSettings settings = Minecraft.getMinecraft().gameSettings;
+        int distance = 0;
+        if (ranges.length > 0) {
+            distance = ranges[MathHelper.clamp(settings.renderDistanceChunks, 0, ranges.length - 1)];
+        }
+
+        int divider = 0;
+        float haze = 0;
+        float moon = 0;
+        for (int x = -distance; x <= distance; ++x) {
+            for (int z = -distance; z <= distance; ++z) {
+                BlockPos pos = mc.player.getPosition().add(x, 0, z);
+                Biome biome = mc.player.world.getBiome(pos);
+                float ashClouds = getBiomeFactor(biome);
+                float lunar = getBiomeMoonFactor(biome);
+                //float foggy = biomeFog + (density * 5000F);
+                haze += ashClouds;
+                moon += lunar;
+                divider++;
+            }
+        }
+
+        haze = (haze / divider);
+        moon = (moon / divider);
+        if (LepidodendronConfig.renderFog) {
+            f16 = (1.0F - theWorld.getRainStrength(partialTicks))*(1-haze);
+        }
+        else {
+            f16 = 1.0F - theWorld.getRainStrength(partialTicks);
+        }
+        
         GlStateManager.color(1.0F, 1.0F, 1.0F, f16);
         GlStateManager.rotate(-90.0F, 0.0F, 1.0F, 0.0F);
         GlStateManager.rotate(theWorld.getCelestialAngle(partialTicks) * 360.0F, 1.0F, 0.0F, 0.0F);
@@ -326,21 +369,46 @@ public class SkyRendererPrecambrian extends IRenderHandler {
         bufferbuilder.pos((double)f17, 100.0D, (double)f17).tex(1.0D, 1.0D).endVertex();
         bufferbuilder.pos((double)(-f17), 100.0D, (double)f17).tex(0.0D, 1.0D).endVertex();
         tessellator.draw();
-        f17 = 35.0F;//This sets the size of the Moon in the sky.
-        mc.renderEngine.bindTexture(MOON_PHASES_TEXTURES);
-        int k1 = theWorld.getMoonPhase();
-        int i2 = k1 % 4;
-        int k2 = k1 / 4 % 2;
-        float f22 = (float)(i2 + 0) / 4.0F;
-        float f23 = (float)(k2 + 0) / 2.0F;
-        float f24 = (float)(i2 + 1) / 4.0F;
-        float f14 = (float)(k2 + 1) / 2.0F;
-        bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
-        bufferbuilder.pos((double)(-f17), -100.0D, (double)f17).tex((double)f24, (double)f14).endVertex();
-        bufferbuilder.pos((double)f17, -100.0D, (double)f17).tex((double)f22, (double)f14).endVertex();
-        bufferbuilder.pos((double)f17, -100.0D, (double)(-f17)).tex((double)f22, (double)f23).endVertex();
-        bufferbuilder.pos((double)(-f17), -100.0D, (double)(-f17)).tex((double)f24, (double)f23).endVertex();
-        tessellator.draw();
+        {
+        	GL11.glPushMatrix();
+        	GlStateManager.color(1.0F, 1.0F, 1.0F, 1-moon);
+        	f17 = 35.0F;//This sets the size of the Moon in the sky.
+        	mc.renderEngine.bindTexture(MOON_PHASES_TEXTURES);
+        	int k1 = theWorld.getMoonPhase();
+        	int i2 = k1 % 4;
+        	int k2 = k1 / 4 % 2;
+        	float f22 = (float)(i2 + 0) / 4.0F;
+        	float f23 = (float)(k2 + 0) / 2.0F;
+        	float f24 = (float)(i2 + 1) / 4.0F;
+        	float f14 = (float)(k2 + 1) / 2.0F;
+        	bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
+        	bufferbuilder.pos((double)(-f17), -100.0D, (double)f17).tex((double)f24, (double)f14).endVertex();
+        	bufferbuilder.pos((double)f17, -100.0D, (double)f17).tex((double)f22, (double)f14).endVertex();
+        	bufferbuilder.pos((double)f17, -100.0D, (double)(-f17)).tex((double)f22, (double)f23).endVertex();
+        	bufferbuilder.pos((double)(-f17), -100.0D, (double)(-f17)).tex((double)f24, (double)f23).endVertex();
+        	tessellator.draw();
+        	GL11.glPopMatrix();
+        }
+        {
+        	GL11.glPushMatrix();
+        	GlStateManager.color(1.0F, 1.0F, 1.0F, moon);
+        	f17 = 35.0F;//This sets the size of the Moon in the sky.
+        	mc.renderEngine.bindTexture(MOON_PHASES_HADEAN);
+        	int k1 = theWorld.getMoonPhase();
+        	int i2 = k1 % 4;
+        	int k2 = k1 / 4 % 2;
+        	float f22 = (float)(i2 + 0) / 4.0F;
+        	float f23 = (float)(k2 + 0) / 2.0F;
+        	float f24 = (float)(i2 + 1) / 4.0F;
+        	float f14 = (float)(k2 + 1) / 2.0F;
+        	bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
+        	bufferbuilder.pos((double)(-f17), -100.0D, (double)f17).tex((double)f24, (double)f14).endVertex();
+        	bufferbuilder.pos((double)f17, -100.0D, (double)f17).tex((double)f22, (double)f14).endVertex();
+        	bufferbuilder.pos((double)f17, -100.0D, (double)(-f17)).tex((double)f22, (double)f23).endVertex();
+        	bufferbuilder.pos((double)(-f17), -100.0D, (double)(-f17)).tex((double)f24, (double)f23).endVertex();
+        	tessellator.draw();
+        	GL11.glPopMatrix();
+        }
         GlStateManager.disableTexture2D();
         float f15 = theWorld.getStarBrightness(partialTicks) * f16;
 
@@ -435,5 +503,25 @@ public class SkyRendererPrecambrian extends IRenderHandler {
         GlStateManager.enableTexture2D();
         GlStateManager.depthMask(true);
     }
-
+    private float getBiomeFactor(Biome biome) {
+    	if (biome instanceof BiomePrecambrian) {
+			if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Hadean) {
+				return 0.8F;
+			}
+        }
+    	if (biome instanceof BiomePrecambrian) {
+			if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Archean) {
+				return 0.5F;
+			}
+    	}
+        return 0;
+    }
+    private float getBiomeMoonFactor(Biome biome) {
+    	if (biome instanceof BiomePrecambrian) {
+			if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Hadean) {
+				return 1F;
+			}
+        }
+        return 0;
+    }
 }
