@@ -564,6 +564,9 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                             if (rand.nextInt(6) == 0) {
                                 iblockstate = BlockLavaCobble.block.getDefaultState();
                             }
+                            if (rand.nextInt(6) == 0) {
+                                iblockstate = BlockLavaRock.block.getDefaultState();
+                            }
                         }
 
                         //Break up our Hadean Lava rock a bit:
