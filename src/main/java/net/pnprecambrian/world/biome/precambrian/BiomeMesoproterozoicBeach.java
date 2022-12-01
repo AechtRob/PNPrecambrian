@@ -2,12 +2,11 @@
 package net.pnprecambrian.world.biome.precambrian;
 
 import net.lepidodendron.ElementsLepidodendronMod;
-import net.lepidodendron.LepidodendronConfig;
 import net.lepidodendron.util.EnumBiomeTypePrecambrian;
 import net.lepidodendron.world.biome.precambrian.BiomePrecambrian;
+import net.lepidodendron.world.gen.WorldGenNullTree;
 import net.lepidodendron.world.gen.WorldGenStromatoliteReefPrecambrian;
 import net.lepidodendron.world.gen.WorldGenToxicMud;
-import net.lepidodendron.world.gen.WorldGenNullTree;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -41,7 +40,7 @@ public class BiomeMesoproterozoicBeach extends ElementsLepidodendronMod.ModEleme
 	static class BiomeGenCustom extends BiomePrecambrian {
 		public BiomeGenCustom() {
 			//super(new BiomeProperties("Permian Desert").setRainfall(0.0F).setBaseHeight(0.18F).setHeightVariation(0.17F).setTemperature(2.2F).setRainDisabled().setWaterColor(10990706));
-			super(new BiomeProperties("Mesoproterozoic Beach").setBaseHeight(2.75F).setHeightVariation(0.001F).setTemperature(0.6F).setWaterColor(0xFC5E95));
+			super(new BiomeProperties("Mesoproterozoic Carpet").setBaseHeight(2.75F).setHeightVariation(0.001F).setTemperature(0.6F).setWaterColor(0xFC5E95));
 			setRegistryName("lepidodendron:mesoproterozoic_beach");
 			topBlock = Blocks.GRAVEL.getDefaultState();
 			fillerBlock = Blocks.STONE.getDefaultState();
