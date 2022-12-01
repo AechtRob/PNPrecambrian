@@ -43,7 +43,7 @@ public class BiomeArcheanTidePools extends ElementsLepidodendronMod.ModElement {
 	static class BiomeGenCustom extends BiomePrecambrian {
 		public BiomeGenCustom() {
 			//super(new BiomeProperties("Permian Desert").setRainfall(0.0F).setBaseHeight(0.18F).setHeightVariation(0.17F).setTemperature(2.2F).setRainDisabled().setWaterColor(10990706));
-			super(new BiomeProperties("Archean Tide Pools").setBaseHeight(2.55F).setHeightVariation(0.0F).setTemperature(0.6F).setWaterColor(0x539E6B));
+			super(new BiomeProperties("Archean Tide Pools").setBaseHeight(2.55F).setHeightVariation(0.0F).setTemperature(0.6F).setWaterColor(0x539E32));
 			setRegistryName("lepidodendron:archean_tide_pools");
 			topBlock = BlockSandBlack.block.getDefaultState();
 			fillerBlock = BlockLavaRock.block.getDefaultState();

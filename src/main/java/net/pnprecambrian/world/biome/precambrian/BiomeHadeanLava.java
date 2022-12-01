@@ -40,7 +40,7 @@ public class BiomeHadeanLava extends ElementsPNPrecambrianMod.ModElement {
 
 	static class BiomeGenCustom extends BiomePrecambrian {
 		public BiomeGenCustom() {
-			super(new BiomeProperties("Hadean Magma Fields").setRainfall(0.95F).setBaseHeight(2.65F).setHeightVariation(0.0F).setTemperature(2.1F).setWaterColor(11556675));
+			super(new BiomeProperties("Hadean Magma Fields").setRainfall(0.95F).setBaseHeight(2.65F).setHeightVariation(0.0F).setTemperature(2.1F).setWaterColor(0x539E32));
 			setRegistryName("lepidodendron:hadean_lava");
 			topBlock = BlockLavaRock.block.getDefaultState();
 			fillerBlock = BlockLavaCobbleMolten.block.getDefaultState();
