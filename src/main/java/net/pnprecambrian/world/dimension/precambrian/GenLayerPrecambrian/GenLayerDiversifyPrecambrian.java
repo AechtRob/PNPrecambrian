@@ -7,6 +7,7 @@ import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 import net.pnprecambrian.world.biome.precambrian.BiomeCryogenianDesert;
 import net.pnprecambrian.world.biome.precambrian.BiomePaleoproterozoicRegolith;
+import net.pnprecambrian.world.biome.precambrian.BiomePrecambrianSea;
 
 public class GenLayerDiversifyPrecambrian extends GenLayer {
 
@@ -20,6 +21,13 @@ public class GenLayerDiversifyPrecambrian extends GenLayer {
     public Biome CRYOGENIAN_LAND = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:cryogenian_desert"));
     public int CRYOGENIAN_LAND_ID =  Biome.getIdForBiome(CRYOGENIAN_LAND);
 
+    public Biome EDIACARAN_OCEAN = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:precambrian_sea"));
+    public int EDIACARAN_OCEAN_ID =  Biome.getIdForBiome(EDIACARAN_OCEAN);
+    public Biome DIACARAN_OCEAN_HILLS = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:ediacaran_extreme_hills"));
+    public int EDIACARAN_OCEAN_HILLS_ID =  Biome.getIdForBiome(DIACARAN_OCEAN_HILLS);
+    public Biome EDIACARAN_FRONDOSE = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:ediacaran_frondose_forest"));
+    public int EDIACARAN_FRONDOSE_ID =  Biome.getIdForBiome(EDIACARAN_FRONDOSE);
+
     private final int PaleoproterozoicBiomes[] = new int[] {
              PALEOPROTEROZOIC_REGOLITH_ID,
              PALEOPROTEROZOIC_REGOLITH_ID,
@@ -30,6 +38,13 @@ public class GenLayerDiversifyPrecambrian extends GenLayer {
             CRYOGENIAN_LAND_ID,
             CRYOGENIAN_LAND_ID,
             CRYOGENIAN_OCEAN_ID
+    };
+
+    private final int EdiacaranBiomes[] = new int[] {
+            EDIACARAN_OCEAN_ID,
+            EDIACARAN_OCEAN_ID,
+            EDIACARAN_OCEAN_HILLS_ID,
+            EDIACARAN_FRONDOSE_ID
     };
 
     public GenLayerDiversifyPrecambrian(long seed, GenLayer genlayer) {
@@ -56,7 +71,8 @@ public class GenLayerDiversifyPrecambrian extends GenLayer {
                         output[i] = PaleoproterozoicBiomes[nextInt(PaleoproterozoicBiomes.length)];
                     else if (Biome.getBiome(center) == BiomeCryogenianDesert.biome)
                         output[i] = NeoproterozoicBiomes[nextInt(NeoproterozoicBiomes.length)];
-
+                    else if (Biome.getBiome(center) == BiomePrecambrianSea.biome)
+                        output[i] = EdiacaranBiomes[nextInt(EdiacaranBiomes.length)];
                     else output[i] = center;
                 } else output[i] = center;
             }

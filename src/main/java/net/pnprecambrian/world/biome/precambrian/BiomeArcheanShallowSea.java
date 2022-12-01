@@ -3,12 +3,13 @@ package net.pnprecambrian.world.biome.precambrian;
 
 import net.lepidodendron.ElementsLepidodendronMod;
 import net.lepidodendron.LepidodendronConfig;
-import net.lepidodendron.block.BlockLavaRock;
-import net.lepidodendron.block.BlockSandBlack;
+import net.lepidodendron.block.*;
 import net.lepidodendron.util.EnumBiomeTypePrecambrian;
 import net.lepidodendron.world.biome.precambrian.BiomePrecambrian;
+import net.lepidodendron.world.gen.WorldGenAddSomethingToTopSolidBlock;
 import net.lepidodendron.world.gen.WorldGenNullTree;
 import net.lepidodendron.world.gen.WorldGenToxicMud;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
@@ -62,6 +63,7 @@ public class BiomeArcheanShallowSea extends ElementsLepidodendronMod.ModElement 
 
 		protected static final WorldGenNullTree NULL_TREE = new WorldGenNullTree(false);
 
+		protected static final WorldGenAddSomethingToTopSolidBlock LITTER = new WorldGenAddSomethingToTopSolidBlock();
 		protected static final WorldGenToxicMud MUD_GENERATOR = new WorldGenToxicMud();
 		//protected static final WorldGenStromatoliteReefPrecambrian REEF_GENERATOR = new WorldGenStromatoliteReefPrecambrian();
 
@@ -81,6 +83,67 @@ public class BiomeArcheanShallowSea extends ElementsLepidodendronMod.ModElement 
 
 		@Override
 		public void decorate(World worldIn, Random rand, BlockPos pos) {
+
+			if(net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, rand, new net.minecraft.util.math.ChunkPos(pos), DecorateBiomeEvent.Decorate.EventType.GRASS)) {
+				for (int i = 0; i < 24; ++i) {
+					LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 50, Blocks.MAGMA.getDefaultState(), -1);
+				}
+				for (int i = 0; i < 8; ++i) {
+					LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 50, Blocks.MAGMA.getDefaultState(), 0);
+				}
+
+				for (int i = 0; i < 3; ++i) {
+					LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 50, Blocks.OBSIDIAN.getDefaultState(), -1);
+				}
+
+				for (int i = 0; i < 3; ++i) {
+					LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 50, BlockVolcanicAshLight.block.getDefaultState(), -1);
+				}
+
+				for (int i = 0; i < 3; ++i) {
+					LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 50, BlockVolcanicAshDark.block.getDefaultState(), -1);
+				}
+
+				for (int i = 0; i < 3; ++i) {
+					LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 50, BlockVolcanicAsh.block.getDefaultState(), -1);
+				}
+
+				for (int i = 0; i < 4; ++i) {
+					LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 50, BlockVolcanicAshLight.block.getDefaultState(), 0);
+				}
+
+				for (int i = 0; i < 4; ++i) {
+					LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 50, BlockVolcanicAshDark.block.getDefaultState(), 0);
+				}
+
+				for (int i = 0; i < 4; ++i) {
+					LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 50, BlockVolcanicAsh.block.getDefaultState(), 0);
+				}
+
+				for (int i = 0; i < 2; ++i) {
+					LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 50, BlockSulphurOre.block.getDefaultState(), -1);
+				}
+
+				for (int i = 0; i < 1; ++i) {
+					LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 50, BlockSulphurOre.block.getDefaultState(), 0);
+				}
+
+				for (int i = 0; i < 2; ++i) {
+					LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 50, BlockLavaRockZirconOre.block.getDefaultState(), -1);
+				}
+
+				if (rand.nextInt(8) == 0) {
+					LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 50, BlockLavaRockDiamondOre.block.getDefaultState(), -1);
+				}
+
+				if (rand.nextInt(6) == 0) {
+					for (int i = 0; i < 6; ++i) {
+						if (rand.nextInt(6) == 0) {
+							LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 60, BlockSulphurVent.block.getDefaultState(), 0);
+						}
+					}
+				}
+			}
 
 			if (net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, rand, new net.minecraft.util.math.ChunkPos(pos), DecorateBiomeEvent.Decorate.EventType.GRASS))
 				for (int i = 0; i < 128; ++i)
