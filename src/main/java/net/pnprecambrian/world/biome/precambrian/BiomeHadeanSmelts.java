@@ -39,7 +39,7 @@ public class BiomeHadeanSmelts extends ElementsPNPrecambrianMod.ModElement {
 
 	static class BiomeGenCustom extends BiomePrecambrian {
 		public BiomeGenCustom() {
-			super(new BiomeProperties("Hadean Smelts").setRainfall(0.95F).setBaseHeight(2.35F).setHeightVariation(0.11F).setTemperature(2.1F).setWaterColor(11556675));
+			super(new BiomeProperties("Hadean Smelts").setRainfall(0.95F).setBaseHeight(2.35F).setHeightVariation(0.11F).setTemperature(2.1F).setWaterColor(0x539E32));
 			setRegistryName("lepidodendron:hadean_smelts");
 			topBlock = BlockLavaRock.block.getDefaultState();
 			fillerBlock = BlockLavaRock.block.getDefaultState();
