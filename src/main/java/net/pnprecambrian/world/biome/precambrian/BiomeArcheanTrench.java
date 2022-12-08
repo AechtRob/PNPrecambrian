@@ -64,14 +64,14 @@ public class BiomeArcheanTrench extends ElementsPNPrecambrianMod.ModElement {
 	        return null;
 	    }
 
-		/*@Override
+		@Override
 		public int getSkyColorByTemp(float par1)
 		{
 			if (LepidodendronConfig.renderFog) {
-				return 0xC81400;
+				return 0xD7450A;
 			}
 			return super.getSkyColorByTemp(par1);
-		}*/
+		}
 
 		@Override
 	    public void decorate(World worldIn, Random rand, BlockPos pos)
