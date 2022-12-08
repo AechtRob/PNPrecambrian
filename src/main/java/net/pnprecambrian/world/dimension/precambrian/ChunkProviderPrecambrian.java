@@ -141,7 +141,7 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                         int i1 = this.random.nextInt(16) + 8;
                         int j1 = this.random.nextInt(256);
                         int k1 = this.random.nextInt(16) + 8;
-                        (new WorldGenHadeanLakes((new FluidStack(FluidRegistry.getFluid("sulfuric_acid"), 1000)).getFluid().getBlock())).generate(this.world, this.random, blockpos.add(i1, j1, k1));
+                        (new WorldGenHadeanLakes((new FluidStack(FluidRegistry.getFluid("pn_sulfuric_acid"), 1000)).getFluid().getBlock())).generate(this.world, this.random, blockpos.add(i1, j1, k1));
                     }
                 }
                 if (this.random.nextInt(6) == 0) {

@@ -1,6 +1,7 @@
 
 package net.pnprecambrian.world.biome.precambrian;
 
+import net.lepidodendron.LepidodendronConfig;
 import net.lepidodendron.block.*;
 import net.lepidodendron.util.EnumBiomeTypePrecambrian;
 import net.lepidodendron.world.biome.precambrian.BiomePrecambrian;
