@@ -2,7 +2,6 @@
 package net.pnprecambrian.world.biome.precambrian;
 
 import net.lepidodendron.ElementsLepidodendronMod;
-import net.lepidodendron.LepidodendronConfig;
 import net.lepidodendron.block.BlockSandPaleoproterozoic;
 import net.lepidodendron.util.EnumBiomeTypePrecambrian;
 import net.lepidodendron.world.biome.precambrian.BiomePrecambrian;
@@ -41,7 +40,7 @@ public class BiomePaleoproterozoicBeach extends ElementsLepidodendronMod.ModElem
 	static class BiomeGenCustom extends BiomePrecambrian {
 		public BiomeGenCustom() {
 			//super(new BiomeProperties("Permian Desert").setRainfall(0.0F).setBaseHeight(0.18F).setHeightVariation(0.17F).setTemperature(2.2F).setRainDisabled().setWaterColor(10990706));
-			super(new BiomeProperties("Paleoproterozoic Shallows").setRainfall(0.0F).setBaseHeight(2.75F).setHeightVariation(0.001F).setTemperature(0.1F).setRainDisabled().setWaterColor(0xB00000));
+			super(new BiomeProperties("Paleoproterozoic Shallows").setRainfall(0.0F).setBaseHeight(2.75F).setHeightVariation(0.001F).setTemperature(2.1F).setRainDisabled().setWaterColor(0xB00000));
 			setRegistryName("lepidodendron:paleoproterozoic_beach");
 			topBlock = BlockSandPaleoproterozoic.block.getDefaultState();
 			fillerBlock = BlockSandPaleoproterozoic.block.getDefaultState();
@@ -53,7 +52,7 @@ public class BiomePaleoproterozoicBeach extends ElementsLepidodendronMod.ModElem
 			decorator.reedsPerChunk = 0;
 			decorator.cactiPerChunk = 0;
 			decorator.sandPatchesPerChunk = 0;
-			decorator.gravelPatchesPerChunk = 10;
+			decorator.gravelPatchesPerChunk = 2;
 			this.spawnableMonsterList.clear();
 			this.spawnableCreatureList.clear();
 			this.spawnableWaterCreatureList.clear();

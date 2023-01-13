@@ -51,7 +51,7 @@ public class BiomeHadeanLava extends ElementsPNPrecambrianMod.ModElement {
 			decorator.bigMushroomsPerChunk = 0;
 			decorator.reedsPerChunk = 0;
 			decorator.cactiPerChunk = 0;
-			decorator.sandPatchesPerChunk = 100;
+			decorator.sandPatchesPerChunk = 0;
 			decorator.gravelPatchesPerChunk = 0;
 			this.spawnableMonsterList.clear();
 			this.spawnableCreatureList.clear();

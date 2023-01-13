@@ -28,7 +28,7 @@ import java.util.function.Supplier;
 public class PNPrecambrianMod {
     public static final String MODID = "pnprecambrian";
     public static final String NAME = "Prehistoric Nature Precambrian Dimension";
-    public static final String VERSION = "2.02";
+    public static final String VERSION = "3.0";
     public static final SimpleNetworkWrapper PACKET_HANDLER = NetworkRegistry.INSTANCE.newSimpleChannel("pnprecambrian:a");
     @SidedProxy(clientSide = "net.pnprecambrian.ClientProxyPNPrecambrianMod", serverSide = "net.pnprecambrian.ServerProxyPNPrecambrianMod")
     public static net.pnprecambrian.IProxyPNPrecambrianMod proxy;

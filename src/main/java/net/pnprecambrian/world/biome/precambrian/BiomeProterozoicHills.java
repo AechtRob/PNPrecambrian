@@ -50,7 +50,7 @@ public class BiomeProterozoicHills extends ElementsPNPrecambrianMod.ModElement {
 			decorator.bigMushroomsPerChunk = 0;
 			decorator.reedsPerChunk = 0;
 			decorator.cactiPerChunk = 0;
-			decorator.sandPatchesPerChunk = 100;
+			decorator.sandPatchesPerChunk = 1;
 			decorator.gravelPatchesPerChunk = 0;
 			this.spawnableMonsterList.clear();
 			this.spawnableCreatureList.clear();
@@ -63,7 +63,7 @@ public class BiomeProterozoicHills extends ElementsPNPrecambrianMod.ModElement {
 		protected static final WorldGenToxicMud TOXIC_MUD_GENERATOR = new WorldGenToxicMud();
 		protected static final WorldGenStromatoliteReefCambrian REEF_GENERATOR = new WorldGenStromatoliteReefCambrian();
 		protected static final WorldGenThrombolite THROMBOLITE_GENERATOR = new WorldGenThrombolite();
-		protected static final WorldGenReefCambrian REEF_GENERATOR_CAMBRIAN = new WorldGenReefCambrian();
+		//protected static final WorldGenReefCambrian REEF_GENERATOR_CAMBRIAN = new WorldGenReefCambrian();
 		protected static final WorldGenBacterialCrust CRUST_GENERATOR = new WorldGenBacterialCrust();
 		protected static final WorldGenChaunograptus CHAUNOGRAPTUS_GENERATOR = new WorldGenChaunograptus();
 

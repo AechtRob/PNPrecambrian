@@ -55,7 +55,7 @@ public class BiomeCryogenianBeach extends ElementsLepidodendronMod.ModElement {
 			decorator.reedsPerChunk = 0;
 			decorator.cactiPerChunk = 0;
 			decorator.sandPatchesPerChunk = 0;
-			decorator.gravelPatchesPerChunk = 10;
+			decorator.gravelPatchesPerChunk = 1;
 			this.spawnableMonsterList.clear();
 			this.spawnableCreatureList.clear();
 			this.spawnableWaterCreatureList.clear();

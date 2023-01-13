@@ -6,8 +6,8 @@ import net.lepidodendron.block.BlockSandPaleoproterozoic;
 import net.lepidodendron.util.EnumBiomeTypePrecambrian;
 import net.lepidodendron.world.biome.precambrian.BiomePrecambrian;
 import net.lepidodendron.world.gen.WorldGenCobble;
-import net.lepidodendron.world.gen.WorldGenGranite;
 import net.lepidodendron.world.gen.WorldGenNullTree;
+import net.lepidodendron.world.gen.WorldGenScoria;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
@@ -42,7 +42,7 @@ public class BiomePaleoproterozoicRegolith extends ElementsLepidodendronMod.ModE
 	static class BiomeGenCustom extends BiomePrecambrian {
 		public BiomeGenCustom() {
 			//super(new BiomeProperties("Permian Desert").setRainfall(0.0F).setBaseHeight(0.18F).setHeightVariation(0.17F).setTemperature(2.2F).setRainDisabled().setWaterColor(10990706));
-			super(new BiomeProperties("Paleoproterozoic Regolith").setRainfall(0.0F).setBaseHeight(3.037F).setHeightVariation(0.062F).setTemperature(0.1F).setRainDisabled().setWaterColor(0xB00000));
+			super(new BiomeProperties("Paleoproterozoic Regolith").setRainfall(0.0F).setBaseHeight(3.037F).setHeightVariation(0.062F).setTemperature(2.1F).setRainDisabled().setWaterColor(0xB00000));
 			setRegistryName("lepidodendron:paleoproterozoic_regolith");
 			topBlock = BlockSandPaleoproterozoic.block.getDefaultState();
 			fillerBlock = BlockSandPaleoproterozoic.block.getDefaultState();
@@ -54,7 +54,7 @@ public class BiomePaleoproterozoicRegolith extends ElementsLepidodendronMod.ModE
 			decorator.reedsPerChunk = 0;
 			decorator.cactiPerChunk = 0;
 			decorator.sandPatchesPerChunk = 0;
-			decorator.gravelPatchesPerChunk = 10;
+			decorator.gravelPatchesPerChunk = 2;
 			this.spawnableMonsterList.clear();
 			this.spawnableCreatureList.clear();
 			this.spawnableWaterCreatureList.clear();
@@ -63,7 +63,7 @@ public class BiomePaleoproterozoicRegolith extends ElementsLepidodendronMod.ModE
 
 		protected static final WorldGenNullTree NULL_TREE = new WorldGenNullTree(false);
 
-		protected static final WorldGenGranite GRANITE_GENERATOR = new WorldGenGranite();
+		protected static final WorldGenScoria SCORIA_GENERATOR = new WorldGenScoria();
 		protected static final WorldGenCobble COBBLE_GENERATOR = new WorldGenCobble();
 
 		public WorldGenAbstractTree getRandomTreeFeature(Random rand)
@@ -88,7 +88,7 @@ public class BiomePaleoproterozoicRegolith extends ElementsLepidodendronMod.ModE
 					int j = rand.nextInt(16) + 8;
 					int k = rand.nextInt(16) + 8;
 					int l = rand.nextInt(worldIn.getHeight(pos.add(j, 0, k)).getY() + 32);
-					GRANITE_GENERATOR.generate(worldIn, rand, pos.add(j, l, k));
+					SCORIA_GENERATOR.generate(worldIn, rand, pos.add(j, l, k));
 				}
 			}
 

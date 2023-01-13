@@ -65,7 +65,13 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
         caveGenerator = new MapGenCaves() {
             @Override
             protected boolean canReplaceBlock(IBlockState a, IBlockState b) {
-                if (a.getBlock() == STONE_LAVA_ROCK.getBlock())
+                if (a.getBlock() == STONE_LAVA_ROCK.getBlock()
+                        || a.getBlock() == STONE_STONE.getBlock()
+                        || a.getBlock() == BlockSandPaleoproterozoic.block
+                        || a.getBlock() == BlockSandPaleoproterozoic.block
+                        || a.getBlock() == BlockSandMicrobial.block
+                        || a.getBlock() == BlockSandBlack.block
+                )
                     return true;
                 return super.canReplaceBlock(a, b);
             }
@@ -76,7 +82,13 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                 Biome biome = world.getBiome(new BlockPos(x + chunkX * 16, 0, z + chunkZ * 16));
                 IBlockState state = data.getBlockState(x, y, z);
                 if (state.getBlock() == STONE_LAVA_ROCK.getBlock() || state.getBlock() == biome.topBlock.getBlock()
-                        || state.getBlock() == biome.fillerBlock.getBlock()) {
+                        || state.getBlock() == biome.fillerBlock.getBlock()
+                        || state.getBlock() == STONE_STONE.getBlock()
+                        || state.getBlock() == BlockSandPaleoproterozoic.block
+                        || state.getBlock() == BlockSandPaleoproterozoic.block
+                        || state.getBlock() == BlockSandMicrobial.block
+                        || state.getBlock() == BlockSandBlack.block
+                ) {
                     if (y - 1 < 10) {
                         data.setBlockState(x, y, z, FLOWING_LAVA);
                     } else {
@@ -599,7 +611,10 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                                 int j2 = Math.max(0, 135 - j1);
                                 double stoneFactor = (double) j2 / (135D - (double) minHeight);
                                 if (Math.random() >= stoneFactor) {
-                                    iblockstate = Blocks.STONE.getStateFromMeta(1);
+                                    iblockstate = BlockStoneScoria.block.getDefaultState();
+                                    //if (rand.nextInt(2) == 0) {
+                                    //    iblockstate = BlockStoneScoria.block.getDefaultState();
+                                    //}
                                     if (rand.nextInt(8) == 0) {
                                         iblockstate = Blocks.COBBLESTONE.getDefaultState();
                                     }
@@ -783,8 +798,12 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                     } else if (j > 0) {
                         --j;
                         chunkPrimerIn.setBlockState(i1, j1, l, iblockstate1);
-                        if (j == 0 && iblockstate1.getBlock() == Blocks.SAND && k > 1) {
-                            j = rand.nextInt(4) + Math.max(0, j1 - 63);
+                        if (j == 0 && (iblockstate1.getBlock() == BlockSandPaleoproterozoic.block || iblockstate1.getBlock() == BlockSandPaleoproterozoicWavy.block) && k > 1) {
+                            j = rand.nextInt(4) + Math.max(0, j1 - world.getSeaLevel());
+                            iblockstate1 = BlockSandstonePaleoproterozoic.block.getDefaultState();
+                        }
+                        else if (j == 0 && iblockstate1.getBlock() == Blocks.SAND && k > 1) {
+                            j = rand.nextInt(4) + Math.max(0, j1 - world.getSeaLevel());
 
                             if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Hadean) {
                                 iblockstate1 = iblockstate1.getValue(BlockSand.VARIANT) == BlockSand.EnumType.RED_SAND ? STONE_MOLTEN_COBBLE : STONE_MOLTEN_COBBLE;

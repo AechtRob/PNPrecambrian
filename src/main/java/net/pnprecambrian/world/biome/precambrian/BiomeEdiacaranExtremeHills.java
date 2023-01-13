@@ -49,7 +49,7 @@ public class BiomeEdiacaranExtremeHills extends ElementsPNPrecambrianMod.ModElem
 			decorator.bigMushroomsPerChunk = 0;
 			decorator.reedsPerChunk = 0;
 			decorator.cactiPerChunk = 0;
-			decorator.sandPatchesPerChunk = 300;
+			decorator.sandPatchesPerChunk = 2;
 			decorator.gravelPatchesPerChunk = 0;
 			this.spawnableMonsterList.clear();
 			this.spawnableCreatureList.clear();

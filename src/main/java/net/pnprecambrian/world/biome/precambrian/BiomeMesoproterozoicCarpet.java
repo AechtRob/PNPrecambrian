@@ -2,12 +2,11 @@
 package net.pnprecambrian.world.biome.precambrian;
 
 import net.lepidodendron.ElementsLepidodendronMod;
-import net.lepidodendron.LepidodendronConfig;
 import net.lepidodendron.util.EnumBiomeTypePrecambrian;
 import net.lepidodendron.world.biome.precambrian.BiomePrecambrian;
+import net.lepidodendron.world.gen.WorldGenNullTree;
 import net.lepidodendron.world.gen.WorldGenStromatoliteReefPrecambrian;
 import net.lepidodendron.world.gen.WorldGenToxicMud;
-import net.lepidodendron.world.gen.WorldGenNullTree;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -53,7 +52,7 @@ public class BiomeMesoproterozoicCarpet extends ElementsLepidodendronMod.ModElem
 			decorator.reedsPerChunk = 0;
 			decorator.cactiPerChunk = 0;
 			decorator.sandPatchesPerChunk = 0;
-			decorator.gravelPatchesPerChunk = 10;
+			decorator.gravelPatchesPerChunk = 1;
 			this.spawnableMonsterList.clear();
 			this.spawnableCreatureList.clear();
 			this.spawnableWaterCreatureList.clear();

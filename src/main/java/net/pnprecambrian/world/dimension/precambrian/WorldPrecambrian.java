@@ -159,8 +159,8 @@ public class WorldPrecambrian extends ElementsPNPrecambrianMod.ModElement {
 				|| biome == BiomePaleoproterozoicShallows.biome
 					|| biome == BiomePaleoproterozoicBeach.biome) {
 				//only cold at night:
-				if (world.isDaytime()) {
-					ff = ff + 2F;
+				if (!world.isDaytime()) {
+					ff = ff - 2F;
 				}
 			}
 
