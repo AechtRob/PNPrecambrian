@@ -13,6 +13,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockWorldState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockPattern;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -30,6 +31,7 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
@@ -40,6 +42,10 @@ import net.pnprecambrian.world.biome.precambrian.BiomePaleoproterozoicBeach;
 import net.pnprecambrian.world.biome.precambrian.BiomePaleoproterozoicRegolith;
 import net.pnprecambrian.world.biome.precambrian.BiomePaleoproterozoicShallows;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Random;
 
 @ElementsPNPrecambrianMod.ModElement.Tag
@@ -88,6 +94,34 @@ public class WorldPrecambrian extends ElementsPNPrecambrianMod.ModElement {
 		@Override
 		public IRenderHandler getSkyRenderer() {
 			if (LepidodendronConfig.renderCustomSkies) {
+				//Check if optifine is installed:
+				boolean isShaders = false;
+				if (FMLClientHandler.instance().hasOptifine()) {
+					//Read from the optionsshaders.txt file:
+					String strFile = null;
+					try {
+						strFile = Minecraft.getMinecraft().gameDir.getCanonicalPath() + "\\optionsshaders.txt";
+					} catch (IOException e) {
+					}
+					try {
+						BufferedReader reader = new BufferedReader(new FileReader(strFile));
+						String line;
+						while ((line = reader.readLine()) != null) {
+							if (line.startsWith("shaderPack=")) {
+								if (!(line.substring(11).equalsIgnoreCase("(internal)")
+										|| line.substring(11).equalsIgnoreCase("OFF"))) {
+									isShaders = true;
+								}
+							}
+						}
+						reader.close();
+					} catch (FileNotFoundException e) {
+					} catch (IOException e) {
+					}
+				}
+				if (isShaders) { // Use the vanilla skyboxes as shaders seem to be in use
+					return super.getSkyRenderer();
+				}
 				return new SkyRendererPrecambrian();
 			}
 			return super.getSkyRenderer();
