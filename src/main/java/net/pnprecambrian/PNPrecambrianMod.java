@@ -24,7 +24,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.function.Supplier;
 
-@Mod(modid = net.pnprecambrian.PNPrecambrianMod.MODID, name = net.pnprecambrian.PNPrecambrianMod.NAME, version = net.pnprecambrian.PNPrecambrianMod.VERSION, dependencies = "required-after:lepidodendron@[52.0,)")
+@Mod(modid = net.pnprecambrian.PNPrecambrianMod.MODID, name = net.pnprecambrian.PNPrecambrianMod.NAME, version = net.pnprecambrian.PNPrecambrianMod.VERSION, dependencies = "required-after:lepidodendron@[54.0,)")
 public class PNPrecambrianMod {
     public static final String MODID = "pnprecambrian";
     public static final String NAME = "Prehistoric Nature Precambrian Dimension";
