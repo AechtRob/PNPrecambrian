@@ -52,6 +52,7 @@ import java.util.Random;
 public class WorldPrecambrian extends ElementsPNPrecambrianMod.ModElement {
 	public static int DIMID = LepidodendronConfig.dimPrecambrian;
 	public static final boolean NETHER_TYPE = false;
+	public static IRenderHandler skyRenderer = new SkyRendererPrecambrian();
 	@GameRegistry.ObjectHolder("lepidodendron:precambrian_portal")
 	public static final WorldPrecambrian.BlockCustomPortal portal = new WorldPrecambrian.BlockCustomPortal();
 	public static DimensionType dtype;
@@ -122,7 +123,7 @@ public class WorldPrecambrian extends ElementsPNPrecambrianMod.ModElement {
 				if (isShaders) { // Use the vanilla skyboxes as shaders seem to be in use
 					return super.getSkyRenderer();
 				}
-				return new SkyRendererPrecambrian();
+				return skyRenderer;
 			}
 			return super.getSkyRenderer();
 		}
