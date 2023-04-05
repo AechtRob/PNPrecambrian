@@ -147,7 +147,7 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
         net.minecraftforge.event.ForgeEventFactory.onChunkPopulate(true, this, this.world, this.random, x, z, false);
         if (biome instanceof BiomePrecambrian) {
             if (((BiomePrecambrian) biome).getBiomeType() == EnumBiomeTypePrecambrian.Hadean) {
-                if (this.random.nextInt(8) == 0) {
+                if (this.random.nextInt(8) == 0 && biome != BiomeHadeanCraters.biome) {
                     if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.random, x, z, false,
                             net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAKE)) {
                         int i1 = this.random.nextInt(16) + 8;
@@ -156,7 +156,7 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                         (new WorldGenHadeanLakes((new FluidStack(FluidRegistry.getFluid("pn_sulfuric_acid"), 1000)).getFluid().getBlock())).generate(this.world, this.random, blockpos.add(i1, j1, k1));
                     }
                 }
-                if (this.random.nextInt(6) == 0) {
+                if (this.random.nextInt(6) == 0 && biome != BiomeHadeanCraters.biome) {
                     if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.random, x, z, false,
                             net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAKE)) {
                         int i1 = this.random.nextInt(16) + 8;
@@ -348,11 +348,11 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                                     Biome biome2 = world.getBiome(new BlockPos((x * 16) - 16, 0, z * 16));
                                     Biome biome3 = world.getBiome(new BlockPos(x * 16, 0, (z * 16) + 16));
                                     Biome biome4 = world.getBiome(new BlockPos(x * 16, 0, (z * 16) - 16));
-                                    if (biome == BiomeHadeanSmelts.biome || biome == BiomeHadeanSmeltsHelper.biome || biome == BiomeHadeanLava.biome
-                                            || biome1 == BiomeHadeanSmelts.biome || biome1 == BiomeHadeanSmeltsHelper.biome || biome1 == BiomeHadeanLava.biome
-                                            || biome2 == BiomeHadeanSmelts.biome || biome2 == BiomeHadeanSmeltsHelper.biome || biome2 == BiomeHadeanLava.biome
-                                            || biome3 == BiomeHadeanSmelts.biome || biome3 == BiomeHadeanSmeltsHelper.biome || biome3 == BiomeHadeanLava.biome
-                                            || biome4 == BiomeHadeanSmelts.biome || biome4 == BiomeHadeanSmeltsHelper.biome || biome4 == BiomeHadeanLava.biome) {
+                                    if (biome == BiomeHadeanSmelts.biome || biome == BiomeHadeanSmeltsHelper.biome || biome == BiomeHadeanLava.biome || biome == BiomeHadeanCraters.biome
+                                            || biome1 == BiomeHadeanSmelts.biome || biome1 == BiomeHadeanSmeltsHelper.biome || biome1 == BiomeHadeanLava.biome || biome == BiomeHadeanCraters.biome
+                                            || biome2 == BiomeHadeanSmelts.biome || biome2 == BiomeHadeanSmeltsHelper.biome || biome2 == BiomeHadeanLava.biome || biome == BiomeHadeanCraters.biome
+                                            || biome3 == BiomeHadeanSmelts.biome || biome3 == BiomeHadeanSmeltsHelper.biome || biome3 == BiomeHadeanLava.biome || biome == BiomeHadeanCraters.biome
+                                            || biome4 == BiomeHadeanSmelts.biome || biome4 == BiomeHadeanSmeltsHelper.biome || biome4 == BiomeHadeanLava.biome || biome == BiomeHadeanCraters.biome) {
                                         primer.setBlockState(i * 4 + k2, i2 * 8 + j2, l * 4 + l2, LAVA);
                                     }
                                     else {
@@ -631,8 +631,16 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
 
                         j = k;
                         if (j1 >= i - 1) {
-                            if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Hadean && rand.nextInt(600) == 0) {
-                                chunkPrimerIn.setBlockState(i1, j1, l, BlockMeteorite.block.getDefaultState());
+                            if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Hadean)// && rand.nextInt(600) == 0) {
+                            {
+                            	if(biome == BiomeHadeanCraters.biome && rand.nextInt(60) == 0)
+                            	{
+                            		chunkPrimerIn.setBlockState(i1, j1, l, BlockMeteorite.block.getDefaultState());
+                            	}
+                            	else if(biome != BiomeHadeanCraters.biome && rand.nextInt(600) == 0)
+                            	{
+                            		chunkPrimerIn.setBlockState(i1, j1, l, BlockMeteorite.block.getDefaultState());
+                            	}                               
                             }
                             else {
                                 chunkPrimerIn.setBlockState(i1, j1, l, iblockstate);
