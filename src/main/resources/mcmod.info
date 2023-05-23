@@ -12,7 +12,7 @@
     "dependencies": ["lepidodendron@[58.0,)","jeid@[2.0.6,)"],
     "logoFile": "",
     "screenshots": [],
-    "dependencies": ["lepidodendron@[58.0,)","jeid@[2.0.6,)"],
+    "requiredMods": ["lepidodendron@[58.0,)","jeid@[2.0.6,)"],
     "useDependencyInformation": "true"
   }
 ]
