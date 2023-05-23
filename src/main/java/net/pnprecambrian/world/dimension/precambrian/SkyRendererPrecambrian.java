@@ -18,10 +18,12 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.common.ForgeModContainer;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL11;
 
 import java.util.Random;
-
-import org.lwjgl.opengl.GL11;
 
 public class SkyRendererPrecambrian extends IRenderHandler {
 
@@ -29,7 +31,8 @@ public class SkyRendererPrecambrian extends IRenderHandler {
     public static final ResourceLocation MOON_PHASES_TEXTURES = new ResourceLocation("textures/environment/moon_phases.png");
     public static final ResourceLocation SUN_TEXTURES = new ResourceLocation("textures/environment/sun.png");
     public boolean vboEnabled;
-    public final VertexFormat vertexBufferFormat;
+    @SideOnly(Side.CLIENT)
+    public VertexFormat vertexBufferFormat;
     public VertexBuffer starVBO;
     public VertexBuffer skyVBO;
     public VertexBuffer sky2VBO;
@@ -38,12 +41,14 @@ public class SkyRendererPrecambrian extends IRenderHandler {
     public int glSkyList2 = -1;
 
     public SkyRendererPrecambrian() {
-        this.vboEnabled = OpenGlHelper.useVbo();
-        this.vertexBufferFormat = new VertexFormat();
-        this.vertexBufferFormat.addElement(new VertexFormatElement(0, VertexFormatElement.EnumType.FLOAT, VertexFormatElement.EnumUsage.POSITION, 3));
-        this.generateStars();
-        this.generateSky();
-        this.generateSky2();
+        if (FMLCommonHandler.instance().getSide().isClient()) {
+            this.vboEnabled = OpenGlHelper.useVbo();
+            this.vertexBufferFormat = new VertexFormat();
+            this.vertexBufferFormat.addElement(new VertexFormatElement(0, VertexFormatElement.EnumType.FLOAT, VertexFormatElement.EnumUsage.POSITION, 3));
+            this.generateStars();
+            this.generateSky();
+            this.generateSky2();
+        }
     }
 
     @Override

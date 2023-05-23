@@ -52,13 +52,14 @@ import java.util.Random;
 public class WorldPrecambrian extends ElementsPNPrecambrianMod.ModElement {
 	public static int DIMID = LepidodendronConfig.dimPrecambrian;
 	public static final boolean NETHER_TYPE = false;
-	public static IRenderHandler skyRenderer = new SkyRendererPrecambrian();
 	@GameRegistry.ObjectHolder("lepidodendron:precambrian_portal")
 	public static final WorldPrecambrian.BlockCustomPortal portal = new WorldPrecambrian.BlockCustomPortal();
 	public static DimensionType dtype;
 	public WorldPrecambrian(ElementsPNPrecambrianMod instance) {
 		super(instance, 1590);
 	}
+
+	public static final IRenderHandler skyRenderer = new SkyRendererPrecambrian();
 
 	@Override
 	public void initElements() {
