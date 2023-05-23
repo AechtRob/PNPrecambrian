@@ -7,6 +7,8 @@ import net.minecraft.world.gen.layer.IntCache;
 
 public class GenLayerPrecambrianHadeanMolten extends GenLayer {
 
+    public Biome PRECAMBRIAN_CRATERS = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:hadean_craters"));
+    public  int PRECAMBRIAN_CRATERS_ID =  Biome.getIdForBiome(PRECAMBRIAN_CRATERS);
     public Biome PRECAMBRIAN_LAVA = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:hadean_smelts"));
     public  int PRECAMBRIAN_LAVA_ID =  Biome.getIdForBiome(PRECAMBRIAN_LAVA);
     public Biome PRECAMBRIAN_MAGMA = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:hadean_lava"));
@@ -20,6 +22,7 @@ public class GenLayerPrecambrianHadeanMolten extends GenLayer {
     }
 
     private final int MoltenBiomes[] = new int[] {
+            PRECAMBRIAN_CRATERS_ID,
             PRECAMBRIAN_LAVA_ID,
             PRECAMBRIAN_MAGMA_ID
     };
