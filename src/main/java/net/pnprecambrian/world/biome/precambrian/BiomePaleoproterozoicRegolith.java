@@ -6,6 +6,7 @@ import net.lepidodendron.block.BlockSandPaleoproterozoic;
 import net.lepidodendron.util.EnumBiomeTypePrecambrian;
 import net.lepidodendron.world.biome.precambrian.BiomePrecambrian;
 import net.lepidodendron.world.gen.WorldGenCobble;
+import net.lepidodendron.world.gen.WorldGenDiskagma;
 import net.lepidodendron.world.gen.WorldGenNullTree;
 import net.lepidodendron.world.gen.WorldGenScoria;
 import net.minecraft.util.math.BlockPos;
@@ -65,6 +66,7 @@ public class BiomePaleoproterozoicRegolith extends ElementsLepidodendronMod.ModE
 
 		protected static final WorldGenScoria SCORIA_GENERATOR = new WorldGenScoria();
 		protected static final WorldGenCobble COBBLE_GENERATOR = new WorldGenCobble();
+		protected static final WorldGenDiskagma DISKAGMA_GENERATOR = new WorldGenDiskagma();
 
 		public WorldGenAbstractTree getRandomTreeFeature(Random rand)
 		{
@@ -98,6 +100,15 @@ public class BiomePaleoproterozoicRegolith extends ElementsLepidodendronMod.ModE
 					int k = rand.nextInt(16) + 8;
 					int l = rand.nextInt(worldIn.getHeight(pos.add(j, 0, k)).getY() + 32);
 					COBBLE_GENERATOR.generate(worldIn, rand, pos.add(j, l, k));
+				}
+			}
+
+			if (net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, rand, new net.minecraft.util.math.ChunkPos(pos), net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.ROCK)) {
+				for (int i = 0; i < 2; ++i) {
+					int j = rand.nextInt(16) + 8;
+					int k = rand.nextInt(16) + 8;
+					int l = rand.nextInt(worldIn.getHeight(pos.add(j, 0, k)).getY() + 32);
+					DISKAGMA_GENERATOR.generate(worldIn, rand, pos.add(j, l, k));
 				}
 			}
 
