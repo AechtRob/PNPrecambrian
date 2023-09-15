@@ -71,6 +71,9 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                         || a.getBlock() == BlockSandPaleoproterozoic.block
                         || a.getBlock() == BlockSandMicrobial.block
                         || a.getBlock() == BlockSandBlack.block
+                        || a.getMaterial() == Material.ROCK
+                        || a.getMaterial() == Material.SAND
+                        || a.getMaterial() == Material.GROUND
                 )
                     return true;
                 return super.canReplaceBlock(a, b);
@@ -88,6 +91,9 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                         || state.getBlock() == BlockSandPaleoproterozoic.block
                         || state.getBlock() == BlockSandMicrobial.block
                         || state.getBlock() == BlockSandBlack.block
+                        || state.getMaterial() == Material.ROCK
+                        || state.getMaterial() == Material.SAND
+                        || state.getMaterial() == Material.GROUND
                 ) {
                     if (y - 1 < 10) {
                         data.setBlockState(x, y, z, FLOWING_LAVA);
