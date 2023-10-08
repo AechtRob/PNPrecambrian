@@ -341,21 +341,25 @@ public class SkyRendererPrecambrian extends IRenderHandler {
         int divider = 0;
         float haze = 0;
         float moon = 0;
+        float scale = 0;
         for (int x = -distance; x <= distance; ++x) {
             for (int z = -distance; z <= distance; ++z) {
                 BlockPos pos = mc.player.getPosition().add(x, 0, z);
                 Biome biome = mc.player.world.getBiome(pos);
                 float ashClouds = getBiomeFactor(biome);
                 float lunar = getBiomeMoonFactor(biome);
+                float size = getBiomeMoonSizeFactor(biome);
                 //float foggy = biomeFog + (density * 5000F);
                 haze += ashClouds;
                 moon += lunar;
+                scale += size;
                 divider++;
             }
         }
 
         haze = (haze / divider);
         moon = (moon / divider);
+        scale = (scale / divider);
         if (LepidodendronConfig.renderFog) {
             f16 = (1.0F - theWorld.getRainStrength(partialTicks))*(1-haze);
         }
@@ -377,7 +381,7 @@ public class SkyRendererPrecambrian extends IRenderHandler {
         {
         	GL11.glPushMatrix();
         	GlStateManager.color(1.0F, 1.0F, 1.0F, f16*(1-moon));
-        	f17 = 35.0F;//This sets the size of the Moon in the sky.
+        	f17 = scale;//This sets the size of the Moon in the sky.
         	mc.renderEngine.bindTexture(MOON_PHASES_TEXTURES);
         	int k1 = theWorld.getMoonPhase();
         	int i2 = k1 % 4;
@@ -397,7 +401,7 @@ public class SkyRendererPrecambrian extends IRenderHandler {
         {
         	GL11.glPushMatrix();
         	GlStateManager.color(1.0F, 1.0F, 1.0F, f16*moon);
-        	f17 = 35.0F;//This sets the size of the Moon in the sky.
+        	f17 = scale;//This sets the size of the Moon in the sky.
         	mc.renderEngine.bindTexture(MOON_PHASES_HADEAN);
         	int k1 = theWorld.getMoonPhase();
         	int i2 = k1 % 4;
@@ -528,5 +532,30 @@ public class SkyRendererPrecambrian extends IRenderHandler {
 			}
         }
         return 0;
+    }
+    
+    private float getBiomeMoonSizeFactor(Biome biome) {
+    	if (biome instanceof BiomePrecambrian) {
+			if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Hadean) {
+				return 60;
+			}
+			if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Archean) {
+				return 35;
+			}
+			if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Paleoproterozoic) {
+				return 30;
+			}
+			if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Mesoproterozoic) {
+				return 25;
+			}
+			if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Proterozoic_Land) {
+				return 25;
+			}
+			else
+			{
+				return 20;
+			}
+        }
+        return 20;
     }
 }
