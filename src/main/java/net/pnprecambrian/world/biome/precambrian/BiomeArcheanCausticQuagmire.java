@@ -3,6 +3,7 @@ package net.pnprecambrian.world.biome.precambrian;
 
 import net.lepidodendron.ElementsLepidodendronMod;
 import net.lepidodendron.LepidodendronConfig;
+import net.lepidodendron.block.BlockLavaRock;
 import net.lepidodendron.block.BlockToxicMud;
 import net.lepidodendron.util.EnumBiomeTypePrecambrian;
 import net.lepidodendron.world.biome.precambrian.BiomePrecambrian;
@@ -44,7 +45,7 @@ public class BiomeArcheanCausticQuagmire extends ElementsLepidodendronMod.ModEle
 			super(new BiomeProperties("Caustic Quagmire").setBaseHeight(2.7F).setHeightVariation(0.0F).setTemperature(0.6F).setWaterColor(0x539E32));
 			setRegistryName("lepidodendron:archean_caustic");
 			topBlock = BlockToxicMud.block.getDefaultState();
-			fillerBlock = Blocks.STONE.getDefaultState();
+			fillerBlock = BlockLavaRock.block.getDefaultState();
 			decorator.treesPerChunk = -999;
 			decorator.flowersPerChunk = 0;
 			decorator.grassPerChunk = 0;
