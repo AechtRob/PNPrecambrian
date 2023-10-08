@@ -10,8 +10,8 @@ public class GenLayerPrecambrianArcheanCaustic extends GenLayer {
     public Biome CAUSTIC = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:archean_caustic"));
     public int CAUSTIC_ID =  Biome.getIdForBiome(CAUSTIC);
 
-    public Biome PRECAMBRIAN_LAND = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:proterozoic_hills"));
-    public int PRECAMBRIAN_LAND_ID =  Biome.getIdForBiome(PRECAMBRIAN_LAND);
+    public Biome ARCHEAN_LAND = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:archean_hills"));
+    public int ARCHEAN_LAND_ID =  Biome.getIdForBiome(ARCHEAN_LAND);
 
     public GenLayerPrecambrianArcheanCaustic(long seed, GenLayer genlayer) {
         super(seed);
@@ -35,14 +35,14 @@ public class GenLayerPrecambrianArcheanCaustic extends GenLayer {
                 this.initChunkSeed((long)(j + areaX), (long)(i + areaY));
                 int k = aint[j + 1 + (i + 1) * (areaWidth + 2)];
 
-                if (k == PRECAMBRIAN_LAND_ID)
+                if (k == ARCHEAN_LAND_ID)
                 {
                     int l1 = aint[j + 1 + (i + 1 - 1) * (areaWidth + 2)];
                     int k2 = aint[j + 1 + 1 + (i + 1) * (areaWidth + 2)];
                     int j3 = aint[j + 1 - 1 + (i + 1) * (areaWidth + 2)];
                     int i4 = aint[j + 1 + (i + 1 + 1) * (areaWidth + 2)];
 
-                    if (l1 == PRECAMBRIAN_LAND_ID && k2 == PRECAMBRIAN_LAND_ID && j3 == PRECAMBRIAN_LAND_ID && i4 == PRECAMBRIAN_LAND_ID & nextInt(4) == 0)
+                    if (l1 == ARCHEAN_LAND_ID && k2 == ARCHEAN_LAND_ID && j3 == ARCHEAN_LAND_ID && i4 == ARCHEAN_LAND_ID & nextInt(4) == 0)
                     {
                         aint1[j + i * areaWidth] = CausticBiomes[nextInt(CausticBiomes.length)];;
                     }
