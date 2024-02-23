@@ -95,12 +95,12 @@ public class BiomeMesoproterozoicBeach extends ElementsLepidodendronMod.ModEleme
 					int radius = 4;
 					int j;
 					int k;
-					if (radius < 14) {
-						j = 16 + rand.nextInt(16 - radius - 2) - rand.nextInt(16 - radius - 2);
-						k = 16 + rand.nextInt(16 - radius - 2) - rand.nextInt(16 - radius - 2);
+					if (radius < 8) {
+						j = 16 + (int)Math.floor(rand.nextInt(16 - radius - 8)/2) - (int)Math.floor(rand.nextInt(16 - radius - 6)/2);
+						k = 16 + (int)Math.floor(rand.nextInt(16 - radius - 8)/2) - (int)Math.floor(rand.nextInt(16 - radius - 6)/2);
 					}
 					else {
-						radius = 14;
+						radius = 8;
 						j = 16;
 						k = 16;
 					}
@@ -119,12 +119,12 @@ public class BiomeMesoproterozoicBeach extends ElementsLepidodendronMod.ModEleme
 					int radius = 16;
 					int j;
 					int k;
-					if (radius < 13) {
-						j = 16 + rand.nextInt(16 - radius - 2) - rand.nextInt(16 - radius - 2);
-						k = 16 + rand.nextInt(16 - radius - 2) - rand.nextInt(16 - radius - 2);
+					if (radius < 8) {
+						j = 16 + (int)Math.floor(rand.nextInt(16 - radius - 8)/2) - (int)Math.floor(rand.nextInt(16 - radius - 6)/2);
+						k = 16 + (int)Math.floor(rand.nextInt(16 - radius - 8)/2) - (int)Math.floor(rand.nextInt(16 - radius - 6)/2);
 					}
 					else {
-						radius = 13;
+						radius = 8;
 						j = 16;
 						k = 16;
 					}

@@ -13,6 +13,7 @@ import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 import net.minecraft.world.storage.WorldInfo;
+import net.pnprecambrian.world.biome.precambrian.BiomeProterozoicHills;
 import net.pnprecambrian.world.dimension.precambrian.GenLayerPrecambrian.GenLayerPrecambrian;
 
 import javax.annotation.Nullable;
@@ -21,8 +22,31 @@ import java.util.Random;
 
 public class BiomeProviderPrecambrian extends BiomeProvider {
     public static List<Biome> allowedBiomes = Lists.newArrayList(
+            Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:archean_beach")),
+            Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:archean_caustic")),
+            Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:archean_shallow_sea")),
+            Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:archean_tide_pools")),
+            Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:archean_trench")),
+            Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:cryogenian_beach")),
+            Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:cryogenian_desert")),
+            Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:cryogenian_ocean")),
+            Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:ediacaran_beach")),
+            Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:ediacaran_extreme_hills")),
+            Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:ediacaran_frondose_forest")),
+            Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:ediacaran_trench")),
+            Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:hadean_craters")),
+            Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:hadean_lava")),
+            Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:hadean_smelts")),
+            Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:hadean_smelts_helper")),
+            Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:precambrian_biome")),
+            Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:mesoproterozoic_beach")),
+            Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:mesoproterozoic_carpet")),
+            Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:neoproterozoic_plains")),
+            Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:paleoproterozoic_beach")),
+            Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:paleoproterozoic_regolith")),
+            Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:paleoproterozoic_shallows")),
             Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:precambrian_sea")),
-            Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:precambrian_biome"))
+            Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:proterozoic_hills"))
     );
     public GenLayer genBiomes;
     /** A GenLayer containing the indices into BiomeGenBase.biomeList[] */
@@ -55,7 +79,7 @@ public class BiomeProviderPrecambrian extends BiomeProvider {
 
     @Override
     public Biome getBiome(BlockPos pos, Biome defaultBiome) {
-        return this.biomeCache.getBiome(pos.getX(), pos.getZ(), defaultBiome);
+        return this.biomeCache.getBiome(pos.getX(), pos.getZ(), BiomeProterozoicHills.biome);
     }
 
     @Override
@@ -74,7 +98,7 @@ public class BiomeProviderPrecambrian extends BiomeProvider {
         {
             for (int i = 0; i < width * height; ++i)
             {
-                biomes[i] = Biome.getBiome(aint[i], Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:precambrian_sea")));
+                biomes[i] = Biome.getBiome(aint[i], Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:proterozoic_hills")));
             }
 
             return biomes;
@@ -114,7 +138,7 @@ public class BiomeProviderPrecambrian extends BiomeProvider {
 
             for (int i = 0; i < width * length; ++i)
             {
-                listToReuse[i] = Biome.getBiome(aint[i], Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:precambrian_sea")));
+                listToReuse[i] = Biome.getBiome(aint[i], Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:proterozoic_hills")));
             }
 
             return listToReuse;

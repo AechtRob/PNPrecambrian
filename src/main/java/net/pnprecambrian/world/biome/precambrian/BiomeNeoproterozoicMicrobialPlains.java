@@ -93,8 +93,8 @@ public class BiomeNeoproterozoicMicrobialPlains extends ElementsPNPrecambrianMod
 	        	int i = rand.nextInt(2);
 	            for (int j = 0; j < i; ++j)
 	            {
-	                int k = rand.nextInt(16) + 8;
-	                int l = rand.nextInt(16) + 8;
+					int k = rand.nextInt(4) + 14;
+					int l = rand.nextInt(4) + 14;
 	                BlockPos blockpos = worldIn.getHeight(pos.add(k, 0, l));
 					IGNEOUS_GENERATOR.generate(worldIn, rand, blockpos);
 	            }

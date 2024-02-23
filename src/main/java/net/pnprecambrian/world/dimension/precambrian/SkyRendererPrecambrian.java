@@ -397,7 +397,7 @@ public class SkyRendererPrecambrian extends IRenderHandler {
         {
         	GL11.glPushMatrix();
         	GlStateManager.color(1.0F, 1.0F, 1.0F, f16*moon);
-        	f17 = 35.0F;//This sets the size of the Moon in the sky.
+        	f17 = 100.0F;//This sets the size of the Moon in the sky. Hadean is huge.
         	mc.renderEngine.bindTexture(MOON_PHASES_HADEAN);
         	int k1 = theWorld.getMoonPhase();
         	int i2 = k1 % 4;
