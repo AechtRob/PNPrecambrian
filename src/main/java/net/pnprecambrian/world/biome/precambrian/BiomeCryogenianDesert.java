@@ -108,9 +108,7 @@ public class BiomeCryogenianDesert extends ElementsLepidodendronMod.ModElement {
 				i = rand.nextInt(3);
 
 				for (int j = 0; j < i; ++j) {
-					int k = rand.nextInt(16) + 8;
-					int l = rand.nextInt(16) + 8;
-					BlockPos blockpos = worldIn.getHeight(pos.add(k, 0, l));
+					BlockPos blockpos = worldIn.getHeight(pos);
 					ICEBERG_GENERATOR.generate(worldIn, rand, blockpos, true);
 				}
 
