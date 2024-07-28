@@ -1,6 +1,7 @@
 package net.pnprecambrian.world.dimension.precambrian;
 
 import com.google.common.collect.Lists;
+import net.lepidodendron.world.biome.precambrian.BiomePrecambrian;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.util.ReportedException;
@@ -161,6 +162,9 @@ public class BiomeProviderPrecambrian extends BiomeProvider {
                 Biome biome = Biome.getBiome(aint[k1]);
 
                 if (!allowed.contains(biome)) {
+                    return false;
+                }
+                if (!(biome instanceof BiomePrecambrian)) {
                     return false;
                 }
             }
