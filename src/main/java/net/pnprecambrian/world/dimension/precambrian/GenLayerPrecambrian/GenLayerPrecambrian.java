@@ -30,6 +30,8 @@ public class GenLayerPrecambrian {
         //biomes = new GenLayerPermianSpongeReef(1975L, biomes);
         biomes = new GenLayerPrecambrianArcheanCaustic(740L, biomes);
         biomes = new GenLayerNeoproterozoicPlains(1918L, biomes);
+        biomes = new GenLayerStromatolitePavement(1759L, biomes);
+        biomes = new GenLayerReef(1767L, biomes);
         biomes = new GenLayerZoom(1003L, biomes);
         //biomes = new GenLayerPermianMountainEdge(2L, biomes);
         biomes = new GenLayerSmooth(700L, biomes);
@@ -40,7 +42,6 @@ public class GenLayerPrecambrian {
         biomes = new GenLayerZoom(1004L, biomes);
         biomes = new GenLayerSmooth(703L, biomes);
         biomes = new GenLayerFuzzyZoom(1000L, biomes);
-        //biomes = new GenLayerPermianBeach(1050L, biomes);
         //biomes = new GenLayerPermianFloodBasaltEdge(3L, biomes);
         //biomes = new GenLayerPermianCliff(1080L, biomes);
 
@@ -70,14 +71,28 @@ public class GenLayerPrecambrian {
         GenLayer genlayercreek7 = new GenLayerSmooth(1000L, genlayercreek6);
         GenLayer genlayertrenchfinal = new GenLayerPrecambrianSeaTrenchesMix(100L, biomes, genlayercreek7);
 
-        GenLayer genlayervoronoizoom = new GenLayerVoronoiZoom(10L, genlayertrenchfinal);
+        GenLayer genlayerrift = new GenLayerRiverInit(200L, biomes);
+        GenLayer genlayerrift2 = GenLayerZoom.magnify(2000L, genlayerrift, 1);
+        GenLayer genlayerrift3 = GenLayerZoom.magnify(2000L, genlayerrift2, 2);
+        GenLayer genlayerrift4 = GenLayerZoom.magnify(2000L, genlayerrift3, 2);
+        GenLayer genlayerrift5 = GenLayerZoom.magnify(2000L, genlayerrift4, 2);
+        GenLayer genlayerrift6 = GenLayerZoom.magnify(2000L, genlayerrift5, 2);
+        GenLayer genlayerrift7 = new GenLayerRiver(2L, genlayerrift6);
+        GenLayer genlayerrift8 = new GenLayerSmooth(2000L, genlayerrift7);
+        GenLayer genlayerrift9 = new GenLayerZoom(2076L, genlayerrift8);
+        GenLayer genlayerrift10 = new GenLayerZoom(3076L, genlayerrift9);
+        GenLayer genlayerrift11 = new GenLayerZoom(4076L, genlayerrift10);
+        GenLayer genlayerriftfinal = new GenLayerPrecambrianRiftMix(200L, genlayertrenchfinal, genlayerrift11);
 
-        genlayertrenchfinal.initWorldGenSeed(seed);
+
+        GenLayer genlayervoronoizoom = new GenLayerVoronoiZoom(10L, genlayerriftfinal);
+
+        genlayerriftfinal.initWorldGenSeed(seed);
         genlayervoronoizoom.initWorldGenSeed(seed);
         biomes.initWorldGenSeed(seed);
 
         genlayervoronoizoom.initWorldGenSeed(seed);
-        return (new GenLayer[] { genlayertrenchfinal, genlayervoronoizoom, genlayertrenchfinal });
+        return (new GenLayer[] { genlayerriftfinal, genlayervoronoizoom, genlayerriftfinal });
 
     }
 

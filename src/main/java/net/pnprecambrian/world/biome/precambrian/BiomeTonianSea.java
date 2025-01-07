@@ -2,6 +2,7 @@
 package net.pnprecambrian.world.biome.precambrian;
 
 import net.lepidodendron.ElementsLepidodendronMod;
+import net.lepidodendron.block.BlockToxicMud;
 import net.lepidodendron.util.EnumBiomeTypePrecambrian;
 import net.lepidodendron.world.biome.precambrian.BiomePrecambrian;
 import net.lepidodendron.world.gen.WorldGenNullTree;
@@ -19,10 +20,10 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import java.util.Random;
 
 @ElementsLepidodendronMod.ModElement.Tag
-public class BiomeMesoproterozoicBeach extends ElementsLepidodendronMod.ModElement {
-	@GameRegistry.ObjectHolder("lepidodendron:mesoproterozoic_beach")
+public class BiomeTonianSea extends ElementsLepidodendronMod.ModElement {
+	@GameRegistry.ObjectHolder("lepidodendron:tonian_sea")
 	public static final BiomeGenCustom biome = null;
-	public BiomeMesoproterozoicBeach(ElementsLepidodendronMod instance) {
+	public BiomeTonianSea(ElementsLepidodendronMod instance) {
 		super(instance, 1589);
 	}
 
@@ -40,9 +41,9 @@ public class BiomeMesoproterozoicBeach extends ElementsLepidodendronMod.ModEleme
 	static class BiomeGenCustom extends BiomePrecambrian {
 		public BiomeGenCustom() {
 			//super(new BiomeProperties("Permian Desert").setRainfall(0.0F).setBaseHeight(0.18F).setHeightVariation(0.17F).setTemperature(2.2F).setRainDisabled().setWaterColor(10990706));
-			super(new BiomeProperties("Mesoproterozoic Carpet").setBaseHeight(2.75F).setHeightVariation(0.001F).setTemperature(0.6F).setWaterColor(0xFC5E95));
-			setRegistryName("lepidodendron:mesoproterozoic_beach");
-			topBlock = Blocks.GRAVEL.getDefaultState();
+			super(new BiomeProperties("Tonian Sea").setBaseHeight(1.6F).setHeightVariation(0.012F).setTemperature(1.6F).setWaterColor(0xFC5E95));
+			setRegistryName("lepidodendron:tonian_sea");
+			topBlock = BlockToxicMud.block.getDefaultState();
 			fillerBlock = Blocks.STONE.getDefaultState();
 			decorator.treesPerChunk = -999;
 			decorator.flowersPerChunk = 0;
@@ -144,7 +145,7 @@ public class BiomeMesoproterozoicBeach extends ElementsLepidodendronMod.ModEleme
 
 		@Override
 		public EnumBiomeTypePrecambrian getBiomeType() {
-			return EnumBiomeTypePrecambrian.Mesoproterozoic;
+			return EnumBiomeTypePrecambrian.Neoproterozoic;
 		}
 
 	}

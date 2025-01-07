@@ -109,7 +109,7 @@ public class BiomeMesoproterozoicCarpet extends ElementsLepidodendronMod.ModElem
 					if (
 							(pos1.getY() < worldIn.getSeaLevel())
 					) {
-						REEF_GENERATOR.generate(worldIn, rand, pos1, radius, false, false);
+						REEF_GENERATOR.generate(worldIn, rand, pos1, radius, true, false);
 					}
 				}
 			}
@@ -133,7 +133,7 @@ public class BiomeMesoproterozoicCarpet extends ElementsLepidodendronMod.ModElem
 					if (
 							(pos1.getY() < worldIn.getSeaLevel())
 					) {
-						REEF_GENERATOR.generate(worldIn, rand, pos1, radius, false, false);
+						REEF_GENERATOR.generate(worldIn, rand, pos1, radius, true, false);
 					}
 				}
 			}

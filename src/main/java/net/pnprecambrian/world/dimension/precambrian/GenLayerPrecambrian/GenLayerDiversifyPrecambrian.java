@@ -20,9 +20,13 @@ public class GenLayerDiversifyPrecambrian extends GenLayer {
     public int CRYOGENIAN_OCEAN_ID =  Biome.getIdForBiome(CRYOGENIAN_OCEAN);
     public Biome CRYOGENIAN_LAND = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:cryogenian_desert"));
     public int CRYOGENIAN_LAND_ID =  Biome.getIdForBiome(CRYOGENIAN_LAND);
+    public Biome TONIAN_SEA = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:tonian_sea"));
+    public int TONIAN_SEA_ID =  Biome.getIdForBiome(TONIAN_SEA);
 
     public Biome EDIACARAN_OCEAN = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:precambrian_sea"));
     public int EDIACARAN_OCEAN_ID =  Biome.getIdForBiome(EDIACARAN_OCEAN);
+    public Biome EDIACARAN_SPARSE_OCEAN = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:ediacaran_sparse_sea"));
+    public int EDIACARAN_SPARSE_OCEAN_ID =  Biome.getIdForBiome(EDIACARAN_SPARSE_OCEAN);
     public Biome EDIACARAN_OCEAN_HILLS = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:ediacaran_extreme_hills"));
     public int EDIACARAN_OCEAN_HILLS_ID =  Biome.getIdForBiome(EDIACARAN_OCEAN_HILLS);
     public Biome EDIACARAN_FRONDOSE = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:ediacaran_frondose_forest"));
@@ -35,14 +39,14 @@ public class GenLayerDiversifyPrecambrian extends GenLayer {
     };
 
     private final int NeoproterozoicBiomes[] = new int[] {
-            CRYOGENIAN_LAND_ID,
+            TONIAN_SEA_ID,
             CRYOGENIAN_LAND_ID,
             CRYOGENIAN_OCEAN_ID
     };
 
     private final int EdiacaranBiomes[] = new int[] {
             EDIACARAN_OCEAN_ID,
-            EDIACARAN_OCEAN_ID,
+            EDIACARAN_SPARSE_OCEAN_ID,
             EDIACARAN_OCEAN_HILLS_ID,
             EDIACARAN_FRONDOSE_ID
     };

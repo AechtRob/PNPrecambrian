@@ -216,8 +216,19 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                     }
                 }
             }
+            else if (biome == BiomeProterozoicRift.biome) {
+                if (this.random.nextInt(2) == 0) {
+                    if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.random, x, z, false,
+                            net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAKE)) {
+                        int i1 = this.random.nextInt(16) + 8;
+                        int j1 = this.random.nextInt(256);
+                        int k1 = this.random.nextInt(16) + 8;
+                        (new WorldGenHadeanLakes(Blocks.LAVA)).generate(this.world, this.random, blockpos.add(i1, j1, k1));
+                    }
+                }
+            }
             else {
-                if (this.random.nextInt(4) == 0) {
+                if (this.random.nextInt(6) == 0) {
                     if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.random, x, z, false,
                             net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAKE)) {
                         int i1 = this.random.nextInt(16) + 8;
@@ -565,7 +576,10 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                         if (biome == BiomeEdiacaranBeach.biome
                                 || biome == BiomeEdiacaranFrondoseForest.biome
                                 || biome == BiomeEdiacaranExtremeHills.biome
-                                || biome == BiomePrecambrianSea.biome) {
+                                || biome == BiomePrecambrianSea.biome
+                                || biome == BiomeEdiacaranSparseSea.biome
+                                || biome == BiomeEdiacaranStromatolitePavement.biome
+                                || biome == BiomeEdiacaranShallowReef.biome) {
                             if (rand.nextInt(3) == 0) {
                                 iblockstate = Blocks.GRAVEL.getDefaultState();
                             }
@@ -584,6 +598,21 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                             }
                             if (rand.nextInt(6) == 0) {
                                 iblockstate = BlockLavaRock.block.getDefaultState();
+                            }
+                        }
+
+                        if (biome == BiomeProterozoicRift.biome) {
+                            if (rand.nextInt(2) == 0) {
+                                iblockstate = BlockSandBlack.block.getDefaultState();
+                            }
+                            if (rand.nextInt(20) == 0) {
+                                iblockstate = BlockLavaCobbleMolten.block.getDefaultState();
+                            }
+                            if (rand.nextInt(32) == 0 && j1 < SEALEVEL + rand.nextInt(3)) {
+                                iblockstate = Blocks.MAGMA.getDefaultState();
+                            }
+                            if (rand.nextInt(256) == 0) {
+                                iblockstate = BlockSulphurOreLavaRock.block.getDefaultState();
                             }
                         }
 
@@ -699,15 +728,39 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                                         }
                                     }
                                     else {
-                                        if (biome != BiomeEdiacaranTrench.biome && j1 > (58 + rand.nextInt(8))) {
+                                        if (biome != BiomeEdiacaranSparseSea.biome &&biome != BiomeEdiacaranTrench.biome && biome != BiomeProterozoicRift.biome && j1 > (58 + rand.nextInt(8))) {
                                             chunkPrimerIn.setBlockState(i1, j1, l, STONE_BACTERIAL_LAYER);
+                                        }
+                                        else if (biome == BiomeProterozoicRift.biome && j1 > (58 + rand.nextInt(8))) {
+                                            if (rand.nextInt(5) == 0) {
+                                                chunkPrimerIn.setBlockState(i1, j1, l, BlockLavaCobbleMolten.block.getDefaultState());
+                                            }
+                                            else if (rand.nextInt(10) == 0) {
+                                                chunkPrimerIn.setBlockState(i1, j1, l, Blocks.MAGMA.getDefaultState());
+                                            }
+                                            else {
+                                                chunkPrimerIn.setBlockState(i1, j1, l, BlockLavaCobble.block.getDefaultState());
+                                            }
+                                        }
+                                        else if (biome == BiomeEdiacaranSparseSea.biome) {
+                                            if (rand.nextInt(6) == 0) {
+                                                chunkPrimerIn.setBlockState(i1, j1, l, BlockGravelWavy.block.getDefaultState());
+                                            }
+                                            else {
+                                                chunkPrimerIn.setBlockState(i1, j1, l, STONE_BACTERIAL_LAYER);
+                                            }
                                         }
                                         else {
                                             if (rand.nextInt(3) == 0) {
                                                 chunkPrimerIn.setBlockState(i1, j1, l, STONE_STONE);
                                             }
                                             else {
-                                                chunkPrimerIn.setBlockState(i1, j1, l, Blocks.GRAVEL.getDefaultState());
+                                                if (biome.getRegistryName().toString().equalsIgnoreCase("lepidodendron:tonian_sea")) {
+                                                    chunkPrimerIn.setBlockState(i1, j1, l, BlockToxicMud.block.getDefaultState());
+                                                }
+                                                else {
+                                                    chunkPrimerIn.setBlockState(i1, j1, l, Blocks.GRAVEL.getDefaultState());
+                                                }
                                             }
                                         }
                                     }
@@ -715,11 +768,21 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                                 else {
                                     if ((((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Mesoproterozoic)
                                         && Math.random() > 0.33) {
-                                        chunkPrimerIn.setBlockState(i1, j1, l, BlockToxicMud.block.getDefaultState());
+                                        if (Math.random() > 0.6) {
+                                            chunkPrimerIn.setBlockState(i1, j1, l, BlockToxicMud.block.getDefaultState());
+                                        }
+                                        else {
+                                            chunkPrimerIn.setBlockState(i1, j1, l, Blocks.GRAVEL.getDefaultState());
+                                        }
                                     }
                                     else if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Neoproterozoic
                                             && Math.random() > 0.33) {
-                                        chunkPrimerIn.setBlockState(i1, j1, l, Blocks.GRAVEL.getDefaultState());
+                                        if (biome.getRegistryName().toString().equalsIgnoreCase("lepidodendron:tonian_sea")) {
+                                            chunkPrimerIn.setBlockState(i1, j1, l, BlockToxicMud.block.getDefaultState());
+                                        }
+                                        else {
+                                            chunkPrimerIn.setBlockState(i1, j1, l, Blocks.GRAVEL.getDefaultState());
+                                        }
                                     }
                                     else if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Archean
                                             && Math.random() > 0.33) {
@@ -773,15 +836,39 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                                         }
                                     }
                                     else {
-                                        if (biome != BiomeEdiacaranTrench.biome && j1 > (58 + rand.nextInt(8))) {
+                                        if (biome != BiomeEdiacaranSparseSea.biome && biome != BiomeEdiacaranTrench.biome && biome != BiomeProterozoicRift.biome && j1 > (58 + rand.nextInt(8))) {
                                             chunkPrimerIn.setBlockState(i1, j1, l, STONE_BACTERIAL_LAYER);
+                                        }
+                                        else if (biome == BiomeEdiacaranSparseSea.biome) {
+                                            if (rand.nextInt(6) == 0) {
+                                                chunkPrimerIn.setBlockState(i1, j1, l, BlockGravelWavy.block.getDefaultState());
+                                            }
+                                            else {
+                                                chunkPrimerIn.setBlockState(i1, j1, l, STONE_BACTERIAL_LAYER);
+                                            }
+                                        }
+                                        else if (biome == BiomeProterozoicRift.biome && j1 > (58 + rand.nextInt(8))) {
+                                            if (rand.nextInt(5) == 0) {
+                                                chunkPrimerIn.setBlockState(i1, j1, l, BlockLavaCobbleMolten.block.getDefaultState());
+                                            }
+                                            else if (rand.nextInt(10) == 0) {
+                                                chunkPrimerIn.setBlockState(i1, j1, l, Blocks.MAGMA.getDefaultState());
+                                            }
+                                            else {
+                                                chunkPrimerIn.setBlockState(i1, j1, l, BlockLavaCobble.block.getDefaultState());
+                                            }
                                         }
                                         else { //Is a trench
                                             if (rand.nextInt(3) == 0) {
                                                 chunkPrimerIn.setBlockState(i1, j1, l, STONE_STONE);
                                             }
                                             else {
-                                                chunkPrimerIn.setBlockState(i1, j1, l, Blocks.GRAVEL.getDefaultState());
+                                                if (biome.getRegistryName().toString().equalsIgnoreCase("lepidodendron:tonian_sea")) {
+                                                    chunkPrimerIn.setBlockState(i1, j1, l, BlockToxicMud.block.getDefaultState());
+                                                }
+                                                else {
+                                                    chunkPrimerIn.setBlockState(i1, j1, l, Blocks.GRAVEL.getDefaultState());
+                                                }
                                             }
                                         }
                                     }
@@ -792,13 +879,23 @@ public class ChunkProviderPrecambrian implements IChunkGenerator {
                                             chunkPrimerIn.setBlockState(i1, j1, l, BlockToxicMud.block.getDefaultState());
                                         }
                                         else {
-                                            chunkPrimerIn.setBlockState(i1, j1, l, Blocks.GRAVEL.getDefaultState());
+                                            if (biome.getRegistryName().toString().equalsIgnoreCase("lepidodendron:tonian_sea")) {
+                                                chunkPrimerIn.setBlockState(i1, j1, l, BlockToxicMud.block.getDefaultState());
+                                            }
+                                            else {
+                                                chunkPrimerIn.setBlockState(i1, j1, l, Blocks.GRAVEL.getDefaultState());
+                                            }
                                         }
                                     }
                                     else {
                                         if (((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Mesoproterozoic
                                             || ((BiomePrecambrian)biome).getBiomeType() == EnumBiomeTypePrecambrian.Neoproterozoic) {
-                                            chunkPrimerIn.setBlockState(i1, j1, l, Blocks.GRAVEL.getDefaultState());
+                                            if (biome.getRegistryName().toString().equalsIgnoreCase("lepidodendron:tonian_sea")) {
+                                                chunkPrimerIn.setBlockState(i1, j1, l, BlockToxicMud.block.getDefaultState());
+                                            }
+                                            else {
+                                                chunkPrimerIn.setBlockState(i1, j1, l, Blocks.GRAVEL.getDefaultState());
+                                            }
                                         }
                                         else {
                                             chunkPrimerIn.setBlockState(i1, j1, l, BlockToxicMud.block.getDefaultState());

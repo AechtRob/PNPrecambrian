@@ -24,11 +24,17 @@ public class GenLayerPrecambrianSeaTrenchesMix extends GenLayer
     public Biome ARCHEAN_SEA = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:archean_shallow_sea"));
     public int ARCHEAN_SEA_ID =  Biome.getIdForBiome(ARCHEAN_SEA);
     public Biome EDIACARAN_HILLS = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:ediacaran_extreme_hills"));
-    public  int EDIACARAN_HILLS_ID =  Biome.getIdForBiome(EDIACARAN_HILLS);
+    public int EDIACARAN_HILLS_ID =  Biome.getIdForBiome(EDIACARAN_HILLS);
     public Biome EDIACARAN_FRONDOSE = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:ediacaran_frondose_forest"));
-    public  int EDIACARAN_FRONDOSE_ID =  Biome.getIdForBiome(EDIACARAN_FRONDOSE);
-    public  Biome EDIACARAN_SEA = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:precambrian_sea"));
-    public  int EDIACARAN_SEA_ID =  Biome.getIdForBiome(EDIACARAN_SEA);
+    public int EDIACARAN_FRONDOSE_ID =  Biome.getIdForBiome(EDIACARAN_FRONDOSE);
+    public Biome EDIACARAN_SEA = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:precambrian_sea"));
+    public int EDIACARAN_SEA_ID =  Biome.getIdForBiome(EDIACARAN_SEA);
+    public Biome EDIACARAN_SPARSE_OCEAN = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:ediacaran_sparse_sea"));
+    public int EDIACARAN_SPARSE_OCEAN_ID =  Biome.getIdForBiome(EDIACARAN_SPARSE_OCEAN);
+    public Biome EDIACARAN_STROMATOLITE = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:ediacaran_stromatolite_pavement"));
+    public int EDIACARAN_STROMATOLITE_ID =  Biome.getIdForBiome(EDIACARAN_STROMATOLITE);
+    public Biome EDIACARAN_REEF = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:ediacaran_shallow_reef"));
+    public int EDIACARAN_REEF_ID =  Biome.getIdForBiome(EDIACARAN_REEF);
 
     public GenLayerPrecambrianSeaTrenchesMix(long p_i2129_1_, GenLayer p_i2129_3_, GenLayer p_i2129_4_)
     {
@@ -91,6 +97,8 @@ public class GenLayerPrecambrianSeaTrenchesMix extends GenLayer
     
     public boolean hasTrench(int biomeID) {
         return (biomeID == ARCHEAN_SEA_ID || biomeID == EDIACARAN_HILLS_ID
-            || biomeID == EDIACARAN_SEA_ID || biomeID == EDIACARAN_FRONDOSE_ID);
+                || biomeID == EDIACARAN_SEA_ID || biomeID == EDIACARAN_FRONDOSE_ID
+                || biomeID == EDIACARAN_STROMATOLITE_ID || biomeID == EDIACARAN_REEF_ID
+                || biomeID == EDIACARAN_SPARSE_OCEAN_ID);
     }
 }

@@ -35,6 +35,12 @@ public class GenLayerPrecambrianBeach extends GenLayer
     public int EDIACARAN_OCEAN_HILLS_ID =  Biome.getIdForBiome(DIACARAN_OCEAN_HILLS);
     public Biome EDIACARAN_FRONDOSE = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:ediacaran_frondose_forest"));
     public int EDIACARAN_FRONDOSE_ID =  Biome.getIdForBiome(EDIACARAN_FRONDOSE);
+    public Biome EDIACARAN_SPARSE_OCEAN = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:ediacaran_sparse_sea"));
+    public int EDIACARAN_SPARSE_OCEAN_ID =  Biome.getIdForBiome(EDIACARAN_SPARSE_OCEAN);
+    public Biome EDIACARAN_STROMATOLITE = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:ediacaran_stromatolite_pavement"));
+    public int EDIACARAN_STROMATOLITE_ID =  Biome.getIdForBiome(EDIACARAN_STROMATOLITE);
+    public Biome EDIACARAN_REEF = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:ediacaran_shallow_reef"));
+    public int EDIACARAN_REEF_ID =  Biome.getIdForBiome(EDIACARAN_REEF);
 
     public GenLayerPrecambrianBeach(long seed, GenLayer genLayer)
     {
@@ -76,7 +82,9 @@ public class GenLayerPrecambrianBeach extends GenLayer
                         else if (k == ARCHEAN_OCEAN_ID || k == ARCHEAN_POOLS_ID) {
                             aint1[j + i * areaWidth] = ARCHEAN_BEACH_ID;
                         }
-                        else if (k == EDIACARAN_OCEAN_ID || k == EDIACARAN_OCEAN_HILLS_ID || k == EDIACARAN_FRONDOSE_ID) {
+                        else if (k == EDIACARAN_OCEAN_ID || k == EDIACARAN_OCEAN_HILLS_ID
+                                || k == EDIACARAN_FRONDOSE_ID || k == EDIACARAN_REEF_ID
+                                || k == EDIACARAN_STROMATOLITE_ID || k == EDIACARAN_SPARSE_OCEAN_ID ) {
                             aint1[j + i * areaWidth] = EDIACARAN_BEACH_ID;
                         }
                         else {
@@ -102,7 +110,11 @@ public class GenLayerPrecambrianBeach extends GenLayer
                 || biomeID == MESOPROTEROZOIC_OCEAN_ID
                 || biomeID == CRYOGENIAN_OCEAN_ID
                 || biomeID == ARCHEAN_OCEAN_ID || biomeID == ARCHEAN_POOLS_ID
-                || biomeID == EDIACARAN_OCEAN_ID || biomeID == EDIACARAN_OCEAN_HILLS_ID || biomeID == EDIACARAN_FRONDOSE_ID) {
+                || biomeID == EDIACARAN_OCEAN_ID || biomeID == EDIACARAN_OCEAN_HILLS_ID
+                || biomeID == EDIACARAN_FRONDOSE_ID
+                || biomeID == EDIACARAN_SPARSE_OCEAN_ID
+                || biomeID == EDIACARAN_REEF_ID
+                || biomeID == EDIACARAN_STROMATOLITE_ID) {
             return true;
         }
         return false;
