@@ -48,7 +48,11 @@ public class BiomeProviderPrecambrian extends BiomeProvider {
             Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:ediacaran_frondose_forest")),
             Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:hadean_smelts_helper")),
             Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:hadean_smelts")),
-            Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:tonian_sea"))
+            Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:tonian_sea")),
+            Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:proterozoic_rift")),
+            Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:ediacaran_shallow_reef")),
+            Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:ediacaran_stromatolite_pavement")),
+            Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:ediacaran_sparse_sea"))
 
             );
     public GenLayer genBiomes;
