@@ -83,70 +83,73 @@ public class BiomePrecambrianSea extends ElementsPNPrecambrianMod.ModElement {
 	    public void decorate(World worldIn, Random rand, BlockPos pos)
 	    {
 
-			for (int i = 0; i < 5; ++i) {
-				LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 60, Blocks.STONE.getStateFromMeta(1), -1);
-			}
+			if(net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, rand, new net.minecraft.util.math.ChunkPos(pos), DecorateBiomeEvent.Decorate.EventType.GRASS)) {
 
-			for (int i = 0; i < 5; ++i) {
-				LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 60, Blocks.STONE.getStateFromMeta(3), -1);
-			}
+				for (int i = 0; i < 5; ++i) {
+					LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 60, Blocks.STONE.getStateFromMeta(1), -1);
+				}
 
-			for (int i = 0; i < 5; ++i) {
-				LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 60, Blocks.STONE.getStateFromMeta(5), -1);
-			}
+				for (int i = 0; i < 5; ++i) {
+					LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 60, Blocks.STONE.getStateFromMeta(3), -1);
+				}
 
-			for (int i = 0; i < 3; ++i) {
-				LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 60, Blocks.STONE.getStateFromMeta(1), 0);
-			}
+				for (int i = 0; i < 5; ++i) {
+					LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 60, Blocks.STONE.getStateFromMeta(5), -1);
+				}
 
-			for (int i = 0; i < 3; ++i) {
-				LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 60, Blocks.STONE.getStateFromMeta(3), 0);
-			}
+				for (int i = 0; i < 3; ++i) {
+					LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 60, Blocks.STONE.getStateFromMeta(1), 0);
+				}
 
-			for (int i = 0; i < 3; ++i) {
-				LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 60, Blocks.STONE.getStateFromMeta(5), 0);
-			}
+				for (int i = 0; i < 3; ++i) {
+					LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 60, Blocks.STONE.getStateFromMeta(3), 0);
+				}
 
-			for (int i = 0; i < 5; ++i) {
-				LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 50, BlockVolcanicAshLight.block.getDefaultState(), -1);
-			}
+				for (int i = 0; i < 3; ++i) {
+					LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 60, Blocks.STONE.getStateFromMeta(5), 0);
+				}
 
-			for (int i = 0; i < 5; ++i) {
-				LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 50, BlockVolcanicAshDark.block.getDefaultState(), -1);
-			}
+				for (int i = 0; i < 5; ++i) {
+					LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 50, BlockVolcanicAshLight.block.getDefaultState(), -1);
+				}
 
-			for (int i = 0; i < 5; ++i) {
-				LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 50, BlockVolcanicAsh.block.getDefaultState(), -1);
-			}
+				for (int i = 0; i < 5; ++i) {
+					LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 50, BlockVolcanicAshDark.block.getDefaultState(), -1);
+				}
 
-			for (int i = 0; i < 4; ++i) {
-				LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 50, BlockVolcanicAshLight.block.getDefaultState(), 0);
-			}
+				for (int i = 0; i < 5; ++i) {
+					LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 50, BlockVolcanicAsh.block.getDefaultState(), -1);
+				}
 
-			for (int i = 0; i < 4; ++i) {
-				LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 50, BlockVolcanicAshDark.block.getDefaultState(), 0);
-			}
+				for (int i = 0; i < 4; ++i) {
+					LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 50, BlockVolcanicAshLight.block.getDefaultState(), 0);
+				}
 
-			for (int i = 0; i < 4; ++i) {
-				LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 50, BlockVolcanicAsh.block.getDefaultState(), 0);
-			}
+				for (int i = 0; i < 4; ++i) {
+					LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 50, BlockVolcanicAshDark.block.getDefaultState(), 0);
+				}
 
-			for (int i = 0; i < 48; ++i) {
-				LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 50, Blocks.STONE.getDefaultState(), 0);
-			}
-			for (int i = 0; i < 24; ++i) {
-				LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 50, Blocks.GRAVEL.getDefaultState(), 0);
-			}
+				for (int i = 0; i < 4; ++i) {
+					LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 50, BlockVolcanicAsh.block.getDefaultState(), 0);
+				}
 
-			for (int i = 0; i < 6; ++i) {
-				LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 50, BlockSulphurOre.block.getDefaultState(), -1);
-			}
+				for (int i = 0; i < 48; ++i) {
+					LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 50, Blocks.STONE.getDefaultState(), 0);
+				}
+				for (int i = 0; i < 24; ++i) {
+					LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 50, Blocks.GRAVEL.getDefaultState(), 0);
+				}
+
+				for (int i = 0; i < 6; ++i) {
+					LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 50, BlockSulphurOre.block.getDefaultState(), -1);
+				}
 
 
-			if (rand.nextInt(4) == 0) {
-				for (int i = 0; i < 8; ++i) {
-					if (rand.nextInt(4) == 0) {
-						LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 60, BlockSulphurVent.block.getDefaultState(), 0);
+				if (rand.nextInt(4) == 0) {
+					for (int i = 0; i < 8; ++i) {
+						if (rand.nextInt(4) == 0) {
+							LITTER.generate(worldIn, rand, pos.add(16, 0, 16), 0, 60, BlockSulphurVent.block.getDefaultState(), 0);
+						}
 					}
 				}
 			}
