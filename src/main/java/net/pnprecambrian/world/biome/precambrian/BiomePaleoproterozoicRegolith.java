@@ -6,10 +6,7 @@ import net.lepidodendron.block.BlockDiskagma;
 import net.lepidodendron.block.BlockSandPaleoproterozoic;
 import net.lepidodendron.util.EnumBiomeTypePrecambrian;
 import net.lepidodendron.world.biome.precambrian.BiomePrecambrian;
-import net.lepidodendron.world.gen.WorldGenCobble;
-import net.lepidodendron.world.gen.WorldGenNullTree;
-import net.lepidodendron.world.gen.WorldGenScoria;
-import net.lepidodendron.world.gen.WorldGenSinglePlantOptionalWater;
+import net.lepidodendron.world.gen.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
@@ -67,7 +64,7 @@ public class BiomePaleoproterozoicRegolith extends ElementsLepidodendronMod.ModE
 
 		protected static final WorldGenScoria SCORIA_GENERATOR = new WorldGenScoria();
 		protected static final WorldGenCobble COBBLE_GENERATOR = new WorldGenCobble();
-		//protected static final WorldGenDiskagma DISKAGMA_GENERATOR = new WorldGenDiskagma();
+
 		protected static final WorldGenSinglePlantOptionalWater DISKAGMA_GENERATOR = new WorldGenSinglePlantOptionalWater();
 
 		public WorldGenAbstractTree getRandomTreeFeature(Random rand)

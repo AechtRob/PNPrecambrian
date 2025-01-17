@@ -3,26 +3,25 @@ package net.pnprecambrian.world.biome.precambrian;
 
 import net.lepidodendron.ElementsLepidodendronMod;
 import net.lepidodendron.LepidodendronConfig;
-import net.lepidodendron.block.BlockToxicMud;
+import net.lepidodendron.block.BlockSandBlack;
+import net.lepidodendron.block.BlockThuchomyces;
 import net.lepidodendron.util.EnumBiomeTypePrecambrian;
 import net.lepidodendron.world.biome.precambrian.BiomePrecambrian;
 import net.lepidodendron.world.gen.*;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.Random;
 
 @ElementsLepidodendronMod.ModElement.Tag
-public class BiomeArcheanCausticQuagmire extends ElementsLepidodendronMod.ModElement {
-	@GameRegistry.ObjectHolder("lepidodendron:archean_caustic")
+public class BiomeArcheanWindswept extends ElementsLepidodendronMod.ModElement {
+	@GameRegistry.ObjectHolder("lepidodendron:archean_windswept")
 	public static final BiomeGenCustom biome = null;
-	public BiomeArcheanCausticQuagmire(ElementsLepidodendronMod instance) {
+	public BiomeArcheanWindswept(ElementsLepidodendronMod instance) {
 		super(instance, 1589);
 	}
 
@@ -41,10 +40,10 @@ public class BiomeArcheanCausticQuagmire extends ElementsLepidodendronMod.ModEle
 	static class BiomeGenCustom extends BiomePrecambrian {
 		public BiomeGenCustom() {
 			//super(new BiomeProperties("Permian Desert").setRainfall(0.0F).setBaseHeight(0.18F).setHeightVariation(0.17F).setTemperature(2.2F).setRainDisabled().setWaterColor(10990706));
-			super(new BiomeProperties("Archean Caustic Quagmire").setBaseHeight(2.7F).setHeightVariation(0.0F).setTemperature(0.6F).setWaterColor(0x539E32));
-			setRegistryName("lepidodendron:archean_caustic");
-			topBlock = BlockToxicMud.block.getDefaultState();
-			fillerBlock = Blocks.STONE.getDefaultState();
+			super(new BiomeProperties("Archean Desolation").setBaseHeight(2.7F).setHeightVariation(0.0F).setTemperature(0.6F).setWaterColor(0x539E32));
+			setRegistryName("lepidodendron:archean_windswept");
+			topBlock = BlockSandBlack.block.getDefaultState();
+			fillerBlock = BlockSandBlack.block.getDefaultState();
 			decorator.treesPerChunk = -999;
 			decorator.flowersPerChunk = 0;
 			decorator.grassPerChunk = 0;
@@ -63,9 +62,9 @@ public class BiomeArcheanCausticQuagmire extends ElementsLepidodendronMod.ModEle
 		protected static final WorldGenNullTree NULL_TREE = new WorldGenNullTree(false);
 
 		protected static final WorldGenCobbleLava COBBLE_GENERATOR = new WorldGenCobbleLava();
-		protected static final WorldGenStone STONE_GENERATOR = new WorldGenStone();
-		protected static final WorldGenPuddles PUDDLES_GENERATOR = new WorldGenPuddles();
-		protected static final WorldGenArcheanSulphurSpikes SPIKES_GENERATOR = new WorldGenArcheanSulphurSpikes();
+		protected static final WorldGenSinglePlantOptionalWater THUCHOMYCES_GENERATOR = new WorldGenSinglePlantOptionalWater();
+		protected static final WorldGenBacterialCrust CRUST_GENERATOR = new WorldGenBacterialCrust();
+		protected static final WorldGenRockPilesArcheanWindswept ROCK_PILES_GENERATOR = new WorldGenRockPilesArcheanWindswept();
 
 		public WorldGenAbstractTree getRandomTreeFeature(Random rand)
 		{
@@ -84,40 +83,45 @@ public class BiomeArcheanCausticQuagmire extends ElementsLepidodendronMod.ModEle
 		@Override
 		public void decorate(World worldIn, Random rand, BlockPos pos) {
 
-			if (net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, rand, new net.minecraft.util.math.ChunkPos(pos), DecorateBiomeEvent.Decorate.EventType.GRASS))
-				for (int i = 0; i < 48; ++i)
-				{
-					int j = rand.nextInt(16) + 8;
-					int k = rand.nextInt(16) + 8;
-					int l = rand.nextInt(worldIn.getHeight(pos.add(j, 0, k)).getY() + 32);
-					PUDDLES_GENERATOR.generate(worldIn, rand, pos.add(j, l, k));
-				}
 
-			if (net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, rand, new net.minecraft.util.math.ChunkPos(pos), DecorateBiomeEvent.Decorate.EventType.GRASS))
-				for (int i = 0; i < 16; ++i)
-				{
+			if (net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, rand, new net.minecraft.util.math.ChunkPos(pos), net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.ROCK))
+			{
+				if (rand.nextInt(2) == 0) {
+					int i = rand.nextInt(2);
+					for (int j = 0; j < i; ++j) {
+						int k = rand.nextInt(16) + 8;
+						int l = rand.nextInt(16) + 8;
+						BlockPos blockpos = worldIn.getHeight(pos.add(k, 0, l));
+						ROCK_PILES_GENERATOR.generate(worldIn, rand, blockpos);
+					}
+				}
+			}
+
+			if (net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, rand, new net.minecraft.util.math.ChunkPos(pos), net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.ROCK)) {
+				for (int i = 0; i < 4; ++i) {
 					int j = rand.nextInt(16) + 8;
 					int k = rand.nextInt(16) + 8;
 					int l = rand.nextInt(worldIn.getHeight(pos.add(j, 0, k)).getY() + 32);
 					COBBLE_GENERATOR.generate(worldIn, rand, pos.add(j, l, k));
 				}
+			}
 
-			if (net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, rand, new net.minecraft.util.math.ChunkPos(pos), DecorateBiomeEvent.Decorate.EventType.GRASS))
-				for (int i = 0; i < 8; ++i)
-				{
+			if (net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, rand, new net.minecraft.util.math.ChunkPos(pos), net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.ROCK)) {
+				for (int i = 0; i < 1; ++i) {
 					int j = rand.nextInt(16) + 8;
 					int k = rand.nextInt(16) + 8;
 					int l = rand.nextInt(worldIn.getHeight(pos.add(j, 0, k)).getY() + 32);
-					STONE_GENERATOR.generate(worldIn, rand, pos.add(j, l, k));
+					THUCHOMYCES_GENERATOR.generate(BlockThuchomyces.block.getDefaultState(), worldIn, rand, pos.add(j, l, k), 0, 255, false);
 				}
+			}
 
-			if (net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, rand, new net.minecraft.util.math.ChunkPos(pos), DecorateBiomeEvent.Decorate.EventType.GRASS))
-				for (int i = 0; i < 2; ++i)
+			if(net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, rand, new net.minecraft.util.math.ChunkPos(pos), net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.GRASS))
+				for (int i = 0; i < 3; ++i)
 				{
 					int j = rand.nextInt(16) + 8;
 					int k = rand.nextInt(16) + 8;
-					int l = rand.nextInt(worldIn.getHeight(pos.add(j, 0, k)).getY() + 32);
-					SPIKES_GENERATOR.generate(worldIn, rand, pos.add(j, l, k));
+					//int l = rand.nextInt(worldIn.getHeight(pos.add(j, 0, k)).getY() + 32);
+					CRUST_GENERATOR.generate(worldIn, rand, pos.add(j, worldIn.getSeaLevel(), k));
 				}
 
 			super.decorate(worldIn, rand, pos);

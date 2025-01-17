@@ -9,6 +9,8 @@ public class GenLayerPrecambrianArcheanCaustic extends GenLayer {
 
     public Biome CAUSTIC = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:archean_caustic"));
     public int CAUSTIC_ID =  Biome.getIdForBiome(CAUSTIC);
+    public Biome ARCHEAN_WINDSWEPT = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:archean_windswept"));
+    public int ARCHEAN_WINDSWEPT_ID =  Biome.getIdForBiome(ARCHEAN_WINDSWEPT);
 
     public Biome PRECAMBRIAN_LAND = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:proterozoic_hills"));
     public int PRECAMBRIAN_LAND_ID =  Biome.getIdForBiome(PRECAMBRIAN_LAND);
@@ -20,7 +22,7 @@ public class GenLayerPrecambrianArcheanCaustic extends GenLayer {
 
     private final int CausticBiomes[] = new int[] {
             CAUSTIC_ID,
-            CAUSTIC_ID
+            ARCHEAN_WINDSWEPT_ID
     };
 
     public int[] getInts(int areaX, int areaY, int areaWidth, int areaHeight)
