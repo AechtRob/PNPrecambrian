@@ -5,23 +5,21 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 
-public class GenLayerPrecambrianArcheanCaustic extends GenLayer {
+public class GenLayerArcheanContinents extends GenLayer
+{
 
-    public Biome CAUSTIC = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:archean_caustic"));
-    public int CAUSTIC_ID =  Biome.getIdForBiome(CAUSTIC);
+    public static Biome ARCHEAN_SEA = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:archean_shallow_sea"));
+    public static int ARCHEAN_SEA_ID =  Biome.getIdForBiome(ARCHEAN_SEA);
 
-    public Biome PRECAMBRIAN_LAND = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:proterozoic_hills"));
-    public int PRECAMBRIAN_LAND_ID =  Biome.getIdForBiome(PRECAMBRIAN_LAND);
+    public Biome ARCHEAN_WINDSWEPT = Biome.REGISTRY.getObject(new ResourceLocation("lepidodendron:archean_windswept"));
+    public int ARCHEAN_WINDSWEPT_ID =  Biome.getIdForBiome(ARCHEAN_WINDSWEPT);
 
-    public GenLayerPrecambrianArcheanCaustic(long seed, GenLayer genlayer) {
+
+    public GenLayerArcheanContinents(long seed, GenLayer genLayer)
+    {
         super(seed);
-        this.parent = genlayer;
+        this.parent = genLayer;
     }
-
-    private final int CausticBiomes[] = new int[] {
-            CAUSTIC_ID,
-            CAUSTIC_ID
-    };
 
     public int[] getInts(int areaX, int areaY, int areaWidth, int areaHeight)
     {
@@ -32,27 +30,32 @@ public class GenLayerPrecambrianArcheanCaustic extends GenLayer {
         {
             for (int j = 0; j < areaWidth; ++j)
             {
-                this.initChunkSeed((long)(j + areaX), (long)(i + areaY));
+                this.initChunkSeed(j + areaX, i + areaY);
                 int k = aint[j + 1 + (i + 1) * (areaWidth + 2)];
 
-                if (k == PRECAMBRIAN_LAND_ID)
+                if (isSea(k))
                 {
                     int l1 = aint[j + 1 + (i + 1 - 1) * (areaWidth + 2)];
                     int k2 = aint[j + 1 + 1 + (i + 1) * (areaWidth + 2)];
                     int j3 = aint[j + 1 - 1 + (i + 1) * (areaWidth + 2)];
                     int i4 = aint[j + 1 + (i + 1 + 1) * (areaWidth + 2)];
-
-                    if (l1 == PRECAMBRIAN_LAND_ID && k2 == PRECAMBRIAN_LAND_ID && j3 == PRECAMBRIAN_LAND_ID && i4 == PRECAMBRIAN_LAND_ID & nextInt(4) == 0)
+                    if (isSea(l1)
+                            && isSea(k2)
+                            && isSea(j3)
+                            && isSea(i4))
                     {
-                        aint1[j + i * areaWidth] = CausticBiomes[nextInt(CausticBiomes.length)];;
+                        if (nextInt(5) == 0) {
+                            aint1[j + i * areaWidth] = ARCHEAN_WINDSWEPT_ID;
+                        }
+                        else {
+                            aint1[j + i * areaWidth] = k;
+                        }
                     }
-                    else
-                    {
+                    else {
                         aint1[j + i * areaWidth] = k;
                     }
                 }
-                else
-                {
+                else {
                     aint1[j + i * areaWidth] = k;
                 }
             }
@@ -61,4 +64,8 @@ public class GenLayerPrecambrianArcheanCaustic extends GenLayer {
         return aint1;
     }
 
+    public static boolean isSea(int i) {
+        return i == ARCHEAN_SEA_ID;
+    }
+    
 }

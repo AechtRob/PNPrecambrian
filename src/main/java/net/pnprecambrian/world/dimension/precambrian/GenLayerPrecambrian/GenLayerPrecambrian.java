@@ -22,18 +22,16 @@ public class GenLayerPrecambrian {
         //General diversify:
         biomes = new GenLayerDiversifyPrecambrian(789L, biomes);
         biomes = new GenLayerPrecambrianHadeanMolten(700L, biomes);
+        biomes = new GenLayerArcheanContinents(5208, biomes);
+
         biomes = new GenLayerZoom(1001L, biomes);
-        //biomes = new GenLayerDiversifyPermian(1002L, biomes);
-        //biomes = new GenLayerPermianDeepOcean(1100L, biomes);
-        //biomes = new GenLayerPermianShallowOcean(1300L, biomes);
-        //biomes = new GenLayerPermianTreefernCopse(209L, biomes);
-        //biomes = new GenLayerPermianSpongeReef(1975L, biomes);
+
         biomes = new GenLayerPrecambrianArcheanCaustic(740L, biomes);
         biomes = new GenLayerNeoproterozoicPlains(1918L, biomes);
         biomes = new GenLayerStromatolitePavement(1759L, biomes);
         biomes = new GenLayerReef(1767L, biomes);
         biomes = new GenLayerZoom(1003L, biomes);
-        //biomes = new GenLayerPermianMountainEdge(2L, biomes);
+
         biomes = new GenLayerSmooth(700L, biomes);
         biomes = new GenLayerSmooth(701L, biomes);
 
@@ -42,8 +40,6 @@ public class GenLayerPrecambrian {
         biomes = new GenLayerZoom(1004L, biomes);
         biomes = new GenLayerSmooth(703L, biomes);
         biomes = new GenLayerFuzzyZoom(1000L, biomes);
-        //biomes = new GenLayerPermianFloodBasaltEdge(3L, biomes);
-        //biomes = new GenLayerPermianCliff(1080L, biomes);
 
         biomes = new GenLayerSmooth(705L, biomes);
         biomes = new GenLayerFuzzyZoom(1001L, biomes);
@@ -83,7 +79,6 @@ public class GenLayerPrecambrian {
         GenLayer genlayerrift10 = new GenLayerZoom(3076L, genlayerrift9);
         GenLayer genlayerrift11 = new GenLayerZoom(4076L, genlayerrift10);
         GenLayer genlayerriftfinal = new GenLayerPrecambrianRiftMix(200L, genlayertrenchfinal, genlayerrift11);
-
 
         GenLayer genlayervoronoizoom = new GenLayerVoronoiZoom(10L, genlayerriftfinal);
 
