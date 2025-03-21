@@ -40,7 +40,7 @@ public class BiomePaleoproterozoicBeach extends ElementsLepidodendronMod.ModElem
 	static class BiomeGenCustom extends BiomePrecambrian {
 		public BiomeGenCustom() {
 			//super(new BiomeProperties("Permian Desert").setRainfall(0.0F).setBaseHeight(0.18F).setHeightVariation(0.17F).setTemperature(2.2F).setRainDisabled().setWaterColor(10990706));
-			super(new BiomeProperties("Palaeoproterozoic Shallows").setRainfall(0.0F).setBaseHeight(2.75F).setHeightVariation(0.001F).setTemperature(2.1F).setRainDisabled().setWaterColor(0xB00000));
+			super(new BiomeProperties("Paleoproterozoic Shallows").setRainfall(0.0F).setBaseHeight(2.75F).setHeightVariation(0.001F).setTemperature(2.1F).setRainDisabled().setWaterColor(0xB00000));
 			setRegistryName("lepidodendron:paleoproterozoic_beach");
 			topBlock = BlockSandPaleoproterozoic.block.getDefaultState();
 			fillerBlock = BlockSandPaleoproterozoic.block.getDefaultState();

@@ -40,7 +40,7 @@ public class BiomeArcheanWindswept extends ElementsLepidodendronMod.ModElement {
 	static class BiomeGenCustom extends BiomePrecambrian {
 		public BiomeGenCustom() {
 			//super(new BiomeProperties("Permian Desert").setRainfall(0.0F).setBaseHeight(0.18F).setHeightVariation(0.17F).setTemperature(2.2F).setRainDisabled().setWaterColor(10990706));
-			super(new BiomeProperties("Archaean Desolation").setBaseHeight(2.7F).setHeightVariation(0.0F).setTemperature(0.6F).setWaterColor(0x539E32));
+			super(new BiomeProperties("Archean Desolation").setBaseHeight(2.7F).setHeightVariation(0.0F).setTemperature(0.6F).setWaterColor(0x539E32));
 			setRegistryName("lepidodendron:archean_windswept");
 			topBlock = BlockSandBlack.block.getDefaultState();
 			fillerBlock = BlockSandBlack.block.getDefaultState();
