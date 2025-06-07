@@ -70,6 +70,7 @@ public class BiomeHadeanLava extends ElementsPNPrecambrianMod.ModElement {
 		protected static final WorldGenPuddlesLava LAVA_PUDDLES_GENERATOR = new WorldGenPuddlesLava();
 		protected static final WorldGenSurfaceZircon ZIRCON_GENERATOR = new WorldGenSurfaceZircon();
 		protected static final WorldGenSurfaceObsidian OBSIDIAN_GENERATOR = new WorldGenSurfaceObsidian();
+		protected static final WorldGenVolcanoEruptable ERUPTABLE_GENERATOR = new WorldGenVolcanoEruptable();
 
 		public WorldGenAbstractTree getRandomTreeFeature(Random rand)
 	    {
@@ -144,6 +145,17 @@ public class BiomeHadeanLava extends ElementsPNPrecambrianMod.ModElement {
 					int l = rand.nextInt(worldIn.getHeight(pos.add(j, 0, k)).getY() + 32);
 					COBBLE_GENERATOR.generate(worldIn, rand, pos.add(j, l, k));
 				}
+
+			if (net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, rand, new net.minecraft.util.math.ChunkPos(pos), net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.ROCK))
+			{
+				for (int i = 0; i < 12; ++i)
+				{
+					int j = rand.nextInt(16) + 8;
+					int k = rand.nextInt(16) + 8;
+					int l = rand.nextInt(worldIn.getHeight(pos.add(j, 0, k)).getY() + 32);
+					ERUPTABLE_GENERATOR.generate(worldIn, rand, pos.add(j, l, k));
+				}
+			}
 
 			/*
 			if(net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, rand, new net.minecraft.util.math.ChunkPos(pos), DecorateBiomeEvent.Decorate.EventType.GRASS))
