@@ -3,6 +3,7 @@ package net.pnprecambrian.world.biome.precambrian;
 
 import net.lepidodendron.ElementsLepidodendronMod;
 import net.lepidodendron.block.BlockDiskagma;
+import net.lepidodendron.block.BlockEukaryoticMat;
 import net.lepidodendron.block.BlockSandPaleoproterozoic;
 import net.lepidodendron.util.EnumBiomeTypePrecambrian;
 import net.lepidodendron.world.biome.precambrian.BiomePrecambrian;
@@ -66,6 +67,7 @@ public class BiomePaleoproterozoicRegolith extends ElementsLepidodendronMod.ModE
 		protected static final WorldGenCobble COBBLE_GENERATOR = new WorldGenCobble();
 
 		protected static final WorldGenSinglePlantOptionalWater DISKAGMA_GENERATOR = new WorldGenSinglePlantOptionalWater();
+		protected static final WorldGenSingleStaticInWaterUpwards STATIC_GENERATOR = new WorldGenSingleStaticInWaterUpwards();
 
 		public WorldGenAbstractTree getRandomTreeFeature(Random rand)
 		{
@@ -110,6 +112,15 @@ public class BiomePaleoproterozoicRegolith extends ElementsLepidodendronMod.ModE
 					DISKAGMA_GENERATOR.generate(BlockDiskagma.block.getDefaultState(), worldIn, rand, pos.add(j, l, k), 0, 255, true);
 				}
 			}
+
+			if(net.minecraftforge.event.terraingen.TerrainGen.decorate(worldIn, rand, new net.minecraft.util.math.ChunkPos(pos), net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate.EventType.GRASS))
+				for (int i = 0; i < 13; ++i)
+				{
+					int j = rand.nextInt(16) + 8;
+					int k = rand.nextInt(16) + 8;
+					int l = rand.nextInt(worldIn.getHeight(pos.add(j, 0, k)).getY() + 32);
+					STATIC_GENERATOR.generate(BlockEukaryoticMat.block.getDefaultState(), worldIn, rand, pos.add(j, l, k), 1, 255, 0, 255);
+				}
 
 			super.decorate(worldIn, rand, pos);
 		}
